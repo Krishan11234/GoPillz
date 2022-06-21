@@ -1,0 +1,360 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Renew Subscription</title>
+    <link rel="stylesheet" href="/static/css/signup.css " />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body style="margin: 7% 7% 7% 7%">
+    <style>
+      .planinfo {
+        border-bottom: 1px solid lightgray;
+        padding: 3% 3%;
+      }
+      .loader{
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: url('/static/assets/gif/screen_loader.gif')
+                      50% 50% no-repeat rgb(249,249,249);
+          opacity: 0.7
+        }
+    </style>
+    <div class="row">
+      <div class="col-md-5" style="background-color: #cdd6ff">
+        <div class="row">
+          <div class="crossoption" style="margin-top: 13%">
+            <a href="./index.html"
+              ><img src="/static/assets/images/x.svg" align="right"
+            /></a>
+          </div>
+        </div>
+        <div class="row" style="background-color: white; margin: 5% 5%">
+          <div class="planinfo">Summary</div>
+          <div class="planinfo" id="plan_type">Plan Type: <span class="main_text"></span>
+          </div>
+          <div class="planinfo" id="total_amount">Total: <span class="main_text"></span>
+          </div>
+        </div>
+        <div class="row">
+          <img
+            src="/static/assets/images/payment_angel.svg"
+            class="center-image"
+            style="height: 550px; width: 550px"
+          />
+        </div>
+      </div>
+      <div class="col-md-5" style="margin: 5% 5%">
+        <div class="backoption" style="margin-bottom: 5%">
+          <a href="./signup.html"
+            ><img src="/static/assets/images/arrow-left.svg"
+          /></a>
+        </div>
+        <div class="chooseplan">
+          <span style="color: #1e2751">Choosen Plan</span
+          ><span style="margin-left: 65%; color: #2242d5">Change Plan</span>
+        </div>
+        {% csrf_token %}
+        <div class="loader" style="display:None"></div>
+        {% for plan in content.plans %}
+        {% if content.active_plan ==  plan.duration%}
+        <button id='{{content.active_plan}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_type}}','{{plan.price}}')" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left; ">
+          <div style="margin-left: 2%; margin-top: 2%">{{ plan.plan_type }}</div>
+          <div style="margin-left: 2%; margin-bottom: 2%">
+            <span style="color: #2242d5">&#x20b9;{{ plan.price }}/</span
+            ><span style="color: #949494">{{ plan.duration }}</span>
+          </div>
+        </button>
+        {% else %}
+        <button id='{{plan.duration}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_type}}','{{plan.price}}')" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left; display:none;">
+          <div style="margin-left: 2%; margin-top: 2%">{{ plan.plan_type }}</div>
+          <div style="margin-left: 2%; margin-bottom: 2%">
+            <span style="color: #2242d5">&#x20b9;{{ plan.price }}/</span
+            ><span style="color: #949494">{{ plan.duration }}</span>
+          </div>
+        </button>
+        {% endif %}
+        {% endfor %}
+<!--        <button id='plan_couple' onclick="selectArea(this)" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left; ">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">Couple</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;10560/</span-->
+<!--            ><span style="color: #949494">yearly</span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        <button id='plan_single' onclick="selectArea(this)" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left;">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">Single</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;5760/</span-->
+<!--            ><span style="color: #949494">yearly</span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        <button id='plan_family' onclick="selectArea(this)" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left;">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">Family & Friends</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;21120/</span-->
+<!--            ><span style="color: #949494">yearly</span>-->
+<!--          </div>-->
+<!--        </button>-->
+          <div
+            class="paymenttitle"
+            style="
+              color: #1e2751;
+              border-bottom: 1px solid lightgrey;
+              padding-bottom: 5%;
+              margin-bottom: 2%;
+            "
+          >
+            Payment Method
+          </div>
+          <div
+            class="paymentoption"
+            style="
+              color: #1e2751;
+              border: 1px solid lightgrey;
+              padding: 5% 5%;
+              margin-bottom: 2%;
+            "
+          >
+            <img src="/static/assets/images/paytm.svg" style="margin-right: 2%" />PayTM
+            <input
+              type="radio"
+              name="payment"
+              style="margin-left: 70%; transform: scale(2)"
+            />
+          </div>
+          <div
+            class="paymentoption"
+            style="
+              color: #1e2751;
+              border: 1px solid lightgrey;
+              padding: 5% 5%;
+              margin-bottom: 2%;
+            "
+          >
+            <img src="/static/assets/images/razorpay.svg" style="margin-right: 2%" />Rayzor
+            Pay
+            <input
+              type="radio"
+              name="payment"
+              style="margin-left: 64%; transform: scale(2)"
+            />
+          </div>
+          <div
+            class="paymentoption"
+            style="
+              color: #1e2751;
+              border: 1px solid lightgrey;
+              padding: 5% 5%;
+              margin-bottom: 2%;
+            "
+          >
+            <img src="/static/assets/images/stripe.svg" style="margin-right: 2%" />Stripe
+            <input
+              type="radio"
+              name="payment"
+              style="margin-left: 72%; transform: scale(2)"
+            />
+          </div>
+          <div
+            class="paymentoption"
+            style="
+              color: #1e2751;
+              border: 1px solid lightgrey;
+              padding: 5% 5%;
+              margin-bottom: 2%;
+            "
+          >
+            <img src="/static/assets/images/upi.svg" style="margin-right: 2%" />UPI
+            <input
+              type="radio"
+              name="payment"
+              style="margin-left: 76%; transform: scale(2)"
+            />
+          </div>
+          <div
+            class="discountoption"
+            style="color: #2242d5; margin-bottom: 10%"
+          >
+            Have a discount code?
+          </div>
+          <button
+                  id="checkout-button"
+            type="button"
+            class="block"
+            style="
+              color: white;
+              background-color: #2242d5;
+              width: 100%;
+              height: 50px;
+              border: none;
+            "
+          >
+            Proceed To Pay
+          </button>
+        </div>
+      </div>
+    </div>
+    <hr style="margin-top: 10%; margin-bottom: 5%" />
+    <style>
+      a {
+        color: #1e2751;
+        text-decoration: none;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/css/myfooter.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <div class="row" style="color: #1e2751">
+      <div class="col-md-3" style="margin-left: 20px">
+        <div class="row" style="margin-bottom: 20px">
+          <img src="/static/assets/images/v203_350.png" style="width: 200px; height: 70px" />
+        </div>
+        <div class="row">30/91B Malviya Nagar, South Delhi, New Delhi</div>
+        <div class="row" style="margin-bottom: 20px">-</div>
+        <div class="row" style="margin-bottom: 20px">go@gopillz.com</div>
+      </div>
+      <div class="col-md-2" style="margin-left: 20px">
+        <div class="row" style="margin-bottom: 20px; font-size: x-large">
+          Useful links
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./terms&conditions.html">Privacy Policy</a>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./terms&conditions.html#refundpolicy">Refund Policy</a>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./terms&conditions.html">Terms and Conditions</a>
+        </div>
+      </div>
+      <div class="col-md-2" style="margin-left: 20px">
+        <div class="row" style="margin-bottom: 20px; font-size: x-large">
+          Information
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./terms&conditions.html">Disclaimer</a>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./terms&conditions.html">Privacy Notice</a>
+        </div>
+      </div>
+      <div class="col-md-2" style="margin-left: 20px">
+        <div class="row" style="margin-bottom: 20px; font-size: x-large">
+          Support
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./index.html">Contact</a>
+        </div>
+        <div class="row" style="margin-bottom: 20px">
+          <a href="./verifynumber.html">Sign in</a>
+        </div>
+      </div>
+      <div class="col-md-2" style="margin-left: 20px">
+        <div class="row" style="margin-bottom: 20px; font-size: x-large">
+          Socials
+        </div>
+        <div class="row">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-youtube"></a>
+        </div>
+      </div>
+    </div>
+    <div
+      class="row-cols-md-6"
+      style="margin-top: 50px; margin-bottom: 30px; text-align: center"
+    >
+      © 2022 | Copyright All rights reserved
+    </div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      function selectArea(data,plan,type,price){
+<!--        loaderClass = document.getElementsByClassName("loader")-->
+        $('.loader').css('display','block')
+        currentPlan = data.id
+        data.style.backgroundColor = "lightblue";
+        if (currentPlan!=plan+'_couple'){
+          document.getElementById(plan+"_couple").style.backgroundColor = "lightgrey";
+        }
+        if (currentPlan!=plan+'_single'){
+          document.getElementById(plan+"_single").style.backgroundColor = "lightgrey";
+        }
+        if (currentPlan!=plan+'_family_friends'){
+          document.getElementById(plan+'_family_friends').style.backgroundColor = "lightgrey";
+        }
+        $('#plan_type span.main_text').text(type);
+        $('#total_amount span.main_text').text(price);
+        $('.loader').css('display','none')
+      }
+
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        // Create an instance of the Stripe object with your publishable API key
+        var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+        var checkoutButton = document.getElementById("checkout-button");
+        checkoutButton.addEventListener("click", function () {
+          $('.loader').css('display','block')
+          fetch("{% url 'create-checkout-session'  %}", {
+            method: "POST",
+            headers: {
+                'X-CSRFToken': csrftoken
+            }
+          })
+            .then(function (response) {
+            $('.loader').css('display','none')
+              return response.json();
+            })
+            .then(function (session) {
+             $('.loader').css('display','none')
+              console.log('here after')
+              return stripe.redirectToCheckout({ sessionId: session.id });
+            })
+            .then(function (result) {
+            $('.loader').css('display','none')
+              // If redirectToCheckout fails due to a browser or network
+              // error, you should display the localized error message to your
+              // customer using error.message.
+              if (result.error) {
+                alert(result.error.message);
+              }
+            })
+            .catch(function (error) {
+            $('.loader').css('display','none')
+              console.error("Error:", error);
+            });
+        });
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
