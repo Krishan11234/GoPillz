@@ -160,3 +160,8 @@ STRIPE_PUBLISHABLE_KEY_TEST = os.getenv('STRIPE_PUBLISHABLE_KEY_TEST')
 import mimetypes
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}

@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .utils import Utils
 from django.conf import settings
+from django.contrib import messages
 
 
 """
@@ -91,4 +92,6 @@ class VerifyOtp(generics.GenericAPIView):
                     user_auth = authenticate(username=user_data.username, password=settings.DEFAULT_USER_PASSWORD)
                     login(request, user_auth)
                     return redirect('/payment')
-            print('here')
+        error_message = 'OTP Verification Failed'
+        messages.error(request, error_message)
+        return redirect('/signup')

@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="backoption" style="margin-bottom: 5%">
-              <a href="./signup.html"
+              <a href="/signup"
                 ><img src="/static/assets/images/arrow-left.svg" align="left"
               /></a>
             </div>
@@ -53,6 +53,7 @@
         >
           <b>Welcome to GoPillz!</b>
         </div>
+        {% include 'messages.html' %}
         <div
           class="header2"
           style="
@@ -76,7 +77,7 @@
               type="text"
               id="otp"
               name="otp"
-              placeholder="Enter OTP"
+              placeholder="Enter OTP ******"
               pattern="[0-9]{6}"
               required
               style="width: 50%; height: 50px; margin-top: 5%"
