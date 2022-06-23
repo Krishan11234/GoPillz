@@ -52,11 +52,14 @@ class SignUp(generics.GenericAPIView):
         phone_no = data.get('phone', '')
         if len(phone_no) > 0:
             unique_value = phone_no + '@gopillz.com'
-            user = User.objects.get(username=unique_value)
+            try:
+                user = User.objects.get(username=unique_value)
+                dict_data['user'] = user
+            except Exception as e:
+                user = None
             if user is None:
                 dict_data['username'] = unique_value
                 dict_data['email'] = unique_value
-            dict_data['user'] = user
             dict_data['phone'] = phone_no
             otp = self.util_instance.generate_otp()
             dict_data['otp'] = otp

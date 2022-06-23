@@ -42,8 +42,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
             user = UserSerializer.create(UserSerializer(), validated_data=user_data)
             user.set_password(password)
             user.save()
+        try:
+            user_profile = Profile.objects.get(id=user.id)
+        except Exception as e:
+            user_profile = None
 
-        user_profile = Profile.objects.get(id=user.id)
         if user_profile is None:
             user_profile, created = Profile.objects.update_or_create(user=user, otp=validated_data['otp'], expired=False)
         else:
