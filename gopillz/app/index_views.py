@@ -5,7 +5,7 @@ from rest_framework import generics
 
 class Policy(generics.GenericAPIView):
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'terms&conditions.html'
+    template_name = 'terms_conditions.html'
 
     def get(self, request):
         content = {}
