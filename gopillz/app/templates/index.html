@@ -1,4 +1,6 @@
+{% extends "base.html" %}
 {% load static %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +19,81 @@
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="/static/css/index.css" />
+    <style>
+      @viewport{
+        zoom: 1.0;
+        width: extend-to-zoom;
+      }
+
+      @-ms-viewport{
+        width: extend-to-zoom;
+        zoom: 1.0;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      a:hover{
+        color: #fff;
+      }
+      a{
+        color: black;
+        text-decoration: none;
+      }
+      .col-md-1{
+        padding: 0;
+      }
+      .columns {
+        float: left;
+        width: 33.3%;
+        padding: 8px;
+      }
+
+      .price {
+        list-style-type: none;
+        border: 1px solid #eee;
+        margin: 0;
+        padding: 0;
+        -webkit-transition: 0.3s;
+        transition: 0.3s;
+      }
+
+      .price:hover {
+        box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
+      }
+
+      .price .header {
+        background-color: #111;
+        color: white;
+        font-size: 25px;
+      }
+
+      .price li {
+        /* border-bottom: 1px solid #eee; */
+        padding: 20px;
+        text-align: center;
+      }
+
+      .price .grey {
+        background-color: #eee;
+        font-size: 20px;
+      }
+
+      .button {
+        border: none;
+        color: white;
+        padding: 10px 25px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .columns {
+          width: 100%;
+        }
+      }
+      </style>
   </head>
   <body style="padding-left: 50px; padding-right: 50px; padding-top: 20px; width:100%">
   <div class="row" style="padding-bottom: 50px">
@@ -27,22 +103,21 @@
     style="background-color: white; width: 252px; height: 82.59px"
   />
 </div>
-<div class="col-md-1"><a href="./index.html">Home</a></div>
-<div class="col-md-1"><a href="./index.html#pricingplans">Pricing</a></div>
-<div class="col-md-1"  style="margin-right:3%"><a href="./index.html#contactus">How it works</a></div>
-<div class="col-md-2"><a href="./prescription.html" style="color:#2242D5">Update Prescription</a></div>
-<div class="col-md-2"><a href="./renewsubscription.html" style="color:#2242D5">Renew Subcription</a></div>
+<div class="col-md-1"><a href="/home">Home</a></div>
+<div class="col-md-1"><a href="/home">Pricing</a></div>
+<div class="col-md-1"  style="margin-right:3%"><a href="/home">How it works</a></div>
+<div class="col-md-2"><a href="/home" style="color:#2242D5">Update Prescription</a></div>
+<div class="col-md-2"><a href="/home" style="color:#2242D5">Renew Subscription</a></div>
 <div class="col-md-1">
   <button
     type="button"
     class="btn btn-primary"
     style="background-color: #2242d5"
   >
-  <a href="/signup" style="color: white;">
+  <a href="/signup" style="color: white;font-size: 14px;line-height: 2;">
     Sign Up
   </a>
   </button>
-
 </div>
 </div>
     <div class="row" style="padding-bottom: 100px">
@@ -72,7 +147,7 @@
               <button
                 type="button"
                 class="btn btn-primary btn-lg"
-                style="background-color: #2242d5"
+                style="background-color: #2242d5;font-size: 12px;"
                 onclick="signupview()"
               >
                 Get Started
@@ -237,9 +312,11 @@
           id="btnradio2"
           autocomplete="off"
         />
-        <label class="btn btn-outline-primary" for="btnradio2" onclick="location.href= 'GoPillz-yearly.html#pricingplans'"
+        <label class="btn btn-outline-primary" for="btnradio2" onclick="GetYearly('yearly')"
           >yearly</label
         >
+      </div>
+
       </div>
         <div class="row" style="margin-left: 0px  ; margin-right: 0px ; margin-top: 50px; background-color: #ffffff;">
           <!-- <div class="col-md-4">
@@ -255,25 +332,26 @@
             Family<br>
             <span style="padding-top: 500px;">Monthly Cost</span>
           </div> -->
-          
-<div class="columns">
-  <ul class="price">
-    <li class="header" style="background-color: white;color: #1E2751;">Single</li>
-    <li ><span style="font-size: small;">Monthly cost</span><br>
-      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 599.00</span></li>
-    <li><a href="./signup.html" class="button" style="background-color: white; color:#2242d5; border: 1px solid #2242d5;">Sign Up</a></li>
-    <li style="background-color:#CDD6FF">Whatsapp/ Telephonic</li>
-    <li style="background-color:#CDD6FF">Medicine Reminders</li>
-    <li style="background-color:#CDD6FF">Missed Dose Alerts</li>
-  </ul>
-</div>
+
+          <div class="columns">
+            <ul class="price">
+              <li class="header" style="background-color:white; color: #1E2751">Single</li>
+              <li ><span style="font-size: small;">Monthly cost</span><br>
+                <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 599.00</span></li>
+              <li><a href="/payment" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
+              <li>Whatsapp/ Telephonic</li>
+              <li>Medicine Reminders</li>
+              <li>Missed Dose Alerts</li>
+
+            </ul>
+          </div>
 
 <div class="columns">
   <ul class="price">
     <li class="header" style="background-color:white; color: #1E2751">Couple</li>
-    <li ><span style="font-size: small;">Monthly cost</span><br>
-      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 1099.00</span></li>
-    <li><a href="./paymentpage.html" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
+    <li ><span style="font-size: small;">Yearly cost</span><br>
+      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 10560.00</span></li>
+    <li><a href="/payment" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
     <li>Whatsapp/ Telephonic</li>
     <li>Medicine Reminders</li>
     <li>Missed Dose Alerts</li>
@@ -284,9 +362,9 @@
 <div class="columns">
   <ul class="price">
     <li class="header" style="background-color:white; color: #1E2751">Family</li>
-    <li ><span style="font-size: small;">Monthly cost</span><br>
-      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 2199.00</span></li>
-    <li><a href="./paymentpage.html" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
+    <li ><span style="font-size: small;">Yearly cost</span><br>
+      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 21120.00</span></li>
+    <li><a href="/payment" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
     <li>Whatsapp/ Telephonic</li>
     <li>Medicine Reminders</li>
     <li>Missed Dose Alerts</li>
@@ -297,7 +375,7 @@
         </div>
       </div>
     </div>
-  <div id="contactus"></div>
+    <div id="contactus"></div>
   <div class="row" style="margin-top: 100px; margin-bottom: 50px;">
     <div class="col-md-4" style="margin-right: 50px;">
       <img src="/static/assets/images/img_with_bg.png" style="width: 540px; height: 772px;">
@@ -310,9 +388,9 @@
         <p>Not just families but doctors, hospitals, care providers, pharma medical insurers are too able to offer better care with GoPillz.</p> <br>
         <p style="margin-top: 10px;">Write to us on <a href="mailto:go@gopillz.com">go@gopillz.com</a> to learn more.</p>
       </div>
-      <form class="contactform">
       <div class="row">
         <div class="col-md-6">
+        <form class="contactform">
         <div class="form-group" style="margin-bottom: 20px">
             <label for="fname">First Name</label>
             <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
@@ -322,14 +400,16 @@
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
+        </form>
         </div>
         <div class="col-md-6">
+        <form class="contactform">
           <div class="form-group" style="margin-bottom: 20px">
             <label for="lname">Last Name</label>
             <input type="text" class="form-control" id="lname" placeholder="Enter Last Name">
           </div>
           <div class="form-group" style="margin-bottom: 20px">
-            <label for="phone" >Phone Number</label> 
+            <label for="phone" >Phone Number</label>
             <input type="number" class="form-control" id="phone" placeholder="Enter phone number">
           </div>
         </form>
@@ -353,7 +433,7 @@
       text-decoration: none;
     }
   </style>
-  <link rel="stylesheet" href="/static/css/myfooter.css" />
+  <link rel="stylesheet" href="stylesheets/myfooter.css" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -372,13 +452,13 @@
         Useful links
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./terms&conditions.html">Privacy Policy</a>
+        <a href="/policy">Privacy Policy</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./terms&conditions.html#refundpolicy">Refund Policy</a>
+        <a href="/policy">Refund Policy</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./terms&conditions.html">Terms and Conditions</a>
+        <a href="/policy">Terms and Conditions</a>
       </div>
     </div>
     <div class="col-md-2" style="margin-left: 20px">
@@ -386,10 +466,10 @@
         Information
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./terms&conditions.html">Disclaimer</a>
+        <a href="/policy">Disclaimer</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./terms&conditions.html">Privacy Notice</a>
+        <a href="/policy">Privacy Notice</a>
       </div>
     </div>
     <div class="col-md-2" style="margin-left: 20px">
@@ -397,10 +477,10 @@
         Support
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./index.html">Contact</a>
+        <a href="/home">Contact</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="./verifynumber.html">Sign in</a>
+        <a href="/singup">Sign in</a>
       </div>
     </div>
     <div class="col-md-2" style="margin-left: 20px">
@@ -420,14 +500,23 @@
   >
     © 2022 | Copyright All rights reserved
   </div>
-  
+
   <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     crossorigin="anonymous"
   ></script>
-  <script>
+    <script>
     function signupview(){
       window.location.assign("/signup")
+    }
+    function GetYearly(value){
+      $.ajax({
+      type: 'get',
+      url: '/home',
+      data: 'type='+value,
+      success: function(data) {
+    }
+});
     }
   </script>
   <script
@@ -439,6 +528,7 @@
     src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     crossorigin="anonymous"
   ></script>
-  
+
   </body>
 </html>
+{% endblock content %}

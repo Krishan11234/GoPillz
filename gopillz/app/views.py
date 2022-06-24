@@ -22,6 +22,19 @@ class LandingPage(APIView):
 
     def get(self, request):
         content = {}
+        type = request.query_params.get('type', '')
+        # if len(type) > 0:
+        #     return Response(content, template_name='GoPillz-yearly.html')
+        return Response({'content': content})
+
+
+class OtpVerification(generics.GenericAPIView):
+    serializer_class = UserProfileSerializer
+    renderer_classes = [TemplateHTMLRenderer]
+    success_template = 'verifynumber.html'
+
+    def get(self, request):
+        content = {}
         return Response({'content': content})
 
 
@@ -81,6 +94,12 @@ class Login(generics.GenericAPIView):
 
 class VerifyOtp(generics.GenericAPIView):
     serializer_class = UserVerification
+
+    template_name = 'verifynumber.html'
+
+    def get(self, request):
+        content = {}
+        return Response({'content': content})
 
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
