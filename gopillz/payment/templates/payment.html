@@ -114,8 +114,9 @@
 <!--            ><span style="color: #949494">yearly</span>-->
 <!--          </div>-->
 <!--        </button>-->
-
-      {% include 'messages.html' %}
+        <div id="messages">
+            {% include 'messages.html' %}
+        </div>
           <div
             class="paymenttitle"
             style="
@@ -301,13 +302,13 @@
         currentPlan = data.id
         data.style.backgroundColor = "lightblue";
         if (currentPlan!=plan+'_couple'){
-          document.getElementById(plan+"_couple").style.backgroundColor = "lightgrey";
+          document.getElementById(plan+"_couple").style.backgroundColor = "#f0f0f0";
         }
         if (currentPlan!=plan+'_single'){
-          document.getElementById(plan+"_single").style.backgroundColor = "lightgrey";
+          document.getElementById(plan+"_single").style.backgroundColor = "#f0f0f0";
         }
         if (currentPlan!=plan+'_family_friends'){
-          document.getElementById(plan+'_family_friends').style.backgroundColor = "lightgrey";
+          document.getElementById(plan+'_family_friends').style.backgroundColor = "#f0f0f0";
         }
         $('#plan_type span.main_text').text(type);
         $('#total_amount span.main_text').text(price);
@@ -357,7 +358,7 @@
               console.log(session)
               if ('error' in session){
               console.log(session.error)
-              window.location.reload();
+              $('#messages').load();
               }
               else{
               return stripe.redirectToCheckout({ sessionId: session.id });

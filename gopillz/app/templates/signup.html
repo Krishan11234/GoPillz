@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up</title>
-    <link rel="stylesheet" href="./stylesheets/signup.css " />
+    <link rel="stylesheet" href="/static/css/signup.css " />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -19,6 +19,19 @@
     ></script>
   </head>
   <body style="margin: 2% 2% 2% 2%">
+      <style>
+      .loader{
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: url('/static/assets/gif/screen_loader.gif')
+                      50% 50% no-repeat rgb(249,249,249);
+          opacity: 0.7
+        }
+    </style>
     <div class="row">
       <div class="col-md-6" style="background-color: #cdd6ff">
         <img src="/static/assets/images/signup_angel.svg" class="center-image" />
@@ -63,11 +76,13 @@
         >
           Sign Up
         </div>
+        {% include 'messages.html' %}
+        <div class="loader" style="display:None" id="screen-loader"></div>
         <div class="info" style="margin-top: 5%">
           To get your daily medicine reminders with GoPillz digital angels.
         </div>
         <div class="inputno">
-          <form id="signupform" action="/signup" method="post">
+          <form id="signupform" action='/signup'  method="post">
             {% csrf_token %}
             <input
               type="tel"
@@ -104,7 +119,7 @@
         text-decoration: none;
       }
     </style>
-    <link rel="stylesheet" href="stylesheets/myfooter.css" />
+    <link rel="stylesheet" href="/static/css/myfooter.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -123,13 +138,13 @@
           Useful links
         </div>
         <div class="row" style="margin-bottom: 20px">
-          <a href="./terms&conditions.html">Privacy Policy</a>
+          <a href="/policy">Privacy Policy</a>
         </div>
         <div class="row" style="margin-bottom: 20px">
-          <a href="./terms&conditions.html#refundpolicy">Refund Policy</a>
+          <a href="/policy">Refund Policy</a>
         </div>
         <div class="row" style="margin-bottom: 20px">
-          <a href="./terms&conditions.html">Terms and Conditions</a>
+          <a href="/policy">Terms and Conditions</a>
         </div>
       </div>
       <div class="col-md-2" style="margin-left: 20px">
@@ -137,10 +152,10 @@
           Information
         </div>
         <div class="row" style="margin-bottom: 20px">
-          <a href="./terms&conditions.html">Disclaimer</a>
+          <a href="/policy">Disclaimer</a>
         </div>
         <div class="row" style="margin-bottom: 20px">
-          <a href="./terms&conditions.html">Privacy Notice</a>
+          <a href="/policy">Privacy Notice</a>
         </div>
       </div>
       <div class="col-md-2" style="margin-left: 20px">
@@ -151,7 +166,7 @@
           <a href="/home">Contact</a>
         </div>
         <div class="row" style="margin-bottom: 20px">
-          <a href="./verifynumber.html">Sign in</a>
+          <a href="/signup">Sign in</a>
         </div>
       </div>
       <div class="col-md-2" style="margin-left: 20px">
@@ -171,6 +186,33 @@
     >
       © 2022 | Copyright All rights reserved
     </div>
+    <script>
+      function validateFormOnSubmit(data){
+        document.getElementById('screen-loader').style.display = "block";
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        var data = $('#signupform').serialize();
+         $.ajax({
+          type: 'POST',
+          url:'/signup',
+          processData: false,
+          headers:{
+          'X-CSRFToken': csrftoken,
+          'contentType': 'application/json',
+          },
+          data:data,
+          dataType: 'json',
+          success: function(data){
+              window.location.reload()
+              $('.loader').css('display','none')
+          },
+          error: function(){
+              window.location.reload()
+              $('.loader').css('display','none')
+          },
+      });
+      $('.loader').css('display','none')
+      }
+    </script>
 
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"

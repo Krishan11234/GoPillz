@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
-    'payment'
+    'payment',
+    'prescription',
+    # 'phonenumber_field'
 ]
 
 MIDDLEWARE = [
@@ -157,6 +159,7 @@ DJSTRIPE_FOREIGN_KEY_TO_FIELD = "id"
 DJSTRIPE_USE_NATIVE_JSONFIELD = True
 STRIPE_PUBLISHABLE_KEY_LIVE = os.getenv('STRIPE_PUBLISHABLE_KEY_LIVE')
 STRIPE_PUBLISHABLE_KEY_TEST = os.getenv('STRIPE_PUBLISHABLE_KEY_TEST')
+AUTH_USER_MODEL = 'auth.User'
 HOST_DOMAIN = os.getenv('HOST_DOMAIN')
 import mimetypes
 

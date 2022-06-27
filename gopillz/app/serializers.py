@@ -1,6 +1,6 @@
 from rest_framework import serializers, fields
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, ContactUs
 from django.conf import settings
 
 
@@ -64,4 +64,14 @@ class UserVerification(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('otp', 'phone_no')
+
+
+class ContactUsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ContactUs
+        fields = ('email', 'first_name', 'last_name', 'phone_no', 'message')
+
+    def create(self, validated_data):
+        return ContactUs.objects.create(**validated_data)
 

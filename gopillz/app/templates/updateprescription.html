@@ -1,0 +1,636 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="main__container">
+        <div class="back__icon">
+            <a href="./index.html"><img src="/static/assets/images/arrow-left.svg"></a>
+        </div>
+        <div>
+            <h1 class="main__heading">Tell Us About Yourself</h1>
+            <p class="page__info">For existing users only, please <a href="#">Login</a> and update your prescription
+                details</p>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6 left__container">
+                <div class="form__section">
+                    <form>
+                        <div class="col-12 col-lg-12 mb-3">
+                            <label>Upload Prescription</label>
+                            <div class="browse__button">
+                                <input type="file" multiple>
+                                <p>Drag your files here or click in this area.</p>
+                            </div>
+                            <span>File type: jpg, svg, png</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label>Subscriber Name 1</label>
+                                <input type="text" class="form-control" placeholder="Enter Full Name">
+                            </div>
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label>Subscriber Name 2</label>
+                                <input type="text" class="form-control" placeholder="Enter Full Name">
+                            </div>
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label>Subscriber Name 3</label>
+                                <input type="text" class="form-control" placeholder="Enter Full Name">
+                            </div>
+                            <div class="col-12 col-lg-6 mb-3">
+                                <label>Subscriber Name 4</label>
+                                <input type="text" class="form-control" placeholder="Enter Full Name">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="accordion accordion-flush" id="medicineDetailAccordian">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="medicineDetailHeadingOne">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseOne"
+                                            aria-expanded="false" aria-controls="medicine-flush-collapseOne">
+                                            Medicine 1
+                                        </button>
+                                    </h2>
+                                    <div id="medicine-flush-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="medicineDetailHeadingOne"
+                                        data-bs-parent="#medicineDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Medicine</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Medicine Type</label>
+                                                    <select class="form-select">
+                                                        <option value="1">adhesive(s)</option>
+                                                        <option value="2" selected>capsule(s)</option>
+                                                        <option value="3">cachet(s)</option>
+                                                        <option value="4">cream(s)</option>
+                                                        <option value="5">dragee(s)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Number of Days</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Monday</option>
+                                                        <option value="2">Tuesday</option>
+                                                        <option value="3">Wednesday</option>
+                                                        <option value="4">Thursday</option>
+                                                        <option value="5">Friday</option>
+                                                        <option value="6">Saturday</option>
+                                                        <option value="7">Sunday</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Schedule Time</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Before Breakfast - Simastatin</option>
+                                                        <option value="2">After Breakfast - Loratadine</option>
+                                                        <option value="3">Before Lunch - Montelukast</option>
+                                                        <option value="4">After Lunch - Simvastatin</option>
+                                                        <option value="5">Before Dinner - Loratadine</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Choose the level of engagement you desire</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Daily - Morning and Evening</option>
+                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>
+                                                        <option value="3">As per prescription</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="medicineDetailHeadingTwo">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseTwo"
+                                            aria-expanded="false" aria-controls="medicine-flush-collapseTwo">
+                                            Medicine 2
+                                        </button>
+                                    </h2>
+                                    <div id="medicine-flush-collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="medicineDetailHeadingTwo"
+                                        data-bs-parent="#medicineDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Medicine</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Medicine Type</label>
+                                                    <select class="form-select">
+                                                        <option value="1">adhesive(s)</option>
+                                                        <option value="2" selected>capsule(s)</option>
+                                                        <option value="3">cachet(s)</option>
+                                                        <option value="4">cream(s)</option>
+                                                        <option value="5">dragee(s)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Number of Days</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Monday</option>
+                                                        <option value="2">Tuesday</option>
+                                                        <option value="3">Wednesday</option>
+                                                        <option value="4">Thursday</option>
+                                                        <option value="5">Friday</option>
+                                                        <option value="6">Saturday</option>
+                                                        <option value="7">Sunday</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Schedule Time</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Before Breakfast - Simastatin</option>
+                                                        <option value="2">After Breakfast - Loratadine</option>
+                                                        <option value="3">Before Lunch - Montelukast</option>
+                                                        <option value="4">After Lunch - Simvastatin</option>
+                                                        <option value="5">Before Dinner - Loratadine</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Choose the level of engagement you desire</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Daily - Morning and Evening</option>
+                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>
+                                                        <option value="3">As per prescription</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="medicineDetailHeadingThree">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseThree"
+                                            aria-expanded="false" aria-controls="medicine-flush-collapseThree">
+                                            Medicine 3
+                                        </button>
+                                    </h2>
+                                    <div id="medicine-flush-collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="medicineDetailHeadingThree"
+                                        data-bs-parent="#medicineDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Medicine</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Medicine Type</label>
+                                                    <select class="form-select">
+                                                        <option value="1">adhesive(s)</option>
+                                                        <option value="2" selected>capsule(s)</option>
+                                                        <option value="3">cachet(s)</option>
+                                                        <option value="4">cream(s)</option>
+                                                        <option value="5">dragee(s)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Number of Days</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Monday</option>
+                                                        <option value="2">Tuesday</option>
+                                                        <option value="3">Wednesday</option>
+                                                        <option value="4">Thursday</option>
+                                                        <option value="5">Friday</option>
+                                                        <option value="6">Saturday</option>
+                                                        <option value="7">Sunday</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Schedule Time</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Before Breakfast - Simastatin</option>
+                                                        <option value="2">After Breakfast - Loratadine</option>
+                                                        <option value="3">Before Lunch - Montelukast</option>
+                                                        <option value="4">After Lunch - Simvastatin</option>
+                                                        <option value="5">Before Dinner - Loratadine</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Choose the level of engagement you desire</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Daily - Morning and Evening</option>
+                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>
+                                                        <option value="3">As per prescription</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="medicineDetailHeadingFour">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseFour"
+                                            aria-expanded="false" aria-controls="medicine-flush-collapseFour">
+                                            Medicine 4
+                                        </button>
+                                    </h2>
+                                    <div id="medicine-flush-collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="medicineDetailHeadingFour"
+                                        data-bs-parent="#medicineDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Medicine</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Medicine Type</label>
+                                                    <select class="form-select">
+                                                        <option value="1">adhesive(s)</option>
+                                                        <option value="2" selected>capsule(s)</option>
+                                                        <option value="3">cachet(s)</option>
+                                                        <option value="4">cream(s)</option>
+                                                        <option value="5">dragee(s)</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Number of Days</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Monday</option>
+                                                        <option value="2">Tuesday</option>
+                                                        <option value="3">Wednesday</option>
+                                                        <option value="4">Thursday</option>
+                                                        <option value="5">Friday</option>
+                                                        <option value="6">Saturday</option>
+                                                        <option value="7">Sunday</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Schedule Time</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Before Breakfast - Simastatin</option>
+                                                        <option value="2">After Breakfast - Loratadine</option>
+                                                        <option value="3">Before Lunch - Montelukast</option>
+                                                        <option value="4">After Lunch - Simvastatin</option>
+                                                        <option value="5">Before Dinner - Loratadine</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Choose the level of engagement you desire</label>
+                                                    <select class="form-select">
+                                                        <option value="1" selected>Daily - Morning and Evening</option>
+                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>
+                                                        <option value="3">As per prescription</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add__btn">
+                                Add Medicine <i class="fa fa-plus-circle ml-2" aria-hidden="true"></i>
+                            </div>
+                            <div class="accordion accordion-flush" id="doctorDetailAccordian">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="doctorDetailHeadingOne">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseOne"
+                                            aria-expanded="false" aria-controls="doctor-flush-collapseOne">
+                                            Doctor 1 Details
+                                        </button>
+                                    </h2>
+                                    <div id="doctor-flush-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="doctorDetailHeadingOne"
+                                        data-bs-parent="#doctorDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor Name 1</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor Name 4">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor’s Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor’s Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Hospital/Clinic</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Name of Hospital/Clinic">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control" placeholder="Enter City">
+                                                </div>
+                                                <div class="col-12 col-lg-12 mb-3">
+                                                    <label>Ailment for which being treated</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Ailment for which being treated">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="doctorDetailHeadingTwo">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseTwo"
+                                            aria-expanded="false" aria-controls="doctor-flush-collapseTwo">
+                                            Doctor 2 Details
+                                        </button>
+                                    </h2>
+                                    <div id="doctor-flush-collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="doctorDetailHeadingTwo"
+                                        data-bs-parent="#doctorDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor Name 2</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor Name 4">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor’s Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor’s Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Hospital/Clinic</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Name of Hospital/Clinic">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control" placeholder="Enter City">
+                                                </div>
+                                                <div class="col-12 col-lg-12 mb-3">
+                                                    <label>Ailment for which being treated</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Ailment for which being treated">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="doctorDetailHeadingThree">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseThree"
+                                            aria-expanded="false" aria-controls="doctor-flush-collapseThree">
+                                            Doctor 3 Details
+                                        </button>
+                                    </h2>
+                                    <div id="doctor-flush-collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="doctorDetailHeadingThree"
+                                        data-bs-parent="#doctorDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor Name 3</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor Name 4">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor’s Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor’s Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Hospital/Clinic</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Name of Hospital/Clinic">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control" placeholder="Enter City">
+                                                </div>
+                                                <div class="col-12 col-lg-12 mb-3">
+                                                    <label>Ailment for which being treated</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Ailment for which being treated">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="doctorDetailHeadingFour">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseFour"
+                                            aria-expanded="false" aria-controls="doctor-flush-collapseFour">
+                                            Doctor 4 Details
+                                        </button>
+                                    </h2>
+                                    <div id="doctor-flush-collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="doctorDetailHeadingFour"
+                                        data-bs-parent="#doctorDetailAccordian">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor Name 4</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor Name 4">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Doctor’s Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Doctor’s Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Name of Hospital/Clinic</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Name of Hospital/Clinic">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control" placeholder="Enter City">
+                                                </div>
+                                                <div class="col-12 col-lg-12 mb-3">
+                                                    <label>Ailment for which being treated</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Ailment for which being treated">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add__btn">
+                                Add Doctor <i class="fa fa-plus-circle ml-2" aria-hidden="true"></i>
+                            </div>
+                            <div class="accordion accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                            aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Caregiver 1 Details
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Caregiver Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Email Id">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Relation</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Relation">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                            aria-expanded="false" aria-controls="flush-collapseTwo">
+                                            Caregiver 2 Details
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Caregiver Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Email Id">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Relation</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Relation">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingThree">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"
+                                            aria-expanded="false" aria-controls="flush-collapseThree">
+                                            Caregiver 3 Details
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Caregiver Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Email Id">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Relation</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Relation">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingFour">
+                                        <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"
+                                            aria-expanded="false" aria-controls="flush-collapseFour">
+                                            Caregiver 4 Details
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                        aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Caregiver Name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Caregiver Name">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Phone Number</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Phone Number">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Email Id">
+                                                </div>
+                                                <div class="col-12 col-lg-6 mb-3">
+                                                    <label>Relation</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Enter Relation">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="add__btn">
+                                Add Caregiver <i class="fa fa-plus-circle ml-2" aria-hidden="true"></i>
+                            </div>
+
+                        </div>
+                        <button class="submit__btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 right__container">
+                <div id="slider">
+                    <div class="slides">
+                        <img src="/static/assets/images/slider1img.png" />
+                    </div>
+                    <div class="slides">
+                        <img src="/static/assets/images/frame2.png" />
+                    </div>
+                    <div id="dot"><span class="dot"></span><span class="dot"></span></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

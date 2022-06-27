@@ -94,7 +94,9 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
 
 
 class CheckoutSuccess(generics.GenericAPIView):
-    template_name = "success.html"
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "how_it_works.html"
 
     def get(self, request, *args, **kwargs):
         DOMAIN_URL = ''
@@ -104,6 +106,8 @@ class CheckoutSuccess(generics.GenericAPIView):
 
 
 class CancelSuccess(generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = [TemplateHTMLRenderer]
     template_name = "cancel.html"
 
     def get(self, request, *args, **kwargs):

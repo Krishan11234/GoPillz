@@ -1,8 +1,8 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserProfileSerializer, UserVerification
-from rest_framework import generics, permissions
+from .serializers import UserProfileSerializer, UserVerification, ContactUsSerializer
+from rest_framework import generics
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -47,18 +47,32 @@ class SignUp(generics.GenericAPIView):
 
     def get(self, request):
         content = {}
-        return Response({'content': content})
+        return render(request, self.template_name, content)
 
     # @method_decorator(csrf_exempt)
     def post(self, request):
-        data = self.create_user_data(request.data)
-        serializer = self.get_serializer(data=data)
-        if serializer.is_valid():
-            serializer.is_valid(raise_exception=True)
-        serializer.create(validated_data=data)
-        context = {'phone_no': data['phone']}
-        self.send_otp_to_mobile(data)
-        return render(request, self.success_template, context)
+        try:
+            data = self.create_user_data(request.data)
+            serializer = self.get_serializer(data=data)
+            # if serializer.is_valid(raise_exception=True):
+            #     pass
+            serializer.create(validated_data=data)
+            context = {'phone_no': data['phone']}
+            if self.send_otp_to_mobile(data):
+                error_message = 'OTP Sent Please Verify'
+                messages.success(request, error_message)
+                return render(request, self.success_template, context)
+
+            return self.default_error_response(request)
+        except Exception as e:
+            return self.default_error_response(request)
+
+    def default_error_response(self, request):
+        error_message = 'Cannot Send OTP please Try after Some Time'
+        messages.error(request, error_message)
+        response = Response()
+        response['status'] = False
+        return response
 
     def create_user_data(self, data):
         dict_data = {}
@@ -80,7 +94,7 @@ class SignUp(generics.GenericAPIView):
 
     def send_otp_to_mobile(self, data):
         message = settings.SMS_MESSAGE.format(data['otp'])
-        self.util_instance.send_sms_using_twilio(message, data['phone'])
+        return self.util_instance.send_sms_using_twilio(message, data['phone'])
 
 
 class Login(generics.GenericAPIView):
@@ -117,3 +131,28 @@ class VerifyOtp(generics.GenericAPIView):
         error_message = 'OTP Verification Failed'
         messages.error(request, error_message)
         return redirect('/signup')
+
+
+class ContactUs(generics.GenericAPIView):
+    serializer_class = ContactUsSerializer
+
+    def post(self, request):
+        contact_us_serializer = self.serializer_class(data=request.data)
+        try:
+            response = Response()
+            if contact_us_serializer.is_valid(raise_exception=True):
+                contact_us_serializer.create(validated_data=contact_us_serializer.validated_data)
+                error_message = 'Message Sent Successfully We will Update You shortly'
+                messages.success(request, error_message)
+                response['status'] = True
+                return response
+
+            error_message = 'Error in the Data Please Verify and Try again'
+            messages.error(request, error_message)
+            response['status'] = False
+            return response
+        except Exception as e:
+            error_message = 'Error in the Data Please Verify and Try again'
+            messages.error(request, error_message)
+            response['status'] = False
+            return response

@@ -82,7 +82,7 @@
               required
               style="width: 50%; height: 50px; margin-top: 5%"
             /><br />
-            <small style="color: #2242d5; margin-left: 40%">Resend OTP</small
+            <a href="javascript:resentOtp()" style="color: #2242d5; margin-left: 40%">Resend OTP</a
             ><br />
             <input
               type="submit"
@@ -112,7 +112,7 @@
         text-decoration: none;
       }
     </style>
-    <link rel="stylesheet" href="stylesheets/myfooter.css" />
+    <link rel="stylesheet" href="/static/css/myfooter.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -179,7 +179,31 @@
     >
       © 2022 | Copyright All rights reserved
     </div>
-
+    <script>
+      function resentOtp(){
+       const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+       window.location.reload()
+<!--        phone_no = '{{phone_no}}'-->
+<!--        data = JSON.stringify({'phone':phone_no})-->
+<!--        $.ajax({-->
+<!--            type: 'POST',-->
+<!--            url:'/signup',-->
+<!--            processData: false,-->
+<!--            headers:{-->
+<!--            'X-CSRFToken': csrftoken,-->
+<!--            'contentType': 'application/json',-->
+<!--            },-->
+<!--            data:data,-->
+<!--            dataType: 'json',-->
+<!--            success: function(data){-->
+<!--            alert("OTP Sent");-->
+<!--            },-->
+<!--            error: function(){-->
+<!--            alert("Cannot Sent OTP");-->
+<!--            },-->
+<!--        });-->
+      }
+    </script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
       crossorigin="anonymous"

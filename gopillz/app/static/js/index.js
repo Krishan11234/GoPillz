@@ -1,69 +1,41 @@
-@viewport{
-        zoom: 1.0;
-        width: extend-to-zoom;
-      }
+// slider js
 
-      @-ms-viewport{
-        width: extend-to-zoom;
-        zoom: 1.0;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      a{
-        color: black;
-        text-decoration: none;
-      }
-
-      .columns {
-        float: left;
-        width: 33.3%;
-        padding: 8px;
-      }
-
-      .price {
-        list-style-type: none;
-        border: 1px solid #eee;
-        margin: 0;
-        padding: 0;
-        -webkit-transition: 0.3s;
-        transition: 0.3s;
-      }
-
-      .price:hover {
-        box-shadow: 0 8px 12px 0 rgba(0,0,0,0.2)
-      }
-
-      .price .header {
-        background-color: #111;
-        color: white;
-        font-size: 25px;
-      }
-
-      .price li {
-        /* border-bottom: 1px solid #eee; */
-        padding: 20px;
-        text-align: center;
-      }
-
-      .price .grey {
-        background-color: #eee;
-        font-size: 20px;
-      }
-
-      .button {
-        border: none;
-        color: white;
-        padding: 10px 25px;
-        text-align: center;
-        text-decoration: none;
-        font-size: 18px;
-      }
-
-      @media only screen and (max-width: 600px) {
-        .columns {
-          width: 100%;
+        var index = 0;
+        var slides = document.querySelectorAll(".slides");
+        var dot = document.querySelectorAll(".dot");
+        function changeSlide() {
+            if (index < 0) {
+                index = slides.length - 1;
+            }
+            if (index > slides.length - 1) {
+                index = 0;
+            }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                dot[i].classList.remove("active");
+            }
+            slides[index].style.display = "block";
+            dot[index].classList.add("active");
+            index++;
+            setTimeout(changeSlide, 2000);
         }
-      }
+        changeSlide();
+
+// accordian js
+
+$('.panel-collapse').on('show.bs.collapse', function () {
+    $(this).siblings('.panel-heading').addClass('active');
+});
+$('.panel-collapse').on('hide.bs.collapse', function () {
+    $(this).siblings('.panel-heading').removeClass('active');
+});
+
+//browse file js
+
+$(document).ready(function () {
+    $('browse__button input').change(function () {
+        $('browse__button p').text(this.files.length + " file(s) selected");
+    });
+});
+
+

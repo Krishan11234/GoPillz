@@ -1,0 +1,71 @@
+
+    @media (min-width: 320px) and (max-width: 991px) {
+
+        .main__container {
+            margin: 1rem;
+        }
+
+        .left__container {
+            order: 2;
+        }
+
+        .back__icon {
+            margin-bottom: 0.8rem;
+        }
+
+        .back__icon img {
+            height: 20px;
+        }
+
+        .main__heading {
+            font-size: 12px;
+            ;
+        }
+
+        .page__info {
+            font-size: 10px;
+        }
+
+        #slider {
+            margin: 0 auto 30px;
+            width: 80%;
+        }
+
+        #slider img {
+            height: 250px;
+        }
+
+        .form__section label {
+            font-size: 12px;
+        }
+
+        .form__section input {
+            font-size: 12px;
+        }
+
+        .form__section input::placeholder {
+            font-size: 11px;
+        }
+
+        .accordion-button {
+            font-size: 12px;
+            padding: 10px 0;
+        }
+
+        .accordion-button::after {
+            width: 18px;
+        }
+
+        .add__btn {
+            font-size: 12px;
+            margin: 0.5rem 0;
+        }
+
+        .browse__button input {
+            width: 80%;
+        }
+        .browse__button p{
+            font-size: 12px;
+            padding: 5px 9px;
+        }
+    }

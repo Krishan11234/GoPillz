@@ -1,0 +1,12 @@
+@import url(/static/css/font.css);
+@import url(/static/css/responsive.css);
+@import url(/static/css/signup.css);
+@import url(/static/css/myfooter.css);
+@import url(/static/css/radiobutton.css);
+@import url(/static/css/medicine_schedule.css);
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Graphik';
+}

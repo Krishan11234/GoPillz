@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LandingPage, SignUp, Login, VerifyOtp, OtpVerification
+from .views import LandingPage, SignUp, Login, VerifyOtp, OtpVerification, ContactUs
 from django.views.generic import RedirectView
 from .index_views import Policy, UpdatePrescription, RenewSubscription
 
@@ -12,5 +12,6 @@ urlpatterns = [
     path('user_verification', OtpVerification.as_view(), name='otp-verify'),
     path('policy', Policy.as_view(), name='policy'),
     path('update-prescription', UpdatePrescription.as_view(), name='update-prescription'),
-    path('renew-subscription', RenewSubscription.as_view(), name='renew-subscription')
+    path('renew-subscription', RenewSubscription.as_view(), name='renew-subscription'),
+    path('contact_us', ContactUs.as_view(),name='contact-us')
 ]

@@ -24,5 +24,7 @@ class Utils:
                 to='+91' + str(to)
             )
             print(message.sid)
+            return True
         except Exception as ex:
-            print(ex)
+            return False
+
