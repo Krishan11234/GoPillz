@@ -32,6 +32,7 @@
             <div class="loader" style="display:None"></div>
             <div class="col-12 col-lg-6 left__container">
                 <div class="form__section">
+                    <form id="file-form">
                         {% csrf_token %}
                         <div class="col-12 col-lg-12 mb-3">
                             <label>Upload Prescription</label>
@@ -41,6 +42,7 @@
                             </div>
                             <span>File type: jpg, svg, png</span>
                         </div>
+                    </form>
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-3">
                                 <label>Subscriber Name 1</label>
@@ -731,6 +733,11 @@ $('.loader').css('display','block')
     if (relation){
         formData['relation'] = relation
     }
+
+<!--    var form = $('file-form')[0];-->
+<!--    var fileFormData = new FormData(form);-->
+<!--    fileFormData.append('files', $('input[type=file]')[0].files);-->
+<!--    console.log(fileFormData)-->
 
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     $.ajax({

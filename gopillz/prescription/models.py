@@ -40,3 +40,4 @@ class Prescription(models.Model):
     subscriber = models.ManyToManyField(Subscriber, blank=True, null=True)
 
 
+

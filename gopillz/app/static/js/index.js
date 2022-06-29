@@ -14,8 +14,10 @@
                 slides[i].style.display = "none";
                 dot[i].classList.remove("active");
             }
-            slides[index].style.display = "block";
-            dot[index].classList.add("active");
+            if(slides[index]){
+               slides[index].style.display = "block";
+               dot[index].classList.add("active");
+            }
             index++;
             setTimeout(changeSlide, 2000);
         }
@@ -37,5 +39,8 @@ $(document).ready(function () {
         $('browse__button p').text(this.files.length + " file(s) selected");
     });
 });
+
+
+
 
 

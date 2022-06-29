@@ -35,26 +35,26 @@ class Prescription(generics.GenericAPIView):
         except Exception as e:
             error_message = 'Validation Failed Check Data and Try again'
             if 'medicine' in e.args[0]:
-                error_message = 'Medicine Type Cannot Blank'
+                error_message = 'Medicine Name Cannot Blank'
 
             messages.error(request, error_message)
             response['status'] = True
             return response
 
     def prepare_request_data(self, data):
-        request_data = {'medicine': [{}], 'doctor': [{}], 'caregiver': [{}]}
+        request_data = {'medicine': [{}], 'doctor': [{}], 'caregiver': [{}], 'subscriber': []}
         subscriber_data = data.get('subscriber1', '')
         if len(subscriber_data) > 0:
-            request_data['subscribers'].append(subscriber_data)
+            request_data['subscriber'].append({'subscriber_name': subscriber_data})
         subscriber_data = data.get('subscriber2', '')
         if len(subscriber_data) > 0:
-            request_data['subscribers'].append(subscriber_data)
+            request_data['subscriber'].append({'subscriber_name': subscriber_data})
         subscriber_data = data.get('subscriber3', '')
         if len(subscriber_data) > 0:
-            request_data['subscribers'].append(subscriber_data)
+            request_data['subscriber'].append({'subscriber_name': subscriber_data})
         subscriber_data = data.get('subscriber4', '')
         if len(subscriber_data) > 0:
-            request_data['subscribers'].append(subscriber_data)
+            request_data['subscriber'].append({'subscriber_name': subscriber_data})
 
         if 'medicine_type' in data:
             request_data['medicine'][0]['medicine_name'] = ''

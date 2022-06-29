@@ -2,6 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 
+class SubscriberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscriber
+        fields = ('subscriber_name',)
+
+
 class MedicineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
@@ -24,10 +30,11 @@ class PrescriptionSerializer(serializers.ModelSerializer):
     medicine = MedicineSerializer(many=True, required=False)
     doctor = DoctorSerializer(many=True, required=False)
     caregiver = CaregiverSerializer(many=True, required=False)
+    subscriber = SubscriberSerializer(many=True, required=False)
 
     class Meta:
         model = Prescription
-        fields = ('medicine', 'doctor', 'caregiver', )
+        fields = ('medicine', 'doctor', 'caregiver', 'subscriber')
 
     def create(self, validated_data):
         medicine_data = None
@@ -46,5 +53,9 @@ class PrescriptionSerializer(serializers.ModelSerializer):
             doctor_data = Doctor.objects.create(**doctor_data['doctor'][0])
         user = validated_data.pop('user')
 
-        return Prescription.objects.create(user=user, medicine=medicine_data, caregiver=caregiver_data,
+        prescription = Prescription.objects.create(user=user, medicine=medicine_data, caregiver=caregiver_data,
                                            doctor=doctor_data)
+        if 'subscriber' in validated_data['validated_data']:
+            for value in validated_data['validated_data']['subscriber']:
+                subscriber_obj = Subscriber.objects.create(subscriber_name=value['subscriber_name'])
+                prescription.subscriber.add(subscriber_obj)

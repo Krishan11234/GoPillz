@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from .utils import Utils
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import logout
 
 
 """
@@ -23,8 +24,8 @@ class LandingPage(APIView):
     def get(self, request):
         content = {}
         type = request.query_params.get('type', '')
-        # if len(type) > 0:
-        #     return Response(content, template_name='GoPillz-yearly.html')
+        if len(type) > 0:
+            return Response(request, 'GoPillz-yearly.html', content)
         return Response({'content': content})
 
 
@@ -89,6 +90,12 @@ class SignUp(generics.GenericAPIView):
                 dict_data['email'] = unique_value
             dict_data['phone'] = phone_no
             otp = self.util_instance.generate_otp()
+            otp_backup = otp
+            try:
+                if int(otp[0]) == 0:
+                    otp = '1' + otp[1:]
+            except:
+                otp = otp_backup
             dict_data['otp'] = otp
         return dict_data
 
@@ -156,3 +163,13 @@ class ContactUs(generics.GenericAPIView):
             messages.error(request, error_message)
             response['status'] = False
             return response
+
+
+class Logout(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            logout(request)
+            error_message = 'User Logout Successfully'
+            messages.success(request, error_message)
+            return redirect('/home')
+        return Response(status=status.HTTP_200_OK)
