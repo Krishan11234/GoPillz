@@ -29,6 +29,7 @@ class Payment(models.Model):
     payment_status = models.CharField(max_length=100)
     plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
     expired = models.BooleanField(blank=False)
-    renew = models.BooleanField(blank=False)
+    renew = models.BooleanField(blank=False, null=True, default=False)
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True)
+    exp_date = models.DateField(blank=True, null=True)

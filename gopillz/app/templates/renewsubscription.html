@@ -14,6 +14,7 @@
         padding: 3% 3%;
       }
 </style>
+{% include 'messages.html' %}
 <div class="renew-subscription-container">
     <div class="row">
         <div class="col-md-5" style="background-color: #CDD6FF;">
@@ -24,15 +25,14 @@
         </div>
             <div class="row" style="background-color: white; margin: 5% 5%">
             <div class="planinfo">
-              Summary
+
+              Summary<span class="main_text" style="float:right;font-size:13px;color:blue;"> Active Plan</span>
             </div>
             <div class="planinfo">
-              Plan Type<span style="
-    float: right;font-size:13px;color:blue;
-">Couple</span>
+              Plan Type<span style="float: right;font-size:13px;color:blue;">{{content.plan_type}}</span>
             </div>
             <div class="planinfo">
-              Total
+              Total<span style="float: right;font-size:13px;color:blue;">{{content.price}}</span>
             </div>
 
             </div>
@@ -45,14 +45,14 @@
               <a href="/home"><img src="/static/assets/images/arrow-left.svg" ></a>
             </div>
           <div class="chooseplan" >
-            <span style="color:#1E2751;">Current Plan</span><span style="margin-left: 65%;color:#2242D5">Upgrade Plan</span>
+            <span style="color:#1E2751;">Current Plan</span><a href="renew-subscription?upgrade=True" style="margin-left: 65%;color:#2242D5">Upgrade Plan</a>
           </div>
           <div class="chooseplan" style="border: 2px solid #2242D5 ; width:100%; margin-bottom:10%">
           <div style="margin-left: 2%; margin-top: 2%">
             Couple
           </div>
           <div style="margin-left: 2%; margin-bottom: 2%">
-            <span style="color:#2242D5">&#x20b9;10560/</span><span style="color:#949494">yearly</span>
+            <span style="color:#2242D5">&#x20b9;{{content.price}}/</span><span style="color:#949494">{{content.duration}}</span>
           </div>
           </div>
           <div class="paymenttitle" style="color: #1E2751; border-bottom: 1px solid lightgrey; padding-bottom:5%; margin-bottom:2%">
@@ -81,7 +81,7 @@
           <div class="discountoption" style="color: #2242D5 ; margin-bottom: 10%">
             Have a discount code?
           </div>
-          <button onclick="location.href= 'paymentpage.html'" type="button" class="block" style="color: white; background-color:#2242D5; width:100%; height: 50px; border: none" onclick="location.href= 'paymentpage.html'">Proceed To Pay</button>
+          <button onclick="proceed()" type="button" class="block" style="color: white; background-color:#2242D5; width:100%; height: 50px; border: none">Proceed To Pay</button>
 
 
 
@@ -91,6 +91,10 @@
     </div>
 
 </div>
-    
+    <script>
+        function proceed(){
+            window.location.assign('/proceed')
+        }
+    </script>
 
 {% endblock content %}

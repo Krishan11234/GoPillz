@@ -2,8 +2,8 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Plan, PaymentMethod
-from .serializers import PlanSerializer
+from .models import Plan, PaymentMethod, Payment
+from .serializers import PlanSerializer, PaymentSerializer
 import stripe
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
@@ -28,7 +28,11 @@ class PaymentView(generics.GenericAPIView):
             error_message = 'Before Payment Please Verify Who you are'
             messages.info(request, error_message)
             return redirect('/signup')
-
+        try:
+            subscription_data = Payment.objects.get(user_id=request.user.id)
+            return redirect('/renew-subscription')
+        except Exception as e:
+            pass
         failed_message = request.query_params.get('message', '')
         if failed_message == 'Failed':
             error_message = 'Payment Request Failed or Cancelled'
@@ -47,7 +51,10 @@ class PaymentView(generics.GenericAPIView):
                 temp_plan_row['duration'] = plan['duration']
                 temp_plan_row['price'] = plan['price']
                 content['plans'].append(temp_plan_row)
-            content['active_plan'] = request.query_params.get('val','yearly')
+            if request.query_params.get('val','yearly')=='yearly':
+                content['active_plan'] = 'monthly'
+            else:
+                content['active_plan'] = 'yearly'
         except Exception as e:
             pass
         return Response({
@@ -83,7 +90,16 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             return JsonResponse({
                 'error': error_message
             })
+
         DOMAIN_URL = settings.HOST_DOMAIN
+        renew_subscription = request.data.get('renew-subscription')
+        success_url = DOMAIN_URL + 'success',
+        cancel_url = DOMAIN_URL + 'payment?message=Failed',
+
+        if renew_subscription == True:
+            success_url = DOMAIN_URL + 'renew-success'
+            cancel_url = DOMAIN_URL + 'renew-subscription'
+
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -112,8 +128,8 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                 },
             },
             mode='payment',
-            success_url=DOMAIN_URL+'success',
-            cancel_url=DOMAIN_URL + 'payment?message=Failed',
+            success_url=success_url,
+            cancel_url=cancel_url,
         )
         return JsonResponse({
             'id': checkout_session.id
@@ -133,10 +149,10 @@ class CheckoutSuccess(generics.GenericAPIView):
         })
 
 
-class CancelSuccess(generics.GenericAPIView):
+class RenewSuccess(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = "cancel.html"
+    template_name = "thankyou.html"
 
     def get(self, request, *args, **kwargs):
         return Response({
@@ -158,22 +174,30 @@ class WebHooks(generics.GenericAPIView):
 
         if event['type'] == 'checkout.session.completed':
             now = datetime.datetime.now()
-            current_date = now.strftime("%Y/%m/%d")
+            current_date = now.strftime("%Y-%m-%d")
 
             session = event['data']['object']
             metadata = session.get('metadata')
+
             plan = Plan.objects.get(price=session.get('amount_total', ''))
             payment_method = PaymentMethod.objects.get(method_name='Stripe')
             expires_at = session['expires_at']
             date = datetime.datetime.fromtimestamp(expires_at)
-            str_expires_at = date.strftime("%Y/%m/%d")
+            str_expires_at = date.strftime("%Y-%m-%d")
+
             payment_data = {
-                'payment_method': payment_method,
-                'user_id': session.get('user_id', ''),
-                'plan': plan,
-                'expires_at': str_expires_at,
-                'created_at': current_date
+                'payment_method_id': payment_method.id,
+                'user_id': metadata.get('user_id', ''),
+                'plan_id': plan.id,
+                'expired': False,
+                'exp_date': str_expires_at,
+                'created': current_date,
+                'payment_status': session.get('status', 'Incomplete'),
             }
             print(payment_data)
+            payment_serializer = PaymentSerializer(data=payment_data)
+            if payment_serializer.is_valid():
+                payment_serializer.create(validated_data=payment_data)
+            print(payment_serializer)
 
         return HttpResponse(status=200)

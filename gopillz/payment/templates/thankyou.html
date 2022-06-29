@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="whole" style="background-color: #cdd6ff; padding: 30px 30px">
+      <div class="backoption" style="margin-left: 2%; margin-top: 1%">
+        <a href="/home"><img src="/static/assets/images/arrow-left.svg" /></a>
+        <a href="/home"><img src="/static/assets/images/Back To Home.png" /></a>
+      </div>
+      <div class="img">
+        <img src="/static/assets/images/thankyou_angel.svg" class="center-image" />
+      </div>
+      <div
+        class="greetings"
+        style="text-align: center; font-size: xxx-large; color: #1e2751"
+      >
+        Thank You!
+      </div>
+      <div
+        class="confirmation"
+        style="
+          text-align: center;
+          color: #1e2751;
+          font-size: xxx-large;
+          margin-top: 0%;
+        "
+      >
+        Your subscription has been renewed
+      </div>
+      <div class="greetings2" style="text-align: center; margin-top: 3%">
+        Thank you for giving us the opportunity to be able to help you and your
+        loved ones.
+      </div>
+    </div>
+{% endblock content %}

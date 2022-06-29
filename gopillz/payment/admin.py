@@ -16,5 +16,12 @@ class PaymentMethodAdmin(admin.ModelAdmin):
     model = PaymentMethod
 
 
+class PaymentAdmin(admin.ModelAdmin):
+    fieldsets = ()
+    list_display = ('user', 'plan', 'payment_status', 'expired', 'renew', 'created')
+    model = PaymentMethod
+
+
 admin.site.register(Plan, PlanAdmin)
 admin.site.register(PaymentMethod, PaymentMethodAdmin)
+admin.site.register(Payment, PaymentAdmin)

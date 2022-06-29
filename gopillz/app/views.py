@@ -134,6 +134,7 @@ class VerifyOtp(generics.GenericAPIView):
                     profile_data.save()
                     user_auth = authenticate(username=user_data.username, password=settings.DEFAULT_USER_PASSWORD)
                     login(request, user_auth)
+
                     return redirect('/payment')
         error_message = 'OTP Verification Failed'
         messages.error(request, error_message)

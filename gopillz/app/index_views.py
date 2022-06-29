@@ -44,15 +44,3 @@ class UpdatePrescription(generics.GenericAPIView):
         content = {}
         return Response({'content': content})
 
-
-class RenewSubscription(generics.GenericAPIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'renewsubscription.html'
-
-    def get(self, request):
-        if not request.user.is_authenticated:
-            error_message = 'Before Payment Please Verify Who you are'
-            messages.info(request, error_message)
-            return redirect('/signup')
-        content = {}
-        return Response({'content': content})

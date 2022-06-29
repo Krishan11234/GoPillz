@@ -209,9 +209,9 @@
      function changePlan(planDuration){
        console.log(planDuration)
        if (planDuration=='yearly'){
-          window.location.assign("/payment?val=monthly")
+          window.location.assign("/renew-subscription?upgrade=True&val=monthly")
        }
-       window.location.assign("/payment?val=yearly")
+       window.location.assign("/renew-subscription?upgrade=True&val=yearly")
      }
       function selectArea(data,plan,type,price){
 <!--        loaderClass = document.getElementsByClassName("loader")-->
@@ -234,7 +234,7 @@
 
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         // Create an instance of the Stripe object with your publishable API key
-        var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+        var stripe = Stripe("{{ content.STRIPE_PUBLIC_KEY }}");
         var checkoutButton = document.getElementById("checkout-button");
         checkoutButton.addEventListener("click", function () {
         planType = $('#plan_type span.main_text').text();
@@ -253,7 +253,7 @@
           SelectedPaymentOption = "stripe"
         }
         const dataToSend = JSON.stringify({"payment_method": SelectedPaymentOption,
-        "plan_type":planType,"amount":totalAmount
+        "plan_type":planType,"amount":totalAmount,"renew-subscription":true
         });
         console.log(SelectedPaymentOption)
           $('.loader').css('display','block')

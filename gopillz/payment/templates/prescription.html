@@ -35,11 +35,12 @@
                     <form id="file-form">
                         {% csrf_token %}
                         <div class="col-12 col-lg-12 mb-3">
-                            <label>Upload Prescription</label>
+                            <label>Upload Prescription <span id="file-uploading"></span></label>
                             <div class="browse__button">
-                                <input type="file" multiple>
+                                <input type="file" id="myfile" onchange ="changeFileStatus(this)" name="myfile" multiple>
                                 <p>Drag your files here or click in this area.</p>
                             </div>
+
                             <span>File type: jpg, svg, png</span>
                         </div>
                     </form>
@@ -654,6 +655,12 @@
         </div>
     </div>
 <script>
+
+function changeFileStatus(event){
+  console.log(event.files[0].name)
+  console.log(event.files)
+}
+
 function savePrescription(){
 $('.loader').css('display','block')
     var formData = {}
