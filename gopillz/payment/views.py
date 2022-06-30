@@ -68,72 +68,110 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
     stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
     def post(self, request, *args, **kwargs):
-        payment_method = request.data.get('payment_method')
-        plan_type = request.data.get('plan_type')
-        amount = request.data.get('amount')
+        try:
+            payment_method = request.data.get('payment_method')
+            plan_type = request.data.get('plan_type')
+            amount = request.data.get('amount')
 
-        if plan_type=='' and amount =='':
-            error_message = 'Select Plan Type'
-            messages.error(request, error_message)
-            return JsonResponse({
-                'error': error_message
-            })
-        if payment_method is None:
-            error_message = 'Select Atleast One payment Method'
-            messages.error(request, error_message)
-            return JsonResponse({
-                'error': error_message
-            })
-        if payment_method not in ['stripe']:
-            error_message = 'Invalid Payment Method please select Stripe.Others were in processing'
-            messages.error(request, error_message)
-            return JsonResponse({
-                'error': error_message
-            })
+            if plan_type=='' and amount =='':
+                error_message = 'Select Plan Type'
+                messages.error(request, error_message)
+                return JsonResponse({
+                    'error': error_message
+                })
+            if payment_method is None:
+                error_message = 'Select Atleast One payment Method'
+                messages.error(request, error_message)
+                return JsonResponse({
+                    'error': error_message
+                })
+            if payment_method not in ['stripe']:
+                error_message = 'Invalid Payment Method please select Stripe.Others were in processing'
+                messages.error(request, error_message)
+                return JsonResponse({
+                    'error': error_message
+                })
 
-        DOMAIN_URL = settings.HOST_DOMAIN
-        renew_subscription = request.data.get('renew-subscription')
-        success_url = DOMAIN_URL + 'success',
-        cancel_url = DOMAIN_URL + 'payment?message=Failed',
+            DOMAIN_URL = settings.HOST_DOMAIN
+            renew_subscription = request.data.get('renew-subscription')
+            success_url_ = DOMAIN_URL + 'success',
+            cancel_url_ = DOMAIN_URL + 'payment?message=Failed',
 
-        if renew_subscription == True:
-            success_url = DOMAIN_URL + 'renew-success'
-            cancel_url = DOMAIN_URL + 'renew-subscription'
+            if renew_subscription == True:
+                success_url_ = DOMAIN_URL + 'renew-success'
+                cancel_url_ = DOMAIN_URL + 'renew-subscription'
+                checkout_session = stripe.checkout.Session.create(
+                    payment_method_types=['card'],
+                    line_items=[
+                        {
+                            'price_data': {
+                                'currency': 'inr',
+                                'unit_amount': int(amount),
+                                'product_data': {
+                                    'name': plan_type,
+                                },
 
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'price_data': {
-                        'currency': 'inr',
-                        'unit_amount': int(amount),
-                        'product_data': {
-                            'name': plan_type,
+                            },
+                            'quantity': 1,
                         },
-
+                    ],
+                    metadata={
+                        'payment_method': payment_method,
+                        'user_id': request.user.id,
+                        'plan_type': plan_type,
                     },
-                    'quantity': 1,
-                },
-            ],
-            metadata={
-                'payment_method': payment_method,
-                'user_id': request.user.id,
-                'plan_type': plan_type,
-            },
-            payment_intent_data={
-                "metadata": {
+                    payment_intent_data={
+                        "metadata": {
+                            'payment_method': payment_method,
+                            'user_id': request.user.id,
+                            'plan_type': plan_type,
+                        },
+                    },
+                    mode='payment',
+                    success_url=DOMAIN_URL + 'renew-success',
+                    cancel_url=DOMAIN_URL + 'renew-subscription',
+                )
+                return JsonResponse({
+                    'id': checkout_session.id
+                })
+
+            checkout_session = stripe.checkout.Session.create(
+                payment_method_types=['card'],
+                line_items=[
+                    {
+                        'price_data': {
+                            'currency': 'inr',
+                            'unit_amount': int(amount),
+                            'product_data': {
+                                'name': plan_type,
+                            },
+
+                        },
+                        'quantity': 1,
+                    },
+                ],
+                metadata={
                     'payment_method': payment_method,
                     'user_id': request.user.id,
                     'plan_type': plan_type,
                 },
-            },
-            mode='payment',
-            success_url=success_url,
-            cancel_url=cancel_url,
-        )
-        return JsonResponse({
-            'id': checkout_session.id
-        })
+                payment_intent_data={
+                    "metadata": {
+                        'payment_method': payment_method,
+                        'user_id': request.user.id,
+                        'plan_type': plan_type,
+                    },
+                },
+                mode='payment',
+                success_url=DOMAIN_URL + 'success',
+                cancel_url=DOMAIN_URL + 'payment?message=Failed',
+            )
+            return JsonResponse({
+                'id': checkout_session.id
+            })
+        except Exception as e:
+            print(e)
+            pass
 
 
 class CheckoutSuccess(generics.GenericAPIView):
