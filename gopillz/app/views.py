@@ -139,17 +139,20 @@ class VerifyOtp(generics.GenericAPIView):
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
-            user = User.objects.filter(username=request.data['phone_no']+'@gopillz.com')
-            if user:
-                user_data = user[0]
-                profile_data = Profile.objects.get(id=user_data.id)
-                if request.data['otp'] == str(profile_data.otp) and not profile_data.expired:
-                    profile_data.expiry = True
-                    profile_data.save()
-                    user_auth = authenticate(username=user_data.username, password=settings.DEFAULT_USER_PASSWORD)
-                    login(request, user_auth)
+            try:
+                user = User.objects.filter(username=request.data['phone_no']+'@gopillz.com')
+                if user:
+                    user_data = user[0]
+                    profile_data = Profile.objects.get(user_id=user_data.id)
+                    if request.data['otp'] == str(profile_data.otp) and not profile_data.expired:
+                        profile_data.expiry = True
+                        profile_data.save()
+                        user_auth = authenticate(username=user_data.username, password=settings.DEFAULT_USER_PASSWORD)
+                        login(request, user_auth)
 
-                    return redirect('/payment')
+                        return redirect('/payment')
+            except Exception as e:
+                print(e)
         error_message = 'OTP Verification Failed'
         messages.error(request, error_message)
         return redirect('/signup')

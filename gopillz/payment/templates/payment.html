@@ -211,7 +211,9 @@
        if (planDuration=='yearly'){
           window.location.assign("/payment?val=monthly")
        }
-       window.location.assign("/payment?val=yearly")
+       else{
+        window.location.assign("/payment?val=yearly")
+       }
      }
       function selectArea(data,plan,type,price){
 <!--        loaderClass = document.getElementsByClassName("loader")-->

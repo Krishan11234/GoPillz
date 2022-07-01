@@ -51,10 +51,10 @@ class PaymentView(generics.GenericAPIView):
                 temp_plan_row['duration'] = plan['duration']
                 temp_plan_row['price'] = plan['price']
                 content['plans'].append(temp_plan_row)
-            if request.query_params.get('val','yearly')=='yearly':
-                content['active_plan'] = 'monthly'
-            else:
+            if request.query_params.get('val','')=='yearly':
                 content['active_plan'] = 'yearly'
+            else:
+                content['active_plan'] = 'monthly'
         except Exception as e:
             pass
         return Response({

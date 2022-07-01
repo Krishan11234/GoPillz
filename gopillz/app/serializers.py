@@ -43,7 +43,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
             user.set_password(password)
             user.save()
         try:
-            user_profile = Profile.objects.get(id=user.id)
+            user_profile = Profile.objects.get(user_id=user.id)
         except Exception as e:
             user_profile = None
 
