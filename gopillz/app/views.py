@@ -10,6 +10,7 @@ from .utils import Utils
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout
+from .models import Profile
 
 
 """
@@ -104,6 +105,19 @@ class SignUp(generics.GenericAPIView):
         return self.util_instance.send_sms_using_twilio(message, data['phone'])
 
 
+class RegisteredUser(generics.GenericAPIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'registeredlogin.html'
+
+    def get(self, request):
+        if request.user.is_authenticated:
+            message = 'Already Signed In'
+            messages.info(request, message)
+            return redirect('/home')
+        content = {}
+        return Response({'content': content})
+
+
 class Login(generics.GenericAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'verifynumber.html'
@@ -128,7 +142,7 @@ class VerifyOtp(generics.GenericAPIView):
             user = User.objects.filter(username=request.data['phone_no']+'@gopillz.com')
             if user:
                 user_data = user[0]
-                profile_data = user_data.profile
+                profile_data = Profile.objects.get(id=user_data.id)
                 if request.data['otp'] == str(profile_data.otp) and not profile_data.expired:
                     profile_data.expiry = True
                     profile_data.save()

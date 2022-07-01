@@ -25,7 +25,12 @@ class RenewSubscription(generics.GenericAPIView):
             messages.info(request, error_message)
             return redirect('/signup')
         try:
-            subscription_data = Payment.objects.get(user_id=request.user.id)
+            try:
+                subscription_data = Payment.objects.get(user_id=request.user.id)
+            except Exception as e:
+                info_message = 'No Payment Has Been made Please select plan'
+                messages.info(request, info_message)
+                return redirect('/payment')
             if subscription_data.expired:
                 info_message = 'Your Subscription Has been Expired'
                 messages.info(request, info_message)

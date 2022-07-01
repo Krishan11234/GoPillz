@@ -3,36 +3,33 @@
 {% block content %}
 <style>
     .renew-subscription-container{
-      margin: 7% 7% 7% 7%;
+      margin: 5%;
    }
-   a {
-       color: #1e2751;
-        text-decoration: none;
-      }
+
             .planinfo{
-        border-bottom: 1px solid lightgray ;
+
         padding: 3% 3%;
       }
 </style>
 {% include 'messages.html' %}
 <div class="renew-subscription-container">
     <div class="row">
-        <div class="col-md-5" style="background-color: #CDD6FF;">
+        <div class="col-md-6" style="background-color: #CDD6FF;">
         <div class="row">
-            <div class="crossoption" style="margin-top: 13% ;">
+            <div class="crossoption" style="padding: 0 20px;margin-top: 5%;">
                 <a href="/home"><img src="/static/assets/images/x.svg" align="right"></a>
             </div>
         </div>
-            <div class="row" style="background-color: white; margin: 5% 5%">
+            <div class="row" style="border-radius: 8px;background-color: white;margin: 2% 5%;">
             <div class="planinfo">
 
-              Summary<span class="main_text" style="float:right;font-size:13px;color:blue;"> Active Plan</span>
+              <div style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Summary<span class="main_text" style="float:right;font-size:13px;color:#2242D5;font-weight:400"> Active Plan</span></div>
             </div>
             <div class="planinfo">
-              Plan Type<span style="float: right;font-size:13px;color:blue;">{{content.plan_type}}</span>
+                <div style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Plan Type<span style="float:right;font-size:13px;color:#2242D5;font-weight:400">{{content.plan_type}}</span></div>
             </div>
             <div class="planinfo">
-              Total<span style="float: right;font-size:13px;color:blue;">{{content.price}}</span>
+                <div style="margin:0 10px;font-weight:bold">Total<span style="float:right;font-size:13px;color:#2242D5;font-weight:400">{{content.price}}</span></div>
             </div>
 
             </div>
@@ -40,45 +37,49 @@
               <img src="/static/assets/images/payment_angel.svg" class="center-image" style="height: 550px;width: 550px;">
             </div>
         </div>
-        <div class="col-md-5  " style="margin: 5% 5%">
+        <div class="col-md-6  " style="padding:30px 0 0 45px">
             <div class="backoption" style="margin-bottom: 5%">
               <a href="/home"><img src="/static/assets/images/arrow-left.svg" ></a>
             </div>
           <div class="chooseplan" >
-            <span style="color:#1E2751;">Current Plan</span><a href="renew-subscription?upgrade=True" style="margin-left: 65%;color:#2242D5">Upgrade Plan</a>
+            <span style="color:#1E2751;font-weight:bold">Current Plan</span><a href="renew-subscription?upgrade=True" style="font-weight:500;float:right;color:#2242D5">Upgrade Plan</a>
           </div>
           <div class="chooseplan" style="border: 2px solid #2242D5 ; width:100%; margin-bottom:10%">
-          <div style="margin-left: 2%; margin-top: 2%">
+          <div style="margin-left: 2%; margin-top: 2%;font-weight:bold">
               {{content.plan_type}}
           </div>
-          <div style="margin-left: 2%; margin-bottom: 2%">
+          <div style="margin-left: 2%; margin-bottom: 2%;font-weight:500">
             <span style="color:#2242D5">&#x20b9;{{content.price}}/</span><span style="color:#949494">{{content.duration}}</span>
           </div>
           </div>
-          <div class="paymenttitle" style="color: #1E2751; border-bottom: 1px solid lightgrey; padding-bottom:5%; margin-bottom:2%">
+          <div class="paymenttitle" style="color: #1E2751; border-bottom: 1px solid lightgrey; padding-bottom:3%; margin-bottom:2%;font-weight:bold">
             Payment Method
           </div>
-          <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;margin-bottom:2%">
-          <img src="/static/assets/images/paytm.svg" style="margin-right: 2%;">PayTM
-            <input type="radio" name="payment1" style="margin-left: 70%; transform: scale(2)">
+           <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;
+              margin-bottom: 2%;
+              grid-template-columns: 90% 10%;">
+               <div><img src="/static/assets/images/paytm.svg" style="margin-right: 2%;font-weight:500">Paytm</div>
+            <input type="radio" name="payment1" style="width:100%;height:1.5rem">
           </div>
           <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%; display: grid;
               margin-bottom: 2%;
               grid-template-columns: 90% 10%;">
-          <div><img src="/static/assets/images/razorpay.svg" style="margin-right: 2%;">Rayzor Pay</div>
-            <input type="radio" name="payment1" style=" transform: scale(2);margin:5px 0 0 27px">
+          <div><img src="/static/assets/images/razorpay.svg" style="margin-right: 2%;font-weight:500">Rayzor Pay</div>
+            <input type="radio" name="payment1" style=" width:100%;height:1.5rem">
           </div>
           <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;
               margin-bottom: 2%;
               grid-template-columns: 90% 10%;">
-         <div > <img src="/static/assets/images/stripe.svg" style="margin-right: 2%;">Stripe</div>
-            <input type="radio" name="payment1" style="margin:5px 0 0 27px; transform: scale(2)">
+         <div > <img src="/static/assets/images/stripe.svg" style="margin-right: 2%;font-weight:500">Stripe</div>
+            <input type="radio" name="payment1" style="margin:width:100%;height:1.5rem">
           </div>
-          <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;margin-bottom:2%">
-          <img src="/static/assets/images/upi.svg" style="margin-right: 2%;">UPI
-            <input type="radio" name="payment1" style="margin-left: 76%; transform: scale(2)">
+         <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;
+              margin-bottom: 2%;
+              grid-template-columns: 90% 10%;">
+             <div> <img src="/static/assets/images/upi.svg" style="margin-right: 2%;font-weight:500">UPI</div>
+            <input type="radio" name="payment1" style="width:100%;height:1.5rem">
           </div>
-          <div class="discountoption" style="color: #2242D5 ; margin-bottom: 10%">
+          <div class="discountoption" style="color: #2242D5 ; margin-bottom: 11%">
             Have a discount code?
           </div>
           <button onclick="proceed()" type="button" class="block" style="color: white; background-color:#2242D5; width:100%; height: 50px; border: none">Proceed To Pay</button>

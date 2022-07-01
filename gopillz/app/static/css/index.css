@@ -1,4 +1,12 @@
+
+.header__section a{
+   color: #000;
+}
+.header__section a:hover{
+   color: #2242D5;
+}
 @viewport{
+
         zoom: 1.0;
         width: extend-to-zoom;
       }
