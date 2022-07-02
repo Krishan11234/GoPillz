@@ -42,5 +42,23 @@ $(document).ready(function () {
 
 
 
+//animation scroll
 
+ $(function () {
+        $('#scrlBotm').click(function () {
+            $('html, body').animate({
+                scrollTop: $(document).height()
+            },
+            800);
+            return false;
+        });
+
+        $('#scrlTop').click(function () {
+            $('html, body').animate({
+                scrollTop: '0px'
+            },
+            800);
+            return false;
+        });
+    });
 

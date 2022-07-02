@@ -61,8 +61,8 @@ class SignUp(generics.GenericAPIView):
             serializer.create(validated_data=data)
             context = {'phone_no': data['phone']}
             if self.send_otp_to_mobile(data):
-                error_message = 'OTP Sent Please Verify'
-                messages.success(request, error_message)
+                error_message = 'Please Verify OTP Sent'
+                messages.info(request, error_message)
                 return render(request, self.success_template, context)
 
             return self.default_error_response(request)
@@ -186,8 +186,11 @@ class ContactUs(generics.GenericAPIView):
 class Logout(APIView):
     def get(self, request):
         if request.user.is_authenticated:
+            first_name = request.user.first_name
+            if len(first_name)<1:
+                first_name = 'User'
             logout(request)
-            error_message = 'User Logout Successfully'
-            messages.success(request, error_message)
+            error_message = 'Dear {} you have been Logged out Successfully'.format(first_name)
+            messages.info(request, error_message)
             return redirect('/home')
-        return Response(status=status.HTTP_200_OK)
+        return redirect('/home')

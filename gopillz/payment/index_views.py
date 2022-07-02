@@ -21,7 +21,7 @@ class RenewSubscription(generics.GenericAPIView):
     def get(self, request):
         content = {'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLISHABLE_KEY_TEST}
         if not request.user.is_authenticated:
-            error_message = 'Before Payment Please Verify Who you are'
+            error_message = 'Please sign up to purchase plan'
             messages.info(request, error_message)
             return redirect('/signup')
         try:

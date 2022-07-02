@@ -1,0 +1,105 @@
+
+
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="row" style="margin:2rem 4rem">
+      <div class="privacynotice">
+        <h1 style="color: #1e2751;font-size:48px;fomt-weight:500">Privacy Notice</h1>
+      </div>
+      <div class="info" style="padding: 25px;box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);">
+        You must be at least 18 years of age to use the GoPillz Services.
+        Caregivers who are at least 18 years of age may create an account on
+        behalf of a minor, but minors may not use the GoPillz Services. You may
+        not misuse the GoPillz Services. You may not post or transmit through
+        any GoPillz Service any content that is illegal, obscene, threatening,
+        defamatory, invasive of privacy, infringing of intellectual property
+        rights (including publicity rights), otherwise injurious to third
+        parties or objectionable, contains or consist of software viruses or any
+        form of "spam" or unsolicited commercial electronic messages. You may
+        use the GoPillz Services only as permitted by law. The licenses granted
+        by GoPillz terminate if you do not comply with these Terms of Use.
+
+        <br /><br /><b>Your Account</b><br />
+        You may need your own GoPillz account to use certain GoPillz Services
+        and may be required to be logged in to the account and have a valid
+        payment method associated with it. If there is a problem charging your
+        selected payment method we may charge any other valid payment method
+        associated with your account. For your account, you agree to provide and
+        maintain true, current, and complete information about yourself. You are
+        responsible for maintaining the confidentiality of your account and
+        password and for restricting access to your account, and you agree to
+        accept responsibility for all activities that occur under your account
+        or password. You may choose to give access to a caregiver who can access
+        your account. Except as provided in our Notice of Privacy Practices,
+        GoPillz reserves the right to refuse service, suspend or terminate your
+        account, terminate your rights to use GoPillz Services, remove or edit
+        content in its sole discretion.
+
+        <br /><br /><b>Communications with GoPillz</b><br />
+        When you use GoPillz Services, or send emails, text messages, and other
+        communications from your desktop or mobile device to us, you may be
+        communicating with us electronically. You consent to receive
+        communications (including emails, texts, mobile push notifications, or
+        notices and messages on this Web site or through other GoPillz Services)
+        by or on behalf of GoPillz to any email address, phone number, or mobile
+        device associated with your account or otherwise directly or indirectly
+        provided to GoPillz. You can retain copies of these communications for
+        your records. You agree that all agreements, notices, disclosures, and
+        other communications that we provide to you electronically satisfy any
+        legal requirement that such communications be in writing. These
+        communications may include personal information about your
+        prescriptions, treatment, or benefits, and, in connection with such
+        communications, we may use pre-recorded/artificial voice messages and/or
+        automatic dialing devices. If you choose to share access to your mobile
+        phone, carrier account, email, or GoPillz account with others those
+        individuals might also be able to see this information.
+
+        <br /><br /><b>App Permissions</b><br />
+        When you use apps created by GoPillz, you may grant certain permissions
+        to us for your device. You may be able to change the permissions given
+        to us by modifying your device settings.
+      </div>
+    <div
+
+      style="
+        text-align: center;
+        background-color: #dee3f9;margin-top:20px
+
+      "
+    >
+      <div
+        class="sub"
+        style="
+          color: #1e2751;
+          font-size: xx-large;
+          margin-bottom: 30px;
+          margin-top: 30px;
+        "
+      >
+        <b>Subscribe for Health Benefits</b>
+      </div>
+      <div class="sub" style="font-size: large; margin-bottom: 30px">
+        GoPillz offers a variety of plans to meet your needs. <br />
+        There are great discounts available for annual payments as well.
+      </div>
+      <div class="sub" style="margin-bottom: 30px">
+        <button
+          onclick="payment()"
+          type="button"
+          class="btn btn-primary"
+          style="background-color: #2242d5; width: 20%"
+        >
+          Subscribe
+        </button>
+      </div>
+    </div>
+    </div>
+<script>
+  function payment(){
+    window.location.assign('/payment')
+  }
+</script>
+
+{% endblock content %}

@@ -9,5 +9,10 @@ body{
     padding: 0;
     box-sizing: border-box;
     font-family: 'Graphik';
+
 }
 
+a{
+padding:0;
+
+}

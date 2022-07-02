@@ -2,6 +2,17 @@
 {% load static %}
 {% block content %}
 <style>
+.loader{
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: url('/static/assets/gif/screen_loader.gif')
+                      50% 50% no-repeat rgb(249,249,249);
+          opacity: 0.7
+        }
     .renew-subscription-container{
       margin: 5%;
    }
@@ -26,10 +37,10 @@
               <div style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Summary<span class="main_text" style="float:right;font-size:13px;color:#2242D5;font-weight:400"> Active Plan</span></div>
             </div>
             <div class="planinfo">
-                <div style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Plan Type<span style="float:right;font-size:13px;color:#2242D5;font-weight:400">{{content.plan_type}}</span></div>
+                <div id="plan_type" style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Plan Type<span class="main_text" style="float:right;font-size:13px;color:#2242D5;font-weight:400">{{content.plan_type}}</span></div>
             </div>
             <div class="planinfo">
-                <div style="margin:0 10px;font-weight:bold">Total<span style="float:right;font-size:13px;color:#2242D5;font-weight:400">{{content.price}}</span></div>
+                <div style="margin:0 10px;font-weight:bold" id="total_amount">Total<span class="main_text" style="float:right;font-size:13px;color:#2242D5;font-weight:400">{{content.price}}</span></div>
             </div>
 
             </div>
@@ -41,10 +52,12 @@
             <div class="backoption" style="margin-bottom: 5%">
               <a href="/home"><img src="/static/assets/images/arrow-left.svg" ></a>
             </div>
+            {% csrf_token %}
+            <div class="loader" style="display:None"></div>
           <div class="chooseplan" >
             <span style="color:#1E2751;font-weight:bold">Current Plan</span><a href="renew-subscription?upgrade=True" style="font-weight:500;float:right;color:#2242D5">Upgrade Plan</a>
           </div>
-          <div class="chooseplan" style="border: 2px solid #2242D5 ; width:100%; margin-bottom:10%">
+          <div class="chooseplan" style="border: 2px solid #2242D5 ; width:100%; margin-bottom:10%;cursor:pointer">
           <div style="margin-left: 2%; margin-top: 2%;font-weight:bold">
               {{content.plan_type}}
           </div>
@@ -59,30 +72,30 @@
               margin-bottom: 2%;
               grid-template-columns: 90% 10%;">
                <div><img src="/static/assets/images/paytm.svg" style="margin-right: 2%;font-weight:500">Paytm</div>
-            <input type="radio" name="payment1" style="width:100%;height:1.5rem">
+            <input type="radio" id="paytm" name="payment1" style="width:100%;height:1.5rem">
           </div>
           <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%; display: grid;
               margin-bottom: 2%;
               grid-template-columns: 90% 10%;">
           <div><img src="/static/assets/images/razorpay.svg" style="margin-right: 2%;font-weight:500">Rayzor Pay</div>
-            <input type="radio" name="payment1" style=" width:100%;height:1.5rem">
+            <input type="radio" id="rayzor" name="payment1" style=" width:100%;height:1.5rem">
           </div>
           <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;
               margin-bottom: 2%;
               grid-template-columns: 90% 10%;">
          <div > <img src="/static/assets/images/stripe.svg" style="margin-right: 2%;font-weight:500">Stripe</div>
-            <input type="radio" name="payment1" style="margin:width:100%;height:1.5rem">
+            <input type="radio" id="stripe" name="payment1" style="margin:width:100%;height:1.5rem">
           </div>
          <div class="paymentoption" style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;
               margin-bottom: 2%;
               grid-template-columns: 90% 10%;">
              <div> <img src="/static/assets/images/upi.svg" style="margin-right: 2%;font-weight:500">UPI</div>
-            <input type="radio" name="payment1" style="width:100%;height:1.5rem">
+            <input type="radio" id="upi" name="payment1" style="width:100%;height:1.5rem">
           </div>
           <div class="discountoption" style="color: #2242D5 ; margin-bottom: 11%">
             Have a discount code?
           </div>
-          <button onclick="proceed()" type="button" class="block" style="color: white; background-color:#2242D5; width:100%; height: 50px; border: none">Proceed To Pay</button>
+          <button id="checkout-button" type="button" class="block" style="color: white; background-color:#2242D5; width:100%; height: 50px; border: none">Proceed To Pay</button>
 
 
 
@@ -91,11 +104,91 @@
 </div>
     </div>
 
-</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+        var checkoutButton = document.getElementById("checkout-button");
+</script>
+
     <script>
         function proceed(){
             window.location.assign('/proceed')
         }
+             function changePlan(planDuration){
+       console.log(planDuration)
+       if (planDuration=='yearly'){
+          console.log('here')
+          window.location.assign("/renew-subscription?upgrade=True&val=monthly")
+       }
+       else{
+          window.location.assign("/renew-subscription?upgrade=True&val=yearly")
+        }
+     }
+
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        // Create an instance of the Stripe object with your publishable API key
+        var stripe = Stripe("{{ content.STRIPE_PUBLIC_KEY }}");
+        var checkoutButton = document.getElementById("checkout-button");
+        checkoutButton.addEventListener("click", function () {
+        planType = $('#plan_type span.main_text').text();
+        totalAmount = $('#total_amount span.main_text').text();
+        SelectedPaymentOption = null
+        if($("#rayzor").prop('checked') == true){
+          SelectedPaymentOption = "rayzor"
+        }
+        if($("#paytm").prop('checked') == true){
+          SelectedPaymentOption = "paytm"
+        }
+        if($("#upi").prop('checked') == true){
+          SelectedPaymentOption = "upi"
+        }
+        if($("#stripe").prop('checked') == true){
+          SelectedPaymentOption = "stripe"
+        }
+        const dataToSend = JSON.stringify({"payment_method": SelectedPaymentOption,
+        "plan_type":planType,"amount":totalAmount,"renew-subscription":true
+        });
+        console.log(SelectedPaymentOption)
+          $('.loader').css('display','block')
+          fetch("{% url 'create-checkout-session'  %}", {
+            method: "POST",
+            body: dataToSend,
+            headers: {
+                'X-CSRFToken': csrftoken,
+                "Content-Type": "application/json"
+            }
+          })
+            .then(function (response) {
+            $('.loader').css('display','none')
+              return response.json();
+            })
+            .then(function (session) {
+             $('.loader').css('display','none')
+              if ('error' in session){
+              console.log(session.error)
+                window.location.reload()
+              $('#messages').load();
+              }
+              else{
+              return stripe.redirectToCheckout({ sessionId: session.id });
+              }
+            })
+            .then(function (result) {
+            $('.loader').css('display','none')
+              // If redirectToCheckout fails due to a browser or network
+              // error, you should display the localized error message to your
+              // customer using error.message.
+              console.log(result)
+              if (result.error) {
+                alert(result.error.message);
+              }
+            })
+            .catch(function (error) {
+            $('.loader').css('display','none')
+             window.location.reload()
+              console.error("Error:", error);
+            });
+        });
     </script>
 
 {% endblock content %}

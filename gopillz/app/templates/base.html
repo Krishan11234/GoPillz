@@ -11,7 +11,9 @@
     <link rel="stylesheet" href='/static/css/style.css'>
 </head>
 <body>
- <div class="row header__section" style="margin: 1rem">
+
+ <div style="text-align: end;margin: 4px;"><button id="scrlBotm" style="color: #2242D5;border:2px solid #2242D5; height:32px;width:32px;text-align:center;cursor: pointer;font-size: 20px;background-color: transparent;border-radius: 4px;line-height: 0;"><i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i></button></div>
+  <div class="row header__section" style="margin: 1rem">
 <div class="col-md-3">
   <img
     src="/static/assets/images/v203_350.png"
@@ -30,7 +32,7 @@
             class="btn btn-primary"
             style="padding: 8px 12px;
             background-color: #2242d5;
-            font-size: 14px;
+            font-size: 13px;
             width: auto;margin-right:4px"
           >
         Logged In<i class="fa fa-angle-down" style="    padding:0 0 0 4px;    vertical-align: bottom;
@@ -43,7 +45,7 @@
             class="btn btn-primary"
             style="padding: 8px 12px;
            border:2px solid #2242d5;
-            font-size: 14px;background:transparent;color:#2242d5;
+            font-size: 13px;background:transparent;color:#2242d5;
             width: auto;margin-right:4px"
             onclick="logout()">Log Out</button>
     </div>
@@ -65,9 +67,9 @@
  </div>
     {% block content %}
     {% endblock content %}
- <hr  style="margin-top: 10%; margin-bottom: 5%" >
+ <hr  style="margin-top: 5%; margin-bottom: 5%" >
   <div class="row" style="color: #1e2751;margin: 1rem 2.5rem">
-    <div class="col-md-3" style="margin-left: 20px">
+    <div class="col-md-4">
       <div class="row" style="margin-bottom: 20px">
         <img src="/static/assets/images/v203_350.png" style="width: 200px; height: 70px" />
       </div>
@@ -75,32 +77,32 @@
       <div class="row" style="margin-bottom: 20px">-</div>
       <div class="row" style="margin-bottom: 20px">go@gopillz.com</div>
     </div>
-    <div class="col-md-2" style="margin-left: 20px">
+    <div class="col-md-2">
       <div class="row" style="margin-bottom: 20px; font-size: x-large">
         Useful links
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="/policy">Privacy Policy</a>
+        <a href="/privacy_policy">Privacy Policy</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="/policy">Refund Policy</a>
+        <a href="/refund_policy">Refund Policy</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="/policy">Terms and Conditions</a>
+        <a href="/terms_conditions">Terms and Conditions</a>
       </div>
     </div>
-    <div class="col-md-2" style="margin-left: 20px">
+    <div class="col-md-2">
       <div class="row" style="margin-bottom: 20px; font-size: x-large">
         Information
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="/policy">Disclaimer</a>
+        <a href="/disclaimer">Disclaimer</a>
       </div>
       <div class="row" style="margin-bottom: 20px">
-        <a href="/policy">Privacy Notice</a>
+        <a href="/privacy_notice">Privacy Notice</a>
       </div>
     </div>
-    <div class="col-md-2" style="margin-left: 20px">
+    <div class="col-md-2" >
       <div class="row" style="margin-bottom: 20px; font-size: x-large">
         Support
       </div>
@@ -115,10 +117,11 @@
       <div class="row" style="margin-bottom: 20px; font-size: x-large">
         Socials
       </div>
-      <div class="row">
-        <a href="#" class="fa fa-facebook"></a>
-        <a href="#" class="fa fa-twitter"></a>
-        <a href="#" class="fa fa-youtube"></a>
+      <div class="">
+          <a href="#">Coming Soon</a>
+<!--        <a href="#" class="fa fa-facebook-square" style="color: #3B5998;font-size: 34px;margin:0 4px;padding:0"></a>-->
+<!--        <a href="#" class="fa fa-twitter-square" style="color: #55ACEE;font-size: 34px;margin:0 4px;padding:0"></a>-->
+<!--        <a href="#" class="fa fa-youtube-square" style="color: #bb0000 ;font-size: 34px;margin:0 4px;padding:0"></a>-->
       </div>
     </div>
   </div>
@@ -128,6 +131,8 @@
   >
     © 2022 | Copyright All rights reserved
   </div>
+  <div style="text-align: end;margin: 4px;"><button id="scrlTop" style="color: #2242D5;border:2px solid #2242D5; height:32px;width:32px;text-align:center;cursor: pointer;font-size: 20px;background-color: transparent;border-radius: 4px;line-height: 0;"><i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i></button></div>
+
        <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
        <script src="/static/js/index.js"></script>
        <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -141,7 +146,23 @@
  function logout(){
     window.location.assign('/logout')
  }
+ $(function () {
+        $('#scrlBotm').click(function () {
+            $('html, body').animate({
+                scrollTop: $(document).height()
+            },
+            800);
+            return false;
+        });
 
+        $('#scrlTop').click(function () {
+            $('html, body').animate({
+                scrollTop: '0px'
+            },
+            800);
+            return false;
+        });
+    });
 </script>
 </body>
 
