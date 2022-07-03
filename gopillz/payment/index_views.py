@@ -6,6 +6,7 @@ from django.shortcuts import redirect, render
 from .models import Payment, Plan
 from .serializers import PlanSerializer
 from django.conf import settings
+from rest_framework.permissions import IsAuthenticated
 
 
 class RenewSubscription(generics.GenericAPIView):
@@ -66,3 +67,5 @@ class Proceed(generics.GenericAPIView):
         info_message = 'Cannot Proceed From here without Upgrading plan'
         messages.info(request, info_message)
         return redirect('/renew-subscription')
+
+

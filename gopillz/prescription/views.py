@@ -99,3 +99,16 @@ class Prescription(generics.GenericAPIView):
             request_data.pop('caregiver')
 
         return request_data
+
+
+class PrescriptionView(generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = "prescription.html"
+
+    def get(self, request, *args, **kwargs):
+        info_message = 'Payment Processing Completed'
+        messages.info(request, info_message)
+        return Response({
+            'content': "",
+        })

@@ -177,7 +177,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
 class CheckoutSuccess(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = [TemplateHTMLRenderer]
-    template_name = "thankyou.html"
+    template_name = "thankyou2.html"
 
     def get(self, request, *args, **kwargs):
         info_message = 'Payment Processing Completed'

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="col-md-9" style="background-color: #cdd6ff; padding: 45px;margin:auto">
+      <div class="backoption" style="display:flex;justify-content:space-between">
+        <a href="/home"><img src="/static/assets/images/arrow-left.svg" style="margin-right:4px"><img src="/static/assets/images/Back To Home.png" /></a>
+           <button
+                   onclick="prescription()"
+            type="button"
+            class="block"
+            style="
+             color: white;
+    background-color: #2242d5;
+    padding: 10px 20px;
+    border: none;
+            "
+          >
+            Proceed Further
+          </button>
+      </div>
+
+      <div class="img">
+        <img src="/static/assets/images/thankyou_angel.svg" class="center-image" style="height:265px" />
+      </div>
+      <div
+        class="greetings"
+        style="text-align: center; font-size:42px; color: #1e2751;font-weight:500"
+      >
+        Thank You!
+      </div>
+      <div
+        class="confirmation"
+        style="
+          text-align: center;
+          color: #1e2751;
+          font-size:42px;
+          font-weight:500;
+          margin-top: 0%;
+          line-height:1;
+        "
+      >
+        Your subscription has been Activated
+      </div>
+      <div class="greetings2" style="text-align: center; margin-top: 1%;font-size:18px">
+        Thank you for giving us the opportunity to be able to help you and your
+        loved ones.
+      </div>
+    </div>
+<script>
+  function prescription(){
+    window.location.assign('/update-prescription')
+  }
+</script>
+{% endblock content %}
