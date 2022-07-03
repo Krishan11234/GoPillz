@@ -11,6 +11,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import logout
 from .models import Profile
+from rest_framework.permissions import AllowAny
 
 
 """
@@ -41,6 +42,7 @@ class OtpVerification(generics.GenericAPIView):
 
 
 class SignUp(generics.GenericAPIView):
+    permission_classes = (AllowAny,)
     serializer_class = UserProfileSerializer
     renderer_classes = [TemplateHTMLRenderer]
     util_instance = Utils()
@@ -128,6 +130,7 @@ class Login(generics.GenericAPIView):
 
 
 class VerifyOtp(generics.GenericAPIView):
+    permission_classes = (AllowAny,)
     serializer_class = UserVerification
 
     template_name = 'verifynumber.html'

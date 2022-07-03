@@ -175,7 +175,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
 
 
 class CheckoutSuccess(generics.GenericAPIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "thankyou2.html"
 
