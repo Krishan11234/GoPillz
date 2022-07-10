@@ -144,12 +144,12 @@ dropdown-menu.show{
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Schedule Time</label>
                                                     <select id='schedule_time' class="form-select">
-                                                        <option value="1" selected>Before Breakfast - Simastatin</option>
-                                                        <option value="2">After Breakfast - Loratadine</option>
-                                                        <option value="3">Before Lunch - Montelukast</option>
-                                                        <option value="4">After Lunch - Simvastatin</option>
-                                                        <option value="5">Before Dinner - Loratadine</option>
-                                                        <option value="6">After Dinner - Loratadine</option>
+                                                        <option value="1">Before Breakfast - </option>
+                                                        <option value="2">After Breakfast - </option>
+                                                        <option value="3">Before Lunch - </option>
+                                                        <option value="4">After Lunch - </option>
+                                                        <option value="5">Before Dinner - </option>
+                                                        <option value="6">After Dinner - </option>
                                                     </select>
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
@@ -705,13 +705,15 @@ dropdown-menu.show{
 <script>
 
 function updateScheduleTime(data){
-    console.log('current input value')
     medicine_name = document.getElementById('medicine_name').value
     console.log(medicine_name)
-    var length = $('#schedule_time > option'). length;
-    console.log(length)
-    for (let i = 1; i <= length; i++) {
-    console.log($("#schedule_time").val('1').change())
+    var select = document.getElementById("schedule_time");
+    console.log(select.length)
+    for (let i = 0; i < select.length; i++) {
+        splitedValue = select.options[String(i)].text.split('-')
+        newOptionValue = splitedValue[0]+ '- ' +medicine_name
+        console.log(newOptionValue)
+        select.options[String(i)].text = newOptionValue
     }
 }
 
