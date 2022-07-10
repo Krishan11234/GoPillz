@@ -1,10 +1,16 @@
 @import url(/static/css/font.css);
 @import url(/static/css/responsive.css);
 @import url(/static/css/signup.css);
-@import url(/static/css/myfooter.css);
+@import url(/static/css/footer.css);
 @import url(/static/css/radiobutton.css);
 @import url(/static/css/medicine_schedule.css);
+@import url(/static/css/thank_you.css);
+@import url(/static/css/header.css);
+@import url(/static/css/howitworks.css);
+@import url(/static/css/home.css);
+
 body{
+
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -13,6 +19,6 @@ body{
 }
 
 a{
-padding:0;
+padding:0;}
 
-}
+

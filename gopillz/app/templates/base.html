@@ -12,145 +12,225 @@
 </head>
 <body>
 
- <div style="text-align: end;margin: 4px;"><button id="scrlBotm" style="color: #2242D5;border:2px solid #2242D5; height:32px;width:32px;text-align:center;cursor: pointer;font-size: 20px;background-color: transparent;border-radius: 4px;line-height: 0;"><i class="fa fa-arrow-circle-o-down" aria-hidden="true" style="padding: 0;
-    text-align: center;
-    margin: 0;
-    font-size: 20px;
-    width: initial;"></i></button></div>
-  <div class="row header__section" style="margin: 1rem">
-<div class="col-md-3">
-  <img
-    src="/static/assets/images/v203_350.png"
-    style="background-color: white; width: 252px; height: 82.59px"
-  />
-</div>
-<div class="col-md-1" style="text-align:center;padding:12px 0 0 0;"><a href="/home">Home</a></div>
-<div class="col-md-1" style="text-align:center;padding:12px 0 0 0;"><a href="/home#pricingplans">Pricing</a></div>
-<div class="col-md-1"  style="padding:12px 0 0 0;text-align:center"><a href="/how_it_works">How it works</a></div>
-<div class="col-md-2" style="text-align:center;padding:12px 0 0 0;"><a href="/update-prescription" >Update Prescription</a></div>
-<div class="col-md-2" style="text-align:center;padding:12px 0 0 0;"><a href="/renew-subscription">Renew Subscription</a></div>
-     {% if user.is_authenticated %}
-    <div class="col-md-2" style="padding:5px 0;text-align:center">
-          <button
-            type="button"
-            class="btn btn-primary"
-            style="padding: 8px 12px;
-            background-color: #2242d5;
-            font-size: 13px;
-            width: auto;margin-right:4px"
-          >
-        Logged In<i class="fa fa-angle-down" style="    padding:0 0 0 4px;    vertical-align: bottom;
-        text-align: center;
-        margin: 0;
-        font-size: 20px;width:15px;
-       "></i>
-      </button>
-            <button  type="button"
-            class="btn btn-primary"
-            style="padding: 8px 12px;
-           border:2px solid #2242d5;
-            font-size: 13px;background:transparent;color:#2242d5;
-            width: auto;margin-right:4px"
-            onclick="logout()">Log Out</button>
-    </div>
-     {% else %}
-     <div class="col-md-1" style="padding:5px 0;text-align:center">
-          <button
-            type="button"
-            class="btn btn-primary"
-            style="padding: 8px 12px;
-            background-color: #2242d5;
-            font-size: 14px;
-            width: 100%;"
-            onclick="signupview()"
-          >
-        Sign Up
-      </button>
-      {% endif %}
-</div>
- </div>
+  <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+              <a class="navbar-brand" href="#"><img src="/static/assets/images/v203_350.png" alt="logo"></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/home#pricingplans">Pricing</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/how_it_works">How it works</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/update-prescription">Update Prescription</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/renew-subscription">Renew Prescription</a>
+                  </li>
+                </ul>
+                 <div>
+                     {% if not user.is_authenticated %}
+                    <button class="btn primary__btn signup_btn" onclick="signupview()" type="">Sign Up</button>
+                     {% else %}
+                    <button class="btn primary__btn logged_in_btn" type="submit">Logged In</button>
+                    <button class="btn outline__btn logout_btn" onclick="logout()" type="submit">Logout</button>
+                     {% endif %}
+                 </div>
+              </div>
+            </div>
+          </nav>
+<!--  <div class="row header__section" style="margin: 1rem">-->
+<!--<div class="col-md-3">-->
+<!--  <img-->
+<!--    src="/static/assets/images/v203_350.png"-->
+<!--    style="background-color: white; width: 252px; height: 82.59px"-->
+<!--  />-->
+<!--</div>-->
+<!--<div class="col-md-1" style="text-align:center;padding:12px 0 0 0;"><a href="/home">Home</a></div>-->
+<!--<div class="col-md-1" style="text-align:center;padding:12px 0 0 0;"><a href="/home#pricingplans">Pricing</a></div>-->
+<!--<div class="col-md-1"  style="padding:12px 0 0 0;text-align:center"><a href="/how_it_works">How it works</a></div>-->
+<!--<div class="col-md-2" style="text-align:center;padding:12px 0 0 0;"><a href="/update-prescription" >Update Prescription</a></div>-->
+<!--<div class="col-md-2" style="text-align:center;padding:12px 0 0 0;"><a href="/renew-subscription">Renew Subscription</a></div>-->
+<!--     {% if user.is_authenticated %}-->
+<!--    <div class="col-md-2" style="padding:5px 0;text-align:center">-->
+<!--          <button-->
+<!--            type="button"-->
+<!--            class="btn btn-primary"-->
+<!--            style="padding: 8px 12px;-->
+<!--            background-color: #2242d5;-->
+<!--            font-size: 13px;-->
+<!--            width: auto;margin-right:4px"-->
+<!--          >-->
+<!--        Logged In<i class="fa fa-angle-down" style="    padding:0 0 0 4px;    vertical-align: bottom;-->
+<!--        text-align: center;-->
+<!--        margin: 0;-->
+<!--        font-size: 20px;width:15px;-->
+<!--       "></i>-->
+<!--      </button>-->
+<!--            <button  type="button"-->
+<!--            class="btn btn-primary"-->
+<!--            style="padding: 8px 12px;-->
+<!--           border:2px solid #2242d5;-->
+<!--            font-size: 13px;background:transparent;color:#2242d5;-->
+<!--            width: auto;margin-right:4px"-->
+<!--            onclick="logout()">Log Out</button>-->
+<!--    </div>-->
+<!--     {% else %}-->
+<!--     <div class="col-md-1" style="padding:5px 0;text-align:center">-->
+<!--          <button-->
+<!--            type="button"-->
+<!--            class="btn btn-primary"-->
+<!--            style="padding: 8px 12px;-->
+<!--            background-color: #2242d5;-->
+<!--            font-size: 14px;-->
+<!--            width: 100%;"-->
+<!--            onclick="signupview()"-->
+<!--          >-->
+<!--        Sign Up-->
+<!--      </button>-->
+<!--      {% endif %}-->
+<!--</div>-->
+<!-- </div>-->
     {% block content %}
     {% endblock content %}
- <hr  style="margin-top: 5%; margin-bottom: 5%" >
-  <div class="row" style="color: #1e2751;margin: 1rem 2.5rem">
-    <div class="col-md-4">
-      <div class="row" style="margin-bottom: 20px">
-        <img src="/static/assets/images/v203_350.png" style="width: 200px; height: 70px" />
-      </div>
-      <div class="row">30/91B Malviya Nagar, South Delhi, New Delhi</div>
-      <div class="row" style="margin-bottom: 20px">-</div>
-      <div class="row" style="margin-bottom: 20px">go@gopillz.com</div>
-    </div>
-    <div class="col-md-2">
-      <div class="row" style="margin-bottom: 20px; font-size: x-large">
-        Useful links
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/privacy_policy">Privacy Policy</a>
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/refund_policy">Refund Policy</a>
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/terms_conditions">Terms and Conditions</a>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="row" style="margin-bottom: 20px; font-size: x-large">
-        Information
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/disclaimer">Disclaimer</a>
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/privacy_notice">Privacy Notice</a>
-      </div>
-    </div>
-    <div class="col-md-2" >
-      <div class="row" style="margin-bottom: 20px; font-size: x-large">
-        Support
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/home#contactus">Contact</a>
-      </div>
-      <div class="row" style="margin-bottom: 20px">
-        <a href="/registered_user">Sign in</a>
-      </div>
-    </div>
-    <div class="col-md-2">
-      <div class="row" style="margin-bottom: 20px; font-size: x-large">
-        Socials
-      </div>
-      <div class="">
-          <a href="#">Coming Soon</a>
+<!-- <hr  style="margin-top: 5%; margin-bottom: 5%" >-->
+<!--  <div class="row" style="color: #1e2751;margin: 1rem 2.5rem">-->
+<!--    <div class="col-md-4">-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <img src="/static/assets/images/v203_350.png" style="width: 200px; height: 70px" />-->
+<!--      </div>-->
+<!--      <div class="row">30/91B Malviya Nagar, South Delhi, New Delhi</div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-</div>-->
+<!--      <div class="row" style="margin-bottom: 20px">go@gopillz.com</div>-->
+<!--    </div>-->
+<!--    <div class="col-md-2">-->
+<!--      <div class="row" style="margin-bottom: 20px; font-size: x-large">-->
+<!--        Useful links-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/privacy_policy">Privacy Policy</a>-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/refund_policy">Refund Policy</a>-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/terms_conditions">Terms and Conditions</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-2">-->
+<!--      <div class="row" style="margin-bottom: 20px; font-size: x-large">-->
+<!--        Information-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/disclaimer">Disclaimer</a>-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/privacy_notice">Privacy Notice</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-2" >-->
+<!--      <div class="row" style="margin-bottom: 20px; font-size: x-large">-->
+<!--        Support-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/home#contactus">Contact</a>-->
+<!--      </div>-->
+<!--      <div class="row" style="margin-bottom: 20px">-->
+<!--        <a href="/registered_user">Sign in</a>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="col-md-2">-->
+<!--      <div class="row" style="margin-bottom: 20px; font-size: x-large">-->
+<!--        Socials-->
+<!--      </div>-->
+<!--      <div class="">-->
+<!--          <a href="#">Coming Soon</a>-->
 <!--        <a href="#" class="fa fa-facebook-square" style="color: #3B5998;font-size: 34px;margin:0 4px;padding:0"></a>-->
 <!--        <a href="#" class="fa fa-twitter-square" style="color: #55ACEE;font-size: 34px;margin:0 4px;padding:0"></a>-->
 <!--        <a href="#" class="fa fa-youtube-square" style="color: #bb0000 ;font-size: 34px;margin:0 4px;padding:0"></a>-->
-      </div>
-    </div>
-  </div>
-  <div
-    class="row-cols-md-6"
-    style="margin-top: 50px; margin-bottom: 30px; text-align: center"
-  >
-    © 2022 | Copyright All rights reserved
-  </div>
-  <div style="text-align: end;margin: 4px;"><button id="scrlTop" style="color: #2242D5;border:2px solid #2242D5; height:32px;width:32px;text-align:center;cursor: pointer;font-size: 20px;background-color: transparent;border-radius: 4px;line-height: 0;"><i class="fa fa-arrow-circle-o-up" aria-hidden="true" style="padding: 0;
-    text-align: center;
-    margin: 0;
-    font-size: 20px;
-    width: initial;"></i></button></div>
-
-       <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
-       <script src="/static/js/index.js"></script>
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div-->
+<!--    class="row-cols-md-6"-->
+<!--    style="margin-top: 50px; margin-bottom: 30px; text-align: center"-->
+<!--  >-->
+<!--    © 2022 | Copyright All rights reserved-->
+<!--  </div>-->
+<!--  <div style="text-align: end;margin: 4px;"><button id="scrlTop" style="color: #2242D5;border:2px solid #2242D5; height:32px;width:32px;text-align:center;cursor: pointer;font-size: 20px;background-color: transparent;border-radius: 4px;line-height: 0;"><i class="fa fa-arrow-circle-o-up" aria-hidden="true" style="padding: 0;-->
+<!--    text-align: center;-->
+<!--    margin: 0;-->
+<!--    font-size: 20px;-->
+<!--    width: initial;"></i></button></div>-->
+ <footer>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-3 mb-3">
+                  <a class="d-inline-flex align-items-center mb-2 footer_logo_img">
+                    <img src="/static/assets/images/v203_350.png" alt="logo">
+                  </a>
+                  <ul class="list-unstyled footer_first_section">
+                    <li class="mb-2 d-flex"><i class="fa fa-globe mr-1 icon__color" aria-hidden="true"></i><p class="mb-0">30/91B Malviya Nagar, South Delhi, New Delhi - go@gopillz.com</p></li>
+                    <li class="mb-2"><i class="fa fa-envelope-o mr-1 icon__color" aria-hidden="true"></i>go@gopillz.com</li>
+                  </ul>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-1 mb-3">
+                  <h5>Useful Links</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/privacy_policy">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="/refund_policy">Refund Policy</a></li>
+                    <li class="mb-2"><a  href="/terms_conditions">Terms and Conditions</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-3">
+                  <h5>Information</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/disclaimer">Disclaimer</a></li>
+                    <li class="mb-2"><a href="/privacy_notice">Privacy Notice</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-3">
+                  <h5>Support</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="/home#contactus">Contact Us</a></li>
+                    <li class="mb-2"><a href="/registered_user">Sign In</a></li>
+                  </ul>
+                </div>
+                <div class="col-6 col-lg-2 mb-3">
+                  <h5>Socials</h5>
+                  <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#">Coming Soon</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="row text-center">
+               <p class="copy_right_text"> © 2022 | Copyright All rights reserved</p>
+              </div>
+            </div>
+          </footer>
+ <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+ <script src="/static/js/index.js"></script>
        <!-- Option 1: Bootstrap Bundle with Popper -->
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
        <!-- Option 2: Separate Popper and Bootstrap JS -->
 
-       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<!--       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>-->
+<!--       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>-->
 <script>
+$(".nav-link").click(function(){
+  		$('.nav-link').removeClass('active')
+  		$(this).addClass('active')
+	});
+
  function logout(){
     window.location.assign('/logout')
  }

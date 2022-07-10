@@ -5,11 +5,10 @@
 {% load static %}
 {% block content %}
 
-    <div class="row" style="margin:2rem 4rem">
-      <div class="terms&conditions">
-        <h1 style="color: #1e2751;font-size:48px;fomt-weight:500">Terms & Conditions</h1>
-      </div>
-      <div class="info" style="padding: 25px;box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);">
+    <div class="container">
+        <div class="policy__content">
+     <div class="policy__heading"><h1>Terms & Conditions</h1></div>
+     <div class="policy__info">
         The terms "We" / "Us" / "Our"/”Company” individually and Collectively
         refer to GoPillz and the terms "Visitor” ”User” refer to the users.<br /><br />
 
@@ -113,39 +112,23 @@
         other legal theory, and whether or not, such organization or entities
         were advised of the possibility of such damages.
       </div>
-    <div
-
-      style="
-        text-align: center;
-        background-color: #dee3f9;margin-top:20px
-
-      "
-    >
-      <div
-        class="sub"
-        style="
-          color: #1e2751;
-          font-size: xx-large;
-          margin-bottom: 30px;
-          margin-top: 30px;
-        "
-      >
-        <b>Subscribe for Health Benefits</b>
-      </div>
-      <div class="sub" style="font-size: large; margin-bottom: 30px">
+    <p class="policy__subscriber">
+       <div  class="policy__heading">Subscribe for Health Benefits</div>
+     <p>
         GoPillz offers a variety of plans to meet your needs. <br />
         There are great discounts available for annual payments as well.
-      </div>
-      <div class="sub" style="margin-bottom: 30px">
+      </p>
+      <div class="margin__btm">
         <button
           onclick="payment()"
           type="button"
-          class="btn btn-primary"
-          style="background-color: #2242d5; width: 20%"
+          class="btn btn-primary subscribe__btn"
+
         >
           Subscribe
         </button>
       </div>
+    </div>
     </div>
     </div>
 <script>

@@ -13,6 +13,9 @@
         zoom: 1.0;
       }
 
+      * {
+        box-sizing: border-box;
+      }
 
       .col-md-1{
         padding: 0;
@@ -68,321 +71,188 @@
         }
       }
       </style>
-<div class="main__container">
 
-     <div class="row ">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="row" style="padding-bottom: 50px; padding-top: 50px">
-            <div class="col-md-9" style="font-size: xx-large; color: #1e2751">
-              <b>We Propose <br />NEVER MISS A DOSE!</b>
+  {% include 'messages.html' %}
+<div class="home__container">
+   <div class="container  py-4">
+                <div class="row section__one mb-4">
+                  <div class="col-md-6 mt-2">
+                      <h5><span>We propose<br>NEVER MISS A DOSE!</span><img src="/static/assets/images/pills.png"></h5>
+                      <p>
+                          Missing a pill can often take you 10 steps backward in your
+                          wellness journey Sometimes it causes your health problem to come
+                          back.
+                      </p>
+                      <p>
+                          GoPillz sends you reminders to help you take your medicines on time.
+                      </p>
+                      <button class="btn primary__btn" type="button"  onclick="signupview()">Get Started</button>
+                  </div>
+                  <div class="col-md-6 text-end mt-2">
+                      <img src="/static/assets/images/banner_image.png">
+                  </div>
+                </div>
+                <div class="section__two">
+                <div class="section__two__left__container">
+                    <h6>Why choose us?</h6>
+                    <h5>Benefits</h5>
+                    <p>
+                      All that we need is a little nudge in our Super Busy Schedule
+                      sometimes to remind us that we need to take our pillz today so
+                      that we remain healthy, happy and fit forever <i class="fa fa-heart" aria-hidden="true"></i>
+                    </p>
+                </div>
+                <div>
+                    <div class="section__two__right__container">
+                          <div class="parent__digital__angle mt-2">
+                            <img src="/static/assets/images/leaves_left.png" class="digital__angle__leaves__img">
+                            <div class="digital__angels__section benefits__box">
+                              <div class="d-flex justify-content-between">
+                                <img class="circle__img" src="/static/assets/images/bell.png">
+                                <img src="/static/assets/images/blue_till_pill.png" height="70">
+                              </div>
+                              <h3>GoPillz Digital Angels</h3>
+                              <p>
+                                A trusted emphatic companion helps you and your loved ones feel
+                                supported and encouraged to start and maintain treatment. The process
+                                is not a one time but it is maintaining that connection via the
+                                digital connection that helps improve health.
+                              </p>
+                            </div>
+                          </div>
+                        <div>
+                            <div class="provider__connects__section benefits__box mt-2">
+                              <div class="d-flex justify-content-between">
+                                <img class="circle__img" src="/static/assets/images/pharma.png">
+                                <img src="/static/assets/images/tile_2.png"  height="50">
+                              </div>
+                              <h3>Pharmacy & Care Provider Connects</h3>
+                              <p>
+                                Help with refills, easy caregiver connects when required.
+                              </p>
+                            </div>
+                            <div class="family__loops__section benefits__box mt-2">
+                              <div class="d-flex justify-content-between">
+                                <img class="circle__img" src="/static/assets/images/heartbeat.png">
+                                <img  src="/static/assets/images/tile_3.png" height="45">
+                              </div>
+                              <h3>Family & Friends Loop</h3>
+                              <p>
+                                Stay up to date on your loved ones medical condition.
+                              </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
             </div>
-            <div class="col-md-1"><img src="/static/assets/images/pills.png"></div>
-          </div>
-          <div class="row">
-            <div class="col-md-9" style="padding-bottom: 50px">
-              Missing a pill can often take you 10 steps backward in your
-              wellness journey Sometimes it causes your health problem to come
-              back
-            </div>
-          </div>
-          <div class="row" style="padding-bottom: 20px">
-            <div class="col-md-9">
-              GoPillz sends you reminders to help you take your medicines on
-              time
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-3">
-              <button
-                type="button"
-                class="btn btn-primary btn-lg"
-                style="background-color: #2242d5;font-size: 12px;"
-                onclick="signupview()"
-              >
-                Get Started
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6" style="text-align:end">
-        <img src="/static/assets/images/banner_image.png" style="width: 516px; height: 518px" />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-5">
-        <div class="row" style="padding-bottom: 20px">
-          <div class="col-md-3" style="color: #1e2751">Why choose us?</div>
-        </div>
-        <div class="row" style="padding-bottom: 50px">
-          <h1 style="color: #1e2751">Benefits</h1>
-        </div>
-        <div class="row">
-          <div class="col-md-8">
-            <p>
-              All that we need is a little nudge in our Super Busy Schedule
-              sometimes to remind us that we need to take our pillz today so
-              that we remain healthy, happy and fit forever <img src="/static/assets/images/heart_emoji.png">
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="col-md-3"
-        style="
-          padding-left: 10px;
-          padding-right: 10px;
-          border: 1px solid black;
-          padding-top: 20px;
-          padding-bottom: 30px;
-          background-color: #2242d5;
-          color: white;
-          margin-bottom: 120px;
-          margin-top: 120px;
-        "
-      >
-        <div class="row" style="margin-bottom: 20px;">
-          <div class="col-md-6" style="margin-top: 70px;">
-            <img src="/static/assets/images/bell.png">
-          </div>
-          <div class="col-md-6">
-            <img src="/static/assets/images/blue_till_pill.png" style=" margin-left: 100px;top:0px; right: 0px;">
-          </div>
-        </div>
-        <div class="row"><h3>GoPillz Digital Angels</h3></div>
-        <div
-          class="row"
-          style="padding-top: 20px; padding-left: 10px; padding-right: 10px"
-        >
-          A trusted emphatic companion helps you and your loved ones feel
-          supported and encouraged to start and maintain treatment. The process
-          is not a one time but it is maintaining that connection via the
-          digital connection that helps improve health.
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="row">
-          <div
-            class="row"
-            style="
-              padding-left: 10px;
-              padding-right: 10px;
-              margin-left: 20px;
-              border: 1px solid black;
-              padding-top: 20px;
-              padding-bottom: 30px;
-              margin-bottom: 30px;
-            "
-          >
-          <div class="row" style="margin-bottom: 20px;">
-          <div class="col-md-6" style="margin-top: 50px;">
-            <img src="/static/assets/images/pharma.png">
-          </div>
-          <div class="col-md-6">
-            <img src="/static/assets/images/tile_2.png" style=" margin-left: 100px;top:0px; right: 0px;">
-          </div>
-        </div>
-            <h3>Pharmacy & Care Provider Connects</h3>
-            <div class="row" style="padding-top: 20px ; padding-bottom: 10px;">
-              Help with refills, easy caregiver connects when required.
-            </div>
-          </div>
-          <div
-            class="row"
-            style="
-              background-color: orange;
-              margin-left: 20px;
-              border: 1px solid black;
-              color: white;
-              padding-top: 20px;
-              padding-bottom: 30px;
-              padding-left: 10px;
-              padding-right: 10px;
-            "
-          >
-          <div class="row" style="margin-bottom: 20px;">
-          <div class="col-md-6" style="margin-top: 50px;">
-            <img src="/static/assets/images/heartbeat.png">
-          </div>
-          <div class="col-md-6">
-            <img src="/static/assets/images/tile_3.png" style=" margin-left: 100px;top:0px; right: 0px;">
-          </div>
-        </div>
-            <h3>Family & Friends Loop</h3>
-            <div class="row" style="padding-top: 20px; padding-bottom: 10px;">
-              Stay up to date on your loved ones medical condition.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="row"
-      style="
-        text-align: center;
-        padding-top: 100px;
-        color: #1e2751;
-        background-color: #f6f6f6;
-      "
-    >
-      <div style="margin-bottom: 10px">
-        <h2>Subscribe for Health Benefits</h2>
-      </div>
-      <div id="pricingplans"></div>
-      <div style="margin-bottom: 20px">
-        Best pricing for you on
-        <span style="color: #2242d5">GoPillz Health Plus Plans</span>
-      </div>
-      <div>
-        GoPillz offers a variety of plans to meet your needs. There are great
-        discounts available for annual payments as well
-      </div>
-      <div style="color: #1e2751; margin-top: 20px; margin-bottom: 20px">
-        Additional 20% off yearly
-      </div>
-      <div
-        class="btn-group"
-        role="group"
-        aria-label="Basic radio toggle button group"
-      >
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio1"
-          autocomplete="off"
-          checked
-        />
-        <label class="btn btn-outline-primary" for="btnradio1">yearly</label>
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio2"
-          autocomplete="off"
-        />
-        <label class="btn btn-outline-primary" for="btnradio2" onclick="GetMonthly()"
-          >monthly</label
-        >
-      </div>
+     <div class="section__three">
+                  <div class="subscribe__health__benefits" id="pricingplans">
+                           <h5>Subscribe For Health Benefits</h5>
+                           <h6>Best Pricing for you on <span>GoPillz Health Plus Plans</span></h6>
+                           <p>GoPillz offers a variety of plans to meet your needs. There are <br>great discounts available for annual payments as well.</p>
+                           <div>
+                              <input type="checkbox" class="pill-button-input" checked="checked">
+                              <span class="pill-button">
+                                <span class="pill-button-selection pill-button-selection_on pill-button-selection_active">Yearly</span>
+                                <span class="pill-button-selection pill-button-selection_off" onclick="GetMonthly()">Monthly</span>
+                                <span class="pill-button-highlight"></span>
+                              </span>
+                           </div>
+                          <div class="container mt-3">
+                            <div class="row">
+                              <div class="col-md-4">
+                                <div class="pricing__card mb-2">
+                                  <h5 class="card__type">Single</h5>
+                                  <h6 class="monthly__cost">Yearly Cost</h6>
+                                  <p class="price_text">₹ 5760.00</p>
+                                  <button class="btn primary__btn" onclick="subscribe()">Subscribe</button>
+                                  <ul>
+                                     <li>Unlimited user license</li>
+                                     <li>App license</li>
+                                     <li>20/7 Customer Service</li>
+                                     <li>Unlimited procedure store</li>
+                                  </ul>
+                              </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="pricing__card mb-2">
+                                  <h5 class="card__type">Couple</h5>
+                                  <h6 class="monthly__cost">Yearly Cost</h6>
+                                  <p class="price_text">₹ 10560.00</p>
+                                  <button class="btn primary__btn" onclick="subscribe()">Subscribe</button>
+                                  <ul>
+                                     <li>Unlimited user license</li>
+                                     <li>App license</li>
+                                     <li>20/7 Customer Service</li>
+                                     <li>Unlimited procedure store</li>
+                                  </ul>
+                              </div>
+                              </div>
+                              <div class="col-md-4">
+                                  <div class="pricing__card mb-2">
+                                      <h5 class="card__type">Family & Friends</h5>
+                                      <h6 class="monthly__cost">Yearly Cost</h6>
+                                      <p class="price_text">₹ 21120.00</p>
+                                      <button class="btn primary__btn" onclick="subscribe()">Subscribe</button>
+                                      <ul>
+                                         <li>Unlimited user license</li>
+                                         <li>App license</li>
+                                         <li>20/7 Customer Service</li>
+                                         <li>Unlimited procedure store</li>
+                                      </ul>
+                                  </div>
+                              </div>
+                           </div>
+                          </div>
+                  </div>
+              </div>
+              <div class="row m-0" id="contactus">
+                  <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 p-0">
+                    <img src="/static/assets/images/img_with_bg.png" class="contact__us__img">
+                  </div>
+                  {% if user.is_authenticated %}
+                    {% csrf_token %}
+                  {% endif %}
+                  <div class="col-sm-12 col-md-6 col-lg-7 col-xl-6 contact__us__content">
+                    <h5>Contact Us</h5>
+                    <p>Not just families but doctors, hospitals, care providers, pharma,<br> medical insurers are too able to offer better care with GoPillz. Write to us on go@GoPillz.com to learn more.</p>
+                    <div class="row">
+                        <div class="col-sm-5 col-md-6 mb-3">
+                          <label>First Name</label>
+                          <input type="text" id="fname" placeholder="Enter First Name" required>
+                        </div>
+                        <div class="col-sm-5 col-md-6 mb-3">
+                          <label>Last Name</label>
+                          <input type="text" id="lname" placeholder="Enter Last Name" required>
+                      </div>
+                      <div class="col-sm-5 col-md-6 mb-3">
+                        <label>Email</label>
+                        <input type="text" id="InputEmail" placeholder="Enter Email" required>
+                      </div>
+                      <div class="col-sm-5 col-md-6 mb-3">
+                        <label>Phone Number</label>
+                        <input type="text" id="phone" placeholder="+91" required>
+                      </div>
+                      <div class="col-sm-10 col-md-12 mb-3">
+                        <label>Message</label>
+                        <textarea id="userMessage" rows="6" class="w-100" placeholder="Write your message..."></textarea>
+                      </div>
 
-      </div>
-        <div class="row" style="margin-left: 0px  ; margin-right: 0px ; margin-top: 50px; background-color: #ffffff;">
-          <!-- <div class="col-md-4">
-            Single<br>
-            <span style="padding-top: 70px;">Monthly Cost</span>
-          </div>
-          <div class="col-md-4">
-            Couple<br>
-            <span style="margin-top: 50px;">Monthly Cost</span>
-
-          </div>
-          <div class="col-md-4" style="text-align: center ;">
-            Family<br>
-            <span style="padding-top: 500px;">Monthly Cost</span>
-          </div> -->
-
-          <div class="columns">
-            <ul class="price">
-              <li class="header" style="background-color:white; color: #1E2751">Single</li>
-              <li ><span style="font-size: small;">Yearly cost</span><br>
-                <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 5760.00</span></li>
-              <li><a href="/payment?val=yearly" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
-              <li>Whatsapp/ Telephonic</li>
-              <li>Medicine Reminders</li>
-              <li>Missed Dose Alerts</li>
-
-            </ul>
-          </div>
-
-<div class="columns">
-  <ul class="price">
-    <li class="header" style="background-color:white; color: #1E2751">Couple</li>
-    <li ><span style="font-size: small;">Yearly cost</span><br>
-      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 10560.00</span></li>
-    <li><a href="/payment?val=yearly" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
-    <li>Whatsapp/ Telephonic</li>
-    <li>Medicine Reminders</li>
-    <li>Missed Dose Alerts</li>
-
-  </ul>
+                      <div class="col-sm-10 col-md-12 submit__btn__margin">
+                        <button class="btn primary__btn w-100" onclick="SubmitInfo()">Send Message</button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
 </div>
-
-<div class="columns">
-  <ul class="price">
-    <li class="header" style="background-color:white; color: #1E2751">Family</li>
-    <li ><span style="font-size: small;">Yearly cost</span><br>
-      <span style =" color: #2242d5; font-size: xx-large;">&#x20b9; 21120.00</span></li>
-    <li><a href="/payment?val=yearly" class="button" style="background-color: #2242d5 ;">Subscribe</a></li>
-    <li>Whatsapp/ Telephonic</li>
-    <li>Medicine Reminders</li>
-    <li>Missed Dose Alerts</li>
-
-  </ul>
-</div>
-
-        </div>
-
-
-    <div id="contactus"></div>
-  <div class="row" style="margin-top: 100px; margin-bottom: 50px;">
-    <div class="col-md-6">
-      <img src="/static/assets/images/img_with_bg.png" style="width: 540px; height: 772px;">
-    </div>
-    <div class="col-md-6" >
-      <div class="row" style="color: #1E2751;">
-        <h1>Contact Us</h1>
-      </div>
-      <div class="row" style="margin-top: 50px;">
-        <p>Not just families but doctors, hospitals, care providers, pharma medical insurers are too able to offer better care with GoPillz.</p> <br>
-        <p style="margin-top: 10px;">Write to us on <a href="mailto:go@gopillz.com">go@gopillz.com</a> to learn more.</p>
-      </div>
-      {% include 'messages.html' %}
-      <div class="row">
-        <div class="col-md-6">
-        <form class="contactform">
-        <div class="form-group" style="margin-bottom: 20px">
-            <label for="fname">First Name</label>
-            <input type="text" class="form-control" id="fname" placeholder="Enter First Name">
-          </div>
-          <div class="form-group"  style="margin-bottom: 20px">
-            <label for="InputEmail">Email address</label>
-            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-        </form>
-        </div>
-        <div class="col-md-6">
-        <form class="contactform">
-          <div class="form-group" style="margin-bottom: 20px">
-            <label for="lname">Last Name</label>
-            <input type="text" class="form-control" id="lname" placeholder="Enter Last Name" required>
-          </div>
-          <div class="form-group" style="margin-bottom: 20px">
-            <label for="phone" >Phone Number</label>
-            <input type="number" class="form-control" id="phone" placeholder="Enter phone number" required>
-          </div>
-        </form>
-        </div>
-      </div>
-      <div class="row">
-        <form class="contactform">
-        <div class="form-group" style="margin-bottom: 20px">
-            <label for="message">Message</label>
-            <textarea id ="userMessage" rows="6"  name="message" style="width:100%"> Write your message...</textarea>
-          </div>
-        <input type="button" onclick="SubmitInfo()" value="Send Message" style="width: 100%; height: 50px; color:#ffffff; border:none ;background-color:#2242D5">
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
 
     <script>
+    function subscribe(){
+        window.location.assign("/payment?val=monthly")
+    }
     function signupview(){
-      window.location.assign("/signup")
+        window.location.assign("/signup")
     }
     function GetMonthly(value){
       window.location.assign("/home#pricingplans")
@@ -397,21 +267,30 @@
       data = JSON.stringify({ "email":email ,"first_name":first_name,
       "last_name":last_name,"phone_no":'+91'+phone_no,"message":message
       })
-
+      var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]');
+      console.log(csrftoken)
+      if (csrftoken!=null){
+        csrftoken = csrftoken.value
+      }
       $.ajax({
           type: 'POST',
           url:'/contact_us',
           processData: false,
-          contentType: 'application/json',
+          headers: {
+                'X-CSRFToken': csrftoken,
+                "Content-Type": "application/json"
+            },
           data:data,
           dataType: 'json',
           success: function(data){
-              window.location.href = '/home#contactus'
+                window.location.assign("/home_yearly")
           },
           error: function(){
-              window.location.href= '/home#contactus'
+          console.log('==================')
+              window.location.assign("/home_yearly")
           },
       });
     }
   </script>
 {% endblock content %}
+

@@ -1,0 +1,53 @@
+ .navbar-brand img{
+        width: 200px;
+        height: 80px;
+    }
+    .nav-link{
+       font-size: 14px;
+       color: #1b1b1b;
+    }
+    .navbar-nav .nav-link.active, .navbar-nav .nav-link.hover, .nav-link:focus{
+        color: #2242D5;
+        background-color: transparent;
+    }
+    .nav-link:focus, .nav-link:hover{
+        color: #2242D5;
+    }
+    .navbar-toggler{
+        border-radius: 0;
+        line-height: 0;
+        border: 0.09em solid;
+    }
+    .navbar-toggler:focus{
+        box-shadow: none;
+    }
+    .navbar-toggler-icon{
+        width: 1em;
+        height: 1em;
+    }
+    .primary__btn, .primary__btn:hover, .primary__btn:focus{
+        background-color: #2242D5;
+        border: 1px solid #2242D5;
+        padding: 5px 15px;
+        color: #fff;
+        font-size: 14px;
+        width: auto;
+        border-radius: 0;
+    }
+
+    .outline__btn, .outline__btn:focus{
+        color: #2242D5;
+        padding: 5px 15px;
+        border:1px solid #2242D5;
+        font-size: 14px;
+        width: auto;
+        border-radius: 0;
+    }
+    .outline__btn:hover{
+        background-color: #2242D5;
+        border:1px solid #2242D5;
+        color: #fff;
+    }
+    .signup_btn, .logged_in_btn{
+        margin-right: 4px;
+    }

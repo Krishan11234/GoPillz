@@ -20,7 +20,8 @@ class RenewSubscription(generics.GenericAPIView):
     }
 
     def get(self, request):
-        content = {'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLISHABLE_KEY_TEST}
+        content = {}
+        content['STRIPE_PUBLIC_KEY'] = settings.STRIPE_PUBLISHABLE_KEY_TEST
         if not request.user.is_authenticated:
             error_message = 'Please sign up to purchase plan'
             messages.info(request, error_message)
@@ -59,6 +60,7 @@ class RenewSubscription(generics.GenericAPIView):
             except Exception as e:
                 info_message = 'Cannot Upgrade Subscription at this moment Try After Some Time'
                 messages.error(request, info_message)
+
         return Response({'content': content})
 
 

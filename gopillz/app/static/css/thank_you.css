@@ -1,0 +1,32 @@
+.thank_you_container{
+    background-color: rgba(34, 66, 213, 15%);
+    padding: 2rem;
+  }
+  .thank_you_container .content{
+    text-align: center;
+  }
+  .thank_you_container .content h5{
+       color: #1E2751;
+       font-weight: 500;
+       font-size: 35px;
+       margin-bottom: 30px;
+  }
+  .thank_you_container .content h5 span{
+    line-height: 2;
+  }
+  .thank_you_container .content p{
+     color: #1B1B1B;
+     font-size: 18px;
+     margin-bottom: 45px;
+  }
+  @media  (max-width:991px) {
+    .thank_you_container .content h5{
+      font-size: 22px;
+     }
+     .thank_you_container .content p{
+      font-size: 15px;
+     }
+     .thank_you_container{
+       padding: 1rem;
+     }
+  }

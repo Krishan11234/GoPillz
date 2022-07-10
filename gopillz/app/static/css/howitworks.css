@@ -1,0 +1,175 @@
+.how__its__work__container h5{
+    color: #1E2751;
+    font-weight: 500;
+    font-size: 35px;
+    margin-bottom: 25px;
+  }
+  .how__its__work__container .description p{
+     color: #1b1b1b;
+     font-size: 15px;
+     margin-bottom: 25px;
+  }
+  .steps__container{
+    background: #FFFFFF;
+    border: 1px solid #ECECEC;
+    box-shadow: 0px 2px 6px rgba(156, 156, 156, 0.12);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+    z-index:1 ;
+  }
+.dashed__border__img{
+    height: 82px;
+    position: absolute;
+    top: -16px;
+}
+.dashed__border__img__two{
+  transform: rotate(-64deg);
+  left: 138px;
+  height: 64px;
+  position: absolute;
+  bottom: -16px;
+  top: initial;
+}
+.capsules__img{
+  height: 50px;
+  margin-right: 95px;
+  margin-top: 20px;
+}
+.dashed__border__img__one{
+  height: 82px;
+  position: absolute;
+  bottom: -8px;
+  right: 118px;
+  top: initial;
+}
+.dashed__border__img__three{
+    right: 110px;
+    top: 6px;
+}
+.dashed__border__img__four{
+    transform: rotate(188deg);
+    left: 90px;
+}
+.leaves__img__five{
+  height: 135px;
+  position: absolute;
+  left: -74px;
+  top: -66px;
+}
+.dashed__border__img__five{
+    transform: rotate(98deg);
+    right: 36px;
+}
+.dashed__border__img__six{
+    transform: rotate(188deg);
+    left: 34px;
+}
+  .steps__container h6{
+    color: #1E2751;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .steps__container p{
+    color: #1B1B1B;
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  .steps__container.step__one, .steps__container.step__two{
+    width: 245px;
+  }
+  .steps__container.step__three{
+    width: 275px;
+    z-index: 1;
+  }
+  .fa-heart{
+    color: red;
+    font-size: 14px;
+  }
+  .fa{
+    padding:0;
+    text-align: center;
+    width:auto;
+  }
+  .steps__container.step__four{
+    width: 280px;
+  }
+  .steps__container.step__five{
+    width: 335px;
+    z-index: 1;
+  }
+  .steps__container.step__six{
+    width: 335px;
+  }
+  .steps__container h4{
+    font-size: 18px;
+  }
+  ul{
+    padding-left: 12px;
+  }
+  ul li{
+    font-size: 11px;
+    color: #1B1B1B;
+  }
+  .steps__container.step__two,.steps__container.step__four,.steps__container.step__six{
+    background-color: #DEE3F9;
+  }
+  .right__container{
+        margin: auto;
+      }
+      //responsive
+   @media  (max-width:992px) {
+      .how__its__work__container h5{
+        margin-bottom: 10px;
+        font-size: 25px;
+      }
+      .how__its__work__container .description p{
+        font-size: 12px;
+        margin-bottom: 18px;
+      }
+  }
+  @media  (max-width:576px) {
+      .right__container img{
+        display: none;
+      }
+      .steps__container{
+        width: 100% !important;
+      }
+  }
+  @media  only screen and (min-width:577px) and (max-width:768px){
+    .dashed__border__img__three{
+      right: 75px;
+    }
+  }
+  @media  only screen and (min-width:768px) and (max-width:992px){
+    .dashed__border__img__three{
+      right: 50px;
+    }
+  }
+  @media  only screen and (min-width:992px) and (max-width:1400px){
+    .dashed__border__img__three{
+      right: 110px;
+    }
+  }
+  @media only screen and (max-width:2000px) and (min-width: 1400px){
+    .dashed__border__img__three{
+      right: 184px;
+    }
+    .dashed__border__img__six{
+      left: 110px;
+    }
+    .dashed__border__img__five{
+      right: 110px;
+    }
+    .dashed__border__img__four{
+      left: 168px;
+    }
+    .dashed__border__img__two{
+      left: 214px;
+    }
+    .dashed__border__img__one{
+      right: 195px;
+    }
+  }

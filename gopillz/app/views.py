@@ -162,6 +162,7 @@ class VerifyOtp(generics.GenericAPIView):
 
 
 class ContactUs(generics.GenericAPIView):
+    permission_classes = (AllowAny,)
     serializer_class = ContactUsSerializer
 
     def post(self, request):
@@ -180,10 +181,28 @@ class ContactUs(generics.GenericAPIView):
             response['status'] = False
             return response
         except Exception as e:
-            error_message = 'Error in the Data Please Verify and Try again'
+            error_message = self.error_cases(e)
             messages.error(request, error_message)
             response['status'] = False
             return response
+
+    def error_cases(self, error):
+        error_message = 'Error in the Data Please Verify and Try again'
+        try:
+            if 'args' in dir(error):
+                error_args = error.args[0]
+                if 'email' in error_args:
+                    error_message = error_args['email'][0]
+
+                if 'phone_no' in error_args:
+                    error_message = error_args['phone_no'][0]
+
+                if 'email' in error.args[0] and 'phone_no' in error.args[0]:
+                    error_message = 'Please fill the required data in the fields'
+
+        except Exception as e:
+            pass
+        return error_message
 
 
 class Logout(APIView):

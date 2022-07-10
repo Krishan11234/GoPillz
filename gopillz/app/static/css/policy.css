@@ -1,0 +1,48 @@
+
+  .policy__content{
+     margin:1rem 0;
+  }
+  .policy__content .policy__heading h1{
+     color: #1e2751;font-size:35px;font-weight:500
+  }
+  .policy__content .policy__info{
+     padding: 25px;
+     font-size: 16px;
+     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
+  }
+  .policy__subscriber{
+     text-align: center;
+        background-color: #dee3f9;margin-top:20px;
+        padding: 10px;
+  }
+  .policy__subscriber .policy__heading{
+       color: #1e2751;
+          font-size: 35px;
+          margin-bottom: 30px;
+          margin-top: 30px;
+         font-weight:bold;
+  }
+  .policy__subscriber  p{
+    font-size: 18px; margin-bottom: 30px
+  }
+  .margin__btm{
+     margin-bottom: 30px;
+  }
+  .subscribe__btn{
+   background-color: #2242d5; width: 200px;
+  }
+   @media  (max-width: 767px){
+     .policy__content .policy__heading h1{
+       font-size: 28px;
+     }
+     .policy__content .policy__info{
+        font-size: 14px;
+        padding: 15px;
+      }
+      .policy__subscriber .policy__heading{
+        font-size: 28px;
+       }
+       .policy__subscriber p{
+         font-size: 14px;
+       }
+   }

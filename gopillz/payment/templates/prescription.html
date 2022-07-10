@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 <style>
       .planinfo {
         border-bottom: 1px solid lightgray;
@@ -95,7 +96,7 @@
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Number of Days</label>
-                                                    <select id='number_days' class="form-select">
+                                                    <select id='number_days' class="selectpicker" multiple data-live-search="true">
                                                         <option value="1" selected>Monday</option>
                                                         <option value="2">Tuesday</option>
                                                         <option value="3">Wednesday</option>
@@ -104,6 +105,13 @@
                                                         <option value="6">Saturday</option>
                                                         <option value="7">Sunday</option>
                                                     </select>
+<!--                                                    <select id='select-days' class="selectpicker" multiple data-live-search="true">-->
+<!--                                                    <option value="1">One</option>-->
+<!--                                                    <option value="2">Two</option>-->
+<!--                                                    <option value="3">Three</option>-->
+<!--                                                    <option value="4">Four</option>-->
+<!--                                                  </select>-->
+
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Schedule Time</label>
@@ -654,6 +662,16 @@
             </div>
         </div>
     </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+<script type="text/javascript">
+    jQuery('#number_days').selectpicker();
+</script>
+
 <script>
 
 function changeFileStatus(event){
@@ -768,4 +786,5 @@ $('.loader').css('display','block')
 }
 
 </script>
+
 {% endblock content %}

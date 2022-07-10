@@ -1,0 +1,365 @@
+    .section__one h5{
+        display: flex;
+        /* justify-content: space-between; */
+        margin-bottom: 36px;
+        color: #1E2751;
+    }
+    .section__one h5 span{
+        font-size: 45px;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+    .section__one h5 img{
+        width: 35px;
+        height: fit-content;
+    }
+    .section__one p:first-of-type{
+        font-size: 20px;
+        margin-bottom: 40px;
+        color: #1b1b1b;
+        font-weight: 400;
+    }
+    .section__one p{
+        font-size: 14px;
+        margin-bottom: 18px;
+        color: #1E2751;
+        font-weight: 500;
+    }
+    .section__one button{
+      width: 150px;
+      padding: 10px;
+      box-shadow: 0px 4px 24px rgba(34, 66, 213, 0.15);
+      font-size: 16px;
+    }
+    .section__one button:hover, .section__one button:focus{
+      width: 150px;
+      padding: 10px;
+      box-shadow: 0px 4px 24px rgba(34, 66, 213, 0.15);
+      font-size: 16px;
+    }
+    .section__one img{
+        width: 100%;
+    }
+    @media  (max-width:992px) {
+
+      .section__one h5{
+        margin-bottom: 18px;
+      }
+      .section__one h5 span{
+        font-size: 25px;
+      }
+      .section__one h5 img{
+        width: 27px;
+      }
+      .section__one p:first-of-type {
+        font-size: 15px;
+        margin-bottom: 18px;
+      }
+    }
+    @media  only screen and (min-width:768px) and (max-width:992px) {
+      .section__one img{
+        width: 276px;
+    }
+  }
+  @media  only screen and (min-width:1200px) and (max-width:1399px) {
+      .section__one img {
+      width: 374px;
+    }
+    }
+    @media  only screen and (min-width:1400px) and (max-width:2000px){
+      .section__one img {
+      width: 346px;
+    }
+    }
+
+  .section__two{
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: 36% 48%;
+    grid-gap: 204px;
+  }
+  .digital__angels__section{
+    background-color: #2242d5;
+    color: white;
+    padding: 25px;
+  }
+  .parent__digital__angle{
+    position: relative;
+    margin: auto;
+  }
+  .digital__angle__leaves__img{
+    left: -94px;
+    position: absolute;
+    z-index: -1;
+    top: -94px;
+    width: 133px;
+  }
+  .provider__connects__section{
+    padding: 25px;
+    background: #FFFFFF;
+    border: 1px solid #DCDCDC;
+  }
+  .family__loops__section{
+    background-color: orange;
+    color: white;
+    padding: 25px;
+  }
+  .benefits__box h3{
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  .benefits__box p{
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+  .section__two__right__container{
+    display: grid;
+    grid-gap: 28px;
+    grid-template-columns: 48% 48%;
+  }
+  .section__two__left__container{
+    margin-top: 100px;
+  }
+  .section__two__left__container h6{
+    color: #1E2751;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  .section__two__left__container h5{
+    color: #1E2751;
+    font-weight: 500;
+    margin-bottom: 20px;
+    font-size: 45px;
+  }
+  .section__two__left__container p{
+    color: #1b1b1b;
+    font-size: 16px;
+  }
+  .section__two__right__container .circle__img{
+    height: 70px;
+    margin: 28px 0px;
+  }
+  @media  only screen and (min-width:320px) and (max-width:992px){
+      .section__two{
+      margin-top: 20px;
+      grid-template-columns: 100%;
+      grid-gap: 0;
+    }
+    .section__two__right__container{
+      grid-gap: 10px;
+      grid-template-columns: 49% 49%;
+    }
+    .digital__angle__leaves__img{
+      display: none;
+    }
+    .section__two__left__container{
+      margin-top: 0;
+    }
+  }
+  @media  only screen and (min-width:320px) and (max-width:575px){
+    .section__two__right__container{
+      grid-gap: 0;
+      grid-template-columns: 100%;
+    }
+    .section__two__left__container{
+      margin-top: 0;
+    }
+
+  }
+  @media  only screen and (min-width:993px) and (max-width:1200px){
+    .section__two{
+      grid-gap: 140px;
+    }
+  }
+  @media  only screen and (min-width:1201px) and (max-width:1399px){
+    .section__two{
+      grid-gap: 172px;
+    }
+  }
+
+  .section__three{
+    background: #F6F6F6;
+  }
+  .subscribe__health__benefits{
+     text-align: center;
+     padding: 30px;
+  }
+  .subscribe__health__benefits h5{
+     color: #1E2751;
+     font-size: 35px;
+     font-weight: 500;
+     margin-bottom: 20px;
+  }
+  .subscribe__health__benefits h6{
+     color: #1E2751;
+     font-size: 14px;
+     font-weight: 500;
+     margin-bottom: 20px;
+  }
+  .subscribe__health__benefits h6 span{
+     color: #2242D5;
+  }
+  .subscribe__health__benefits p{
+      color: #1B1B1B;
+     font-size: 16px;
+     margin-bottom: 20px;
+
+  }
+  .pill-button {
+  display: inline-block;
+  position: relative;
+  padding: 3px 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: #dee3f9;
+  border-radius: 5px;
+  color: #000;
+  z-index: 0;
+}
+.pill-button-input {
+  display: none;
+  visibility: hidden;
+}
+.pill-button-highlight {
+  transform: translate(0, -50%);
+  transition: all 0.2s;
+  position: absolute;
+  top: 50%;
+  left: 4px;
+  height: 24px;
+  width: 70px;
+  background: #fff;
+  border-radius: 5px;
+  z-index: 1;
+}
+.pill-button-selection {
+  transition: all 0.2s;
+  display: inline-block;
+  position: relative;
+  padding: 0.4em 0.9em;
+  cursor: pointer;
+  z-index: 2;
+}
+.pill-button-selection_active {
+  color: #1E2751;
+  font-weight: bold;
+}
+
+  .contact__us__img{
+    height: 100%;
+    width: 408px;
+  }
+  .contact__us__content{
+    padding: 40px 40px 0;
+  }
+  .contact__us__content h5{
+    color: #1E2751;
+    font-size: 35px;
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .contact__us__content p{
+    color: #1B1B1B;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  .contact__us__content label{
+    display: block;
+    color: #1B1B1B;
+    font-size: 14px;
+  }
+  .contact__us__content input{
+    height: 30px;
+  }
+  .contact__us__content input, .contact__us__content textarea{
+    background: #FFFFFF;
+    border: 1px solid #DFDFDF;
+    border-radius: 2px;
+    font-size: 12px;
+    width: 100%;
+    padding: 4px 6px;
+  }
+  .contact__us__content input::placeholder{
+    color: #949494;
+  }
+  .submit__btn__margin{
+    margin-top: 12px;
+  }
+  @media  only screen and (min-width:320px) and (max-width:991px){
+    .contact__us__img{
+    width: 100%;
+  }
+    .contact__us__content {
+    padding: 15px 15px 0;
+}
+    }
+.pricing__card{
+  padding: 15px;
+  background-color: #fff;
+}
+.pricing__card .card__type{
+  color: #1E2751;
+  font-size: 20px;
+  margin: 15px 0;
+}
+.pricing__card .monthly__cost{
+  color: #1E2751;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.pricing__card .price_text{
+  color: #2242D5;
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.pricing__card ul{
+    text-align: left;
+    margin: auto;
+    width: 75%;
+    padding: 10px 0px;
+    margin-top: 10px;
+    list-style-type: none;
+}
+.pricing__card ul li::before {
+  content: "✓";
+  color: green;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-right: 1em;
+}
+.pricing__card ul li{
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #1B1B1B;
+  padding: 0 20px;
+}
+.pricing__card button{
+  width: 75%;
+}
+.pricing__card:hover{
+  box-shadow: 20px 0px 136px rgba(156, 156, 156, 0.16);
+}
+.pricing__card:hover ul{
+  background-color: #CDD6FF;
+}
+.pricing__card:hover button{
+   width: 75%;
+}
+.pricing__card:hover ul li::before {
+  color: #1B1B1B;
+}
+@media  only screen and (min-width:320px) and (max-width:1200px){
+    .pricing__card button{
+      width: 100%;
+    }
+    .pricing__card ul{
+      width: 100%;
+    }
+    .pricing__card ul li{
+      padding: 0 10px;
+      font-size: 11px;
+    }
+}

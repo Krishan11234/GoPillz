@@ -15,7 +15,7 @@ import datetime
 class PaymentView(generics.GenericAPIView):
     renderer_classes = [TemplateHTMLRenderer]
     serializer_class = None
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
     template_name = 'payment.html'
     plan_format = {
         'couple': 'Couple',
@@ -51,7 +51,7 @@ class PaymentView(generics.GenericAPIView):
                 temp_plan_row['duration'] = plan['duration']
                 temp_plan_row['price'] = plan['price']
                 content['plans'].append(temp_plan_row)
-            if request.query_params.get('val','')=='yearly':
+            if request.query_params.get('val', '') == 'yearly':
                 content['active_plan'] = 'yearly'
             else:
                 content['active_plan'] = 'monthly'
@@ -73,7 +73,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             plan_type = request.data.get('plan_type')
             amount = request.data.get('amount')
 
-            if plan_type=='' and amount =='':
+            if plan_type == '' and amount == '':
                 error_message = 'Select Plan Type'
                 messages.error(request, error_message)
                 return JsonResponse({
@@ -96,7 +96,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             renew_subscription = request.data.get('renew-subscription')
             success_url_ = DOMAIN_URL + 'success',
             cancel_url_ = DOMAIN_URL + 'payment?message=Failed',
-
+            amount = amount+'00'
             if renew_subscription == True:
                 success_url_ = DOMAIN_URL + 'renew-success'
                 cancel_url_ = DOMAIN_URL + 'renew-subscription'
@@ -106,7 +106,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                         {
                             'price_data': {
                                 'currency': 'inr',
-                                'unit_amount': int(amount),
+                                'unit_amount': amount,
                                 'product_data': {
                                     'name': plan_type,
                                 },
@@ -141,7 +141,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                     {
                         'price_data': {
                             'currency': 'inr',
-                            'unit_amount': int(amount),
+                            'unit_amount': amount,
                             'product_data': {
                                 'name': plan_type,
                             },

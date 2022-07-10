@@ -1,207 +1,269 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="row" style="margin:1rem 2.5rem;justify-content:space-between">
-      <div class="col-md-5">
-<!--        <div id="headingname" style="margin-bottom: 20px">GoPillz</div>-->
-        <div id="headingtitle" style="margin-bottom: 50px">
-          <span
-            style="color: #1e2751; font-size: xxx-large; margin-bottom: 50px"
-            ><b>How it works</b></span
-          >
-        </div>
-        <p style="margin-bottom: 50px">
-          GoPillz is offered as a wellness service by the best care providers (
-          Dr's and Hospitals) in the country. In case your care provider is not
-          offering GoPillz, you can buy a subscription directly with us.
-        </p>
-        <p>
-          You can also renew your subscription directly with us if you have
-          changed your care provider and love your GoPillz Digital Angels.
-          <img src="/static/assets/images/heart_emoji.png" />
-        </p>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-6">
-            <div
-              class="elementcontent"
-              style="
-                border: 1px solid lightgray;
-                border-radius: 15px;
-                padding: 15px 15px;
-              "
-            >
-              <div
-                class="elementtitle"
-                style="
-                  font-style: italic;
-                  font-size: small;
-                  color: #1e2751;
-                  margin-bottom: 10px;
-                "
-              >
-                <b>STEP 1</b>
+<!--    <div class="row" style="margin:1rem 2.5rem;justify-content:space-between">-->
+<!--      <div class="col-md-5">-->
+<!--&lt;!&ndash;        <div id="headingname" style="margin-bottom: 20px">GoPillz</div>&ndash;&gt;-->
+<!--        <div id="headingtitle" style="margin-bottom: 50px">-->
+<!--          <span-->
+<!--            style="color: #1e2751; font-size: xxx-large; margin-bottom: 50px"-->
+<!--            ><b>How it works</b></span-->
+<!--          >-->
+<!--        </div>-->
+<!--        <p style="margin-bottom: 50px">-->
+<!--          GoPillz is offered as a wellness service by the best care providers (-->
+<!--          Dr's and Hospitals) in the country. In case your care provider is not-->
+<!--          offering GoPillz, you can buy a subscription directly with us.-->
+<!--        </p>-->
+<!--        <p>-->
+<!--          You can also renew your subscription directly with us if you have-->
+<!--          changed your care provider and love your GoPillz Digital Angels.-->
+<!--          <img src="/static/assets/images/heart_emoji.png" />-->
+<!--        </p>-->
+<!--      </div>-->
+<!--      <div class="col-md-6">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-6">-->
+<!--            <div-->
+<!--              class="elementcontent"-->
+<!--              style="-->
+<!--                border: 1px solid lightgray;-->
+<!--                border-radius: 15px;-->
+<!--                padding: 15px 15px;-->
+<!--              "-->
+<!--            >-->
+<!--              <div-->
+<!--                class="elementtitle"-->
+<!--                style="-->
+<!--                  font-style: italic;-->
+<!--                  font-size: small;-->
+<!--                  color: #1e2751;-->
+<!--                  margin-bottom: 10px;-->
+<!--                "-->
+<!--              >-->
+<!--                <b>STEP 1</b>-->
+<!--              </div>-->
+<!--              Sign Up, Pay, and Activate <br />Subscription-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-4" style="padding-top: 50px">-->
+<!--            <img src="/static/assets/images/Vector_1.svg" align="left" />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row" style="margin-top: 10px">-->
+<!--          <div class="col-md-4">-->
+<!--            <img-->
+<!--              src="/static/assets/images/pills.png "-->
+<!--              class="center-image"-->
+<!--            />-->
+<!--            <img src="/static/assets/images/Vector_2.png" align="right" />-->
+<!--          </div>-->
+<!--          <div class="col-md-6">-->
+<!--            <div-->
+<!--              class="elementcontent"-->
+<!--              style="-->
+<!--                border: 1px solid lightgray;-->
+<!--                border-radius: 15px;-->
+<!--                padding: 15px 15px;-->
+<!--                background-color: #dee3f9;-->
+<!--              "-->
+<!--            >-->
+<!--              <div-->
+<!--                class="elementtitle"-->
+<!--                style="-->
+<!--                  font-style: italic;-->
+<!--                  font-size: small;-->
+<!--                  color: #1e2751;-->
+<!--                  margin-bottom: 10px;-->
+<!--                "-->
+<!--              >-->
+<!--                <b>STEP 2</b>-->
+<!--              </div>-->
+<!--              Post Payment, Share Your <br />Prescription details.-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row" style="margin-top: 10px">-->
+<!--          <div class="col-md-6">-->
+<!--            <div-->
+<!--              class="elementcontent"-->
+<!--              style="-->
+<!--                border: 1px solid lightgray;-->
+<!--                border-radius: 15px;-->
+<!--                padding: 15px 15px;-->
+<!--              "-->
+<!--            >-->
+<!--              <div-->
+<!--                class="elementtitle"-->
+<!--                style="-->
+<!--                  font-style: italic;-->
+<!--                  font-size: small;-->
+<!--                  color: #1e2751;-->
+<!--                  margin-bottom: 10px;-->
+<!--                "-->
+<!--              >-->
+<!--                <b>STEP 3</b>-->
+<!--              </div>-->
+<!--              Choose Your Level of Engagement<br />-->
+<!--              Daily, Twice a Day, Thrice A Day-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-4"></div>-->
+<!--        </div>-->
+<!--        <div class="row" style="margin-top: 10px">-->
+<!--          <div class="col-md-4">-->
+<!--            <img src="/static/assets/images/Vector_3.svg" align="right" />-->
+<!--          </div>-->
+<!--          <div class="col-md-6" style="padding-top: 40px">-->
+<!--            <div-->
+<!--              class="elementcontent"-->
+<!--              style="-->
+<!--                border: 1px solid lightgray;-->
+<!--                border-radius: 15px;-->
+<!--                padding: 15px 15px;-->
+<!--                background-color: #dee3f9;-->
+<!--              "-->
+<!--            >-->
+<!--              <div-->
+<!--                class="elementtitle"-->
+<!--                style="-->
+<!--                  font-style: italic;-->
+<!--                  font-size: small;-->
+<!--                  color: #1e2751;-->
+<!--                  margin-bottom: 10px;-->
+<!--                "-->
+<!--              >-->
+<!--                <b>STEP 4</b>-->
+<!--              </div>-->
+<!--              Choose Between Type of Reminders,<br />-->
+<!--              Telephonic or Whatsapp.-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row" style="margin-top: 10px">-->
+<!--          <div class="col-md-6" style="padding-top: 50px">-->
+<!--            <div-->
+<!--              class="elementcontent"-->
+<!--              style="-->
+<!--                border: 1px solid lightgray;-->
+<!--                border-radius: 15px;-->
+<!--                padding: 15px 15px;-->
+<!--              "-->
+<!--            >-->
+<!--              <div-->
+<!--                class="elementtitle"-->
+<!--                style="-->
+<!--                  font-style: italic;-->
+<!--                  font-size: small;-->
+<!--                  color: #1e2751;-->
+<!--                  margin-bottom: 10px;-->
+<!--                "-->
+<!--              >-->
+<!--                <b>STEP 5</b>-->
+<!--              </div>-->
+<!--              You Will Hear From GoPillz Digital Angels <br />-->
+<!--              Within 48 Hours Of Activation And Will Start Getting Reminders.-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-4">-->
+<!--            <img src="/static/assets/images/Vector_4.svg" align="top" />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="row" style="margin-top: 10px">-->
+<!--          <div class="col-md-4">-->
+<!--            <img src="/static/assets/images/Vector_5.svg" align="right" />-->
+<!--          </div>-->
+<!--          <div class="col-md-6" style="padding-top: 40px">-->
+<!--            <div-->
+<!--              class="elementcontent"-->
+<!--              style="-->
+<!--                border: 1px solid lightgray;-->
+<!--                border-radius: 15px;-->
+<!--                padding: 15px 15px;-->
+<!--                background-color: #dee3f9;-->
+<!--              "-->
+<!--            >-->
+<!--              <div-->
+<!--                class="elementtitle"-->
+<!--                style="-->
+<!--                  font-style: italic;-->
+<!--                  font-size: small;-->
+<!--                  color: #1e2751;-->
+<!--                  margin-bottom: 10px;-->
+<!--                "-->
+<!--              >-->
+<!--                <b>STEP 6</b><br /><br />-->
+<!--                <span> Subscription Benefits</span>-->
+<!--              </div>-->
+<!--              a) We Help You and Your Loved Ones Take Better Care Of Your-->
+<!--              Health. <br />-->
+<!--              b) We Keep You and Family Informed Of Missing Doses<br />-->
+<!--              c) Keep Your Care Providers In The Loop.<br />-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<div class="container how_itswork_container py-4">
+            <div class="row justify-content-between">
+              <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6 col-xl-6  ">
+                  <h5 class>How it works</h5>
+                  <div class="description">
+                    <p>GoPillz is offered as a wellness service by the best care providers ( Dr's and Hospitals) in the country. In case your care provider is not offering GoPillz, you can buy a subscription directly with us.</p>
+                    <p>You can also renew your subscription directly from us if you have changed your doctor or hospital but still love your GoPillz Angels <i class="fa fa-heart" aria-hidden="true"></i>                      ️</p>
+                  </div>
               </div>
-              Sign Up, Pay, and Activate <br />Subscription
+              <div class="col-xs-12 col-sm-10 col-md-7 col-lg-6 col-xl-5  right__container">
+                  <div class="d-flex  position-relative">
+                    <div class="steps_container step_one">
+                      <h6>Step 1</h6>
+                      <p>Sign Up, Pay, Activate Subscription</p>
+                    </div>
+                    <img class="dashed_borderimg dashedborderimg_one" src="/static/assets/images/Vector_1.svg">
+                  </div>
+                  <div class="d-flex justify-content-end position-relative">
+                    <img class="capsules__img" src="/static/assets/images/pills.png" alt="" srcset="">
+                    <img class="dashed_borderimg  dashedborderimg_two" src="/static/assets/images/Vector_1.svg">
+                    <div class="steps_container step_two">
+                      <h6>Step 2</h6>
+                      <p>Post Payment, Share Your Prescription Details</p>
+                    </div>
+                  </div>
+                  <div class="d-flex position-relative">
+                    <div class="steps_container step_three">
+                      <h6>Step 3</h6>
+                      <p>Choose Your Level of Engagement Daily, Twice a Day, Thrice A Day</p>
+                    </div>
+                    <img class="dashed_borderimg dashedborderimg_three" src="/static/assets/images/wings.png">
+                  </div>
+                  <div class="d-flex justify-content-end position-relative">
+                    <img class="dashed_borderimg dashedborderimg_four" src="/static/assets/images/Vector_1.svg">
+                    <div class="steps_container step_four">
+                      <h6>Step 4</h6>
+                      <p>Choose Between Type of Reminders, Telephonic or Whatsapp</p>
+                    </div>
+                  </div>
+                  <div class="d-flex position-relative">
+                    <img class="leaves_img_five" src="/static/assets/images/leaves.png" alt="" srcset="">
+                    <div class="steps_container step_five">
+                      <h6>Step 5</h6>
+                      <p>You Will Hear From GoPillz Digital Angels Within 48 Hours Of Activation And Will Start Getting Reminders.</p>
+                    </div>
+                    <img class="dashed_borderimg dashedborderimg_five" src="/static/assets/images/Vector_1.svg">
+                  </div>
+                  <div class="d-flex justify-content-end position-relative">
+                    <img class="dashed_borderimgsix dashedborder_img" src="/static/assets/images/Vector_1.svg">
+                    <div class="steps_container step_six">
+                      <h6>Step 6</h6>
+                      <h4>Subscription Benefits </h4>
+                      <ul>
+                         <li>We Help You and Your Loved Ones Take Better Care Of Your Health.</li>
+                         <li>We Keep You and Family Informed Of Missing Doses</li>
+                         <li>We Keep Your Care Providers in The Loop.</li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
-          <div class="col-md-4" style="padding-top: 50px">
-            <img src="/static/assets/images/Vector_1.svg" align="left" />
-          </div>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <div class="col-md-4">
-            <img
-              src="/static/assets/images/pills.png "
-              class="center-image"
-            />
-            <img src="/static/assets/images/Vector_2.png" align="right" />
-          </div>
-          <div class="col-md-6">
-            <div
-              class="elementcontent"
-              style="
-                border: 1px solid lightgray;
-                border-radius: 15px;
-                padding: 15px 15px;
-                background-color: #dee3f9;
-              "
-            >
-              <div
-                class="elementtitle"
-                style="
-                  font-style: italic;
-                  font-size: small;
-                  color: #1e2751;
-                  margin-bottom: 10px;
-                "
-              >
-                <b>STEP 2</b>
-              </div>
-              Post Payment, Share Your <br />Prescription details.
-            </div>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <div class="col-md-6">
-            <div
-              class="elementcontent"
-              style="
-                border: 1px solid lightgray;
-                border-radius: 15px;
-                padding: 15px 15px;
-              "
-            >
-              <div
-                class="elementtitle"
-                style="
-                  font-style: italic;
-                  font-size: small;
-                  color: #1e2751;
-                  margin-bottom: 10px;
-                "
-              >
-                <b>STEP 3</b>
-              </div>
-              Choose Your Level of Engagement<br />
-              Daily, Twice a Day, Thrice A Day
-            </div>
-          </div>
-          <div class="col-md-4"></div>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <div class="col-md-4">
-            <img src="/static/assets/images/Vector_3.svg" align="right" />
-          </div>
-          <div class="col-md-6" style="padding-top: 40px">
-            <div
-              class="elementcontent"
-              style="
-                border: 1px solid lightgray;
-                border-radius: 15px;
-                padding: 15px 15px;
-                background-color: #dee3f9;
-              "
-            >
-              <div
-                class="elementtitle"
-                style="
-                  font-style: italic;
-                  font-size: small;
-                  color: #1e2751;
-                  margin-bottom: 10px;
-                "
-              >
-                <b>STEP 4</b>
-              </div>
-              Choose Between Type of Reminders,<br />
-              Telephonic or Whatsapp.
-            </div>
-          </div>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <div class="col-md-6" style="padding-top: 50px">
-            <div
-              class="elementcontent"
-              style="
-                border: 1px solid lightgray;
-                border-radius: 15px;
-                padding: 15px 15px;
-              "
-            >
-              <div
-                class="elementtitle"
-                style="
-                  font-style: italic;
-                  font-size: small;
-                  color: #1e2751;
-                  margin-bottom: 10px;
-                "
-              >
-                <b>STEP 5</b>
-              </div>
-              You Will Hear From GoPillz Digital Angels <br />
-              Within 48 Hours Of Activation And Will Start Getting Reminders.
-            </div>
-          </div>
-          <div class="col-md-4">
-            <img src="/static/assets/images/Vector_4.svg" align="top" />
-          </div>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <div class="col-md-4">
-            <img src="/static/assets/images/Vector_5.svg" align="right" />
-          </div>
-          <div class="col-md-6" style="padding-top: 40px">
-            <div
-              class="elementcontent"
-              style="
-                border: 1px solid lightgray;
-                border-radius: 15px;
-                padding: 15px 15px;
-                background-color: #dee3f9;
-              "
-            >
-              <div
-                class="elementtitle"
-                style="
-                  font-style: italic;
-                  font-size: small;
-                  color: #1e2751;
-                  margin-bottom: 10px;
-                "
-              >
-                <b>STEP 6</b><br /><br />
-                <span> Subscription Benefits</span>
-              </div>
-              a) We Help You and Your Loved Ones Take Better Care Of Your
-              Health. <br />
-              b) We Keep You and Family Informed Of Missing Doses<br />
-              c) Keep Your Care Providers In The Loop.<br />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 {% endblock content %}

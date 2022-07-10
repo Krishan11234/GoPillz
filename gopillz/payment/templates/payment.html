@@ -58,7 +58,7 @@
           <span style="color:#1E2751;font-weight:bold">Choose Plan</span>
           <a style="font-weight:500;float:right;color:#2242D5" href='#' onclick="changePlan('{{content.active_plan}}')">Change Plan</a>
         </div>
-        {% csrf_token %}
+
         <div class="loader" style="display:None"></div>
         {% for plan in content.plans %}
         {% if content.active_plan ==  plan.duration%}
@@ -171,6 +171,7 @@
           >
             Have a discount code?
           </div>
+          {% csrf_token %}
           <button
                   id="checkout-button"
             type="button"
