@@ -3,6 +3,33 @@
 {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
 <style>
+
+.bootstrap-select{
+     border: 1px solid #DFDFDF;
+    border-radius: 2px;
+   width:100% !important;
+}
+.bootstrap-select button{
+      height: 33px;
+    font-size: 14px;
+    background: #fff;
+}
+.bootstrap-select button:hover{
+    background: #fff;
+}
+.bootstrap-select.show-tick .dropdown-menu .selected span.check-mark{
+  color: #2242D5;
+}
+dropdown-menu.show{
+  border-radius: 0 !important;
+}
+.bootstrap-select .dropdown-toggle:focus{
+       border: 1px solid #DFDFDF;
+    border-radius: 2px;
+    outline: none !important;
+    box-shadow: none;
+}
+
       .planinfo {
         border-bottom: 1px solid lightgray;
         padding: 3% 3%;
@@ -19,7 +46,8 @@
           opacity: 0.7
         }
     </style>
-    <div class="main__container">
+  <div class="container">
+        <div class="main__container">
         <div class="back__icon">
             <a href="/home"><img src="/static/assets/images/arrow-left.svg"></a>
         </div>
@@ -31,7 +59,7 @@
         {% include 'messages.html' %}
         <div class="row">
             <div class="loader" style="display:None"></div>
-            <div class="col-12 col-lg-6 left__container">
+            <div class="col-12 col-lg-7 left__container">
                 <div class="form__section">
                     <form id="file-form">
                         {% csrf_token %}
@@ -80,7 +108,7 @@
                                             <div class="row">
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Name of Medicine</label>
-                                                    <input id='medicine_name' type="text" class="form-control"
+                                                    <input onchange="updateScheduleTime(this)" id='medicine_name' type="text" class="form-control"
                                                         placeholder="Enter Medicine Name">
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
@@ -121,6 +149,7 @@
                                                         <option value="3">Before Lunch - Montelukast</option>
                                                         <option value="4">After Lunch - Simvastatin</option>
                                                         <option value="5">Before Dinner - Loratadine</option>
+                                                        <option value="6">After Dinner - Loratadine</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
@@ -323,7 +352,7 @@
 <!--                                </div>-->
                             </div>
                             <div class="add__btn">
-                                Add Medicine <i class="fa fa-plus-circle ml-2" aria-hidden="true"></i>
+                                Add Medicine
                             </div>
                             <div class="accordion accordion-flush" id="doctorDetailAccordian">
                                 <div class="accordion-item">
@@ -492,7 +521,7 @@
 <!--                                </div>-->
                             </div>
                             <div class="add__btn">
-                                Add Doctor <i class="fa fa-plus-circle ml-2" aria-hidden="true"></i>
+                                Add Doctor
                             </div>
                             <div class="accordion accordion-flush" id="accordionFlushExample">
                                 <div class="accordion-item">
@@ -641,14 +670,14 @@
 <!--                                </div>-->
                             </div>
                             <div class="add__btn">
-                                Add Caregiver <i class="fa fa-plus-circle ml-2" aria-hidden="true"></i>
+                                Add Caregiver
                             </div>
 
                         </div>
                         <button onclick="savePrescription()" class="submit__btn">Submit</button>
                 </div>
             </div>
-            <div class="col-12 col-lg-6 right__container">
+            <div class="col-12 col-lg-5 right__container">
                 <div id="slider">
                     <div class="slides">
                         <img src="/static/assets/images/slider1img.png" />
@@ -662,6 +691,7 @@
             </div>
         </div>
     </div>
+  </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -673,6 +703,18 @@
 </script>
 
 <script>
+
+function updateScheduleTime(data){
+    console.log('current input value')
+    medicine_name = document.getElementById('medicine_name').value
+    console.log(medicine_name)
+    var length = $('#schedule_time > option'). length;
+    console.log(length)
+    for (let i = 1; i <= length; i++) {
+    console.log($("#schedule_time").val('1').change())
+    }
+}
+
 
 function changeFileStatus(event){
   console.log(event.files[0].name)

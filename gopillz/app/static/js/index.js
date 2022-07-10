@@ -94,3 +94,4 @@ if(pillButtonInput.prop('checked',true)) {// default on cold start
   console.log('is not checked - cold start');
   pillButtonHighlight.css('width', pillButtonOffTextWidth);
 }
+

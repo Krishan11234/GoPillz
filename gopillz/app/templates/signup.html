@@ -1,99 +1,124 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-      <style>
-      .loader{
-          position: fixed;
-          left: 0px;
-          top: 0px;
-          width: 100%;
-          height: 100%;
-          z-index: 9999;
-          background: url('/static/assets/gif/screen_loader.gif')
-                      50% 50% no-repeat rgb(249,249,249);
-          opacity: 0.7
-        }
-    </style>
-    <div class="row" style="margin: 1rem 2.5rem">
-      <div class="col-md-6" style="background-color: #cdd6ff">
-        <img src="/static/assets/images/signup_angel.svg" class="center-image" />
-      </div>
 
-      <div class="col-md-6" style="text-align: center">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="backoption" style="margin-bottom: 5%">
-              <a href="/home"
-                ><img src="/static/assets/images/arrow-left.svg" align="left"
-              /></a>
-            </div>
+  <div class="container signup__container mb-2">
+    <div class="row justify-content-between align-items-center">
+      <div class="col-md-5 mt-1 py-2 text-center" style="background-color: #cdd6ff">
+        <img src="/static/assets/images/signup_angel.svg" class="sign__up__img">
+      </div>
+      <div class="col-md-6 mt-1 signup__right__container">
+        <div class="d-flex justify-content-between">
+              <a href="/home"><img src="/static/assets/images/arrow-left.svg" height="30" width="30"></a>
+              <a href="/home"><img src="/static/assets/images/x.svg" height="30" width="30"></a>
+        </div>
+        <div class="m-auto text-center">
+          <h1 class="welcome__heading">
+            Welcome to GoPillz!
+          </h1>
+          <h3 class="signup__sub__heading">Sign Up</h3>
+          {% include 'messages.html' %}
+          <div class="loader" style="display:None" id="screen-loader"></div>
+          <p>
+            To get your daily medicine reminders with GoPillz digital angels.
+          </p>
+          <div class="inputno">
+            <form id="signupform" action='/signup'  method="post">
+              {% csrf_token %}
+              <input type="tel" id="phone" name="phone" placeholder="Phone Number (+91-9*********)" class="phone__no__field" pattern="[0-9]{10}" required>
+              <input type="submit" value="Send OTP" class="otp__submit__btn"/>
+            </form>
           </div>
-          <div class="col-md-6">
-            <div class="crossoption" style="margin-bottom: 5%">
-              <a href="/home"
-                ><img src="/static/assets/images/x.svg" align="right"
-              /></a>
-            </div>
+          <div class="footnote">
+            Already a member?
+            <a href="/registered_user" style="text-decoration: none">
+              <span style="color: #2242d5">Login</span>
+            </a>
           </div>
-        </div>
-        <div
-          class="header1"
-          style="
-            font-size: xxx-large;
-            color: #1e2751;
-            text-align: center;
-            margin-top: 5%;
-          "
-        >
-          <b>Welcome to GoPillz!</b>
-        </div>
-        <div
-          class="header2"
-          style="
-            font-size: xx-large;
-            color: #1e2751;
-            text-align: center;
-            margin-top: 10%;
-          "
-        >
-          Sign Up
-        </div>
-        {% include 'messages.html' %}
-        <div class="loader" style="display:None" id="screen-loader"></div>
-        <div class="info" style="margin-top: 5%">
-          To get your daily medicine reminders with GoPillz digital angels.
-        </div>
-        <div class="inputno">
-          <form id="signupform" action='/signup'  method="post">
-            {% csrf_token %}
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Phone Number (+91-9*********)"
-              pattern="[0-9]{10}"
-              style="width: 50%; height: 50px; margin-top: 5%" required>
-            <input
-              type="submit"
-              value="Send OTP"
-              style="
-                background-color: #2242d5;
-                color: white;
-                width: 50%;
-                height: 50px;
-                margin-top: 5%;
-                border: none;
-              "
-            />
-          </form>
-        </div>
-        <div class="footnote" style="margin-top: 5%">
-          Already a member?<a href="/registered_user" style="text-decoration: none">
-            <span style="color: #2242d5">Login</span></a
-          >
         </div>
       </div>
-    </div>
+  </div>
+  </div>
+<!--    <div class="row" style="margin: 1rem 2.5rem">-->
+<!--      <div class="col-md-6" style="background-color: #cdd6ff">-->
+<!--        <img src="/static/assets/images/signup_angel.svg" class="center-image" />-->
+<!--      </div>-->
+
+<!--      <div class="col-md-6" style="text-align: center">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-6">-->
+<!--            <div class="backoption" style="margin-bottom: 5%">-->
+<!--              <a href="/home"-->
+<!--                ><img src="/static/assets/images/arrow-left.svg" align="left"-->
+<!--              /></a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-md-6">-->
+<!--            <div class="crossoption" style="margin-bottom: 5%">-->
+<!--              <a href="/home"-->
+<!--                ><img src="/static/assets/images/x.svg" align="right"-->
+<!--              /></a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div-->
+<!--          class="header1"-->
+<!--          style="-->
+<!--            font-size: xxx-large;-->
+<!--            color: #1e2751;-->
+<!--            text-align: center;-->
+<!--            margin-top: 5%;-->
+<!--          "-->
+<!--        >-->
+<!--          <b>Welcome to GoPillz!</b>-->
+<!--        </div>-->
+<!--        <div-->
+<!--          class="header2"-->
+<!--          style="-->
+<!--            font-size: xx-large;-->
+<!--            color: #1e2751;-->
+<!--            text-align: center;-->
+<!--            margin-top: 10%;-->
+<!--          "-->
+<!--        >-->
+<!--          Sign Up-->
+<!--        </div>-->
+<!--        {% include 'messages.html' %}-->
+<!--        <div class="loader" style="display:None" id="screen-loader"></div>-->
+<!--        <div class="info" style="margin-top: 5%">-->
+<!--          To get your daily medicine reminders with GoPillz digital angels.-->
+<!--        </div>-->
+<!--        <div class="inputno">-->
+<!--          <form id="signupform" action='/signup'  method="post">-->
+<!--            {% csrf_token %}-->
+<!--            <input-->
+<!--              type="tel"-->
+<!--              id="phone"-->
+<!--              name="phone"-->
+<!--              placeholder="Phone Number (+91-9*********)"-->
+<!--              pattern="[0-9]{10}"-->
+<!--              style="width: 50%; height: 50px; margin-top: 5%" required>-->
+<!--            <input-->
+<!--              type="submit"-->
+<!--              value="Send OTP"-->
+<!--              style="-->
+<!--                background-color: #2242d5;-->
+<!--                color: white;-->
+<!--                width: 50%;-->
+<!--                height: 50px;-->
+<!--                margin-top: 5%;-->
+<!--                border: none;-->
+<!--              "-->
+<!--            />-->
+<!--          </form>-->
+<!--        </div>-->
+<!--        <div class="footnote" style="margin-top: 5%">-->
+<!--          Already a member?<a href="/registered_user" style="text-decoration: none">-->
+<!--            <span style="color: #2242d5">Login</span></a-->
+<!--          >-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
 
 

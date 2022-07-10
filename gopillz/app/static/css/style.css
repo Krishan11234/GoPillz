@@ -22,3 +22,13 @@ a{
 padding:0;}
 
 
+.alert{
+  margin: 20px auto;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+padding: 10px 15px;
+text-align: left;
+
+}
+.alert-dismissible .btn-close{
+padding:14px
+}

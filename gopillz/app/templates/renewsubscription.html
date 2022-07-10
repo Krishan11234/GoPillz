@@ -13,9 +13,6 @@
                       50% 50% no-repeat rgb(249,249,249);
           opacity: 0.7
         }
-    .renew-subscription-container{
-      margin: 5%;
-   }
 
             .planinfo{
 
@@ -23,9 +20,9 @@
       }
 </style>
 {% include 'messages.html' %}
-<div class="renew-subscription-container">
-    <div class="row">
-        <div class="col-md-6" style="background-color: #CDD6FF;">
+<div class="renew-subscription-container container">
+    <div class="row justify-content-between">
+        <div class="col-md-5 mt-2" style="background-color: #CDD6FF;">
         <div class="row">
             <div class="crossoption" style="padding: 0 20px;margin-top: 5%;">
                 <a href="/home"><img src="/static/assets/images/x.svg" align="right"></a>
@@ -45,11 +42,11 @@
 
             </div>
             <div class="row">
-              <img src="/static/assets/images/payment_angel.svg" class="center-image" style="height: 550px;width: 550px;">
+              <img src="/static/assets/images/payment_angel.svg" class="center-image" >
             </div>
         </div>
-        <div class="col-md-6  " style="padding:30px 0 0 45px">
-            <div class="backoption" style="margin-bottom: 5%">
+        <div class="col-md-6  mt-2">
+            <div class="backoption" style="margin:18px 0">
               <a href="/home"><img src="/static/assets/images/arrow-left.svg" ></a>
             </div>
             {% csrf_token %}
