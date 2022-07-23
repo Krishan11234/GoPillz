@@ -11,7 +11,7 @@ class SubscriberSerializer(serializers.ModelSerializer):
 class MedicineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
-        fields = ('medicine_name', 'medicine_type', 'number_days', 'schedule_time', 'level_of_engagement')
+        fields = ('medicine_name', 'medicine_type', 'schedule_time', 'level_of_engagement', 'datetime')
 
 
 class DoctorSerializer(serializers.ModelSerializer):
@@ -59,3 +59,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
             for value in validated_data['validated_data']['subscriber']:
                 subscriber_obj = Subscriber.objects.create(subscriber_name=value['subscriber_name'])
                 prescription.subscriber.add(subscriber_obj)
+
+        if 'number_days' in validated_data['validated_data']:
+            for record in validated_data['validated_data']['number_days']:
+                Days.objects.create(medicine_id=prescription.medicine, name=record)

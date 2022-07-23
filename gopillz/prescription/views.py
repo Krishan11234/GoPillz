@@ -10,7 +10,7 @@ class Prescription(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = [TemplateHTMLRenderer]
     serializer_class = PrescriptionSerializer
-    template_name = "success.html"
+    template_name = "prescription.html"
 
     def post(self, request):
         request_data = self.prepare_request_data(request.data)
@@ -20,6 +20,8 @@ class Prescription(generics.GenericAPIView):
             if prescription_serializer.is_valid(raise_exception=True):
                 medicine_data = {}
                 medicine_data['validated_data'] = prescription_serializer.validated_data
+                if 'number_days[]' in request.data:
+                    medicine_data['validated_data']['number_days'] = request.data.getlist("number_days[]")
                 medicine_data['user'] = request.user
                 prescription_serializer.create(validated_data=medicine_data)
                 error_message = 'Data Saved Successfully ADD Another'

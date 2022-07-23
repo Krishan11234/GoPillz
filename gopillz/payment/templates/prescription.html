@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"-->
+<!--        rel="stylesheet">-->
 <style>
+.collapse:not(.show){
+display:block;
+}
 
 .bootstrap-select{
      border: 1px solid #DFDFDF;
@@ -46,8 +54,617 @@ dropdown-menu.show{
           opacity: 0.7
         }
     </style>
+<style>
+
+    .picker-switch .table-condensed{
+        display: none;
+      }
+      .input-group {
+        margin-bottom: 15px;
+      }
+
+      .input-group .input-group-addon {
+        background: transparent;
+      }
+
+      .input-group .input-group-addon:last-child {
+        border-radius: 2px;
+      }
+
+      .form-control {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-shadow: none;
+      }
+
+      .form-control:hover,
+      .form-control:focus,
+      .form-control:active {
+        box-shadow: none;
+      }
+
+      .form-control:focus {
+        border: 1px solid #34495e;
+      }
+
+      /*!
+     * Datetimepicker for Bootstrap 3
+     * version : 4.17.37
+     * https://github.com/Eonasdan/bootstrap-datetimepicker/
+     */
+      .bootstrap-datetimepicker-widget {
+        list-style: none;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu {
+        margin: 2px 0;
+        padding: 4px;
+        width:auto;
+      }
+
+      /* @media (min-width: 768px) {
+        .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+          width: 38em;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+          width: 38em;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+          width: 38em;
+        }
+      }
+     */
+      .bootstrap-datetimepicker-widget.dropdown-menu:before,
+      .bootstrap-datetimepicker-widget.dropdown-menu:after {
+        content: "";
+        display: inline-block;
+        position: absolute;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-bottom: 7px solid #cccccc;
+        border-bottom-color: rgba(0, 0, 0, 0.2);
+        top: -7px;
+        left: 7px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid white;
+        top: -6px;
+        left: 8px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid #cccccc;
+        border-top-color: rgba(0, 0, 0, 0.2);
+        bottom: -7px;
+        left: 6px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-top: 6px solid white;
+        bottom: -6px;
+        left: 7px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:before {
+        left: auto;
+        right: 6px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.pull-right:after {
+        left: auto;
+        right: 7px;
+      }
+
+      .bootstrap-datetimepicker-widget .list-unstyled {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .bootstrap-datetimepicker-widget a[data-action] {
+        padding: 6px 0;
+      }
+
+      .bootstrap-datetimepicker-widget a[data-action]:active {
+        box-shadow: none;
+      }
+
+      .bootstrap-datetimepicker-widget .timepicker-hour,
+      .bootstrap-datetimepicker-widget .timepicker-minute,
+      .bootstrap-datetimepicker-widget .timepicker-second {
+        width: 54px;
+        font-weight: bold;
+        font-size: 1.2em;
+        margin: 0;
+      }
+
+      .bootstrap-datetimepicker-widget button[data-action] {
+        padding: 6px;
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=incrementHours]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Increment Hours";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=incrementMinutes]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Increment Minutes";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=decrementHours]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Decrement Hours";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=decrementMinutes]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Decrement Minutes";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=showHours]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Show Hours";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=showMinutes]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Show Minutes";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=togglePeriod]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Toggle AM/PM";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=clear]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Clear the picker";
+      }
+
+      .bootstrap-datetimepicker-widget .btn[data-action=today]::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Set the date to today";
+      }
+
+      .bootstrap-datetimepicker-widget .picker-switch {
+        text-align: center;
+      }
+
+      .bootstrap-datetimepicker-widget .picker-switch::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Toggle Date and Time Screens";
+      }
+
+      .bootstrap-datetimepicker-widget .picker-switch td {
+        padding: 0;
+        margin: 0;
+        height: auto;
+        width: auto;
+        line-height: inherit;
+      }
+
+      .bootstrap-datetimepicker-widget .picker-switch td span {
+        line-height: 2.5;
+        height: 2.5em;
+        width: 100%;
+      }
+
+      .bootstrap-datetimepicker-widget table {
+        width: 100%;
+        margin: 0;
+      }
+
+      .bootstrap-datetimepicker-widget table td,
+      .bootstrap-datetimepicker-widget table th {
+        text-align: center;
+        border-radius: 4px;
+      }
+
+      .bootstrap-datetimepicker-widget table th {
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+      }
+
+      .bootstrap-datetimepicker-widget table th.picker-switch {
+        width: 145px;
+      }
+
+      .bootstrap-datetimepicker-widget table th.disabled,
+      .bootstrap-datetimepicker-widget table th.disabled:hover {
+        background: none;
+        color: #777777;
+        cursor: not-allowed;
+      }
+
+      .bootstrap-datetimepicker-widget table th.prev::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Previous Month";
+      }
+
+      .bootstrap-datetimepicker-widget table th.next::after {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        content: "Next Month";
+      }
+
+      .bootstrap-datetimepicker-widget table thead tr:first-child th {
+        cursor: pointer;
+      }
+
+      .bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+        background: #eeeeee;
+      }
+
+      .bootstrap-datetimepicker-widget table td {
+        height: 54px;
+        line-height: 54px;
+        width: 54px;
+      }
+
+      .bootstrap-datetimepicker-widget table td.cw {
+        font-size: 0.8em;
+        height: 20px;
+        line-height: 20px;
+        color: #777777;
+      }
+
+      .bootstrap-datetimepicker-widget table td.day {
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+      }
+
+      .bootstrap-datetimepicker-widget table td.day:hover,
+      .bootstrap-datetimepicker-widget table td.hour:hover,
+      .bootstrap-datetimepicker-widget table td.minute:hover,
+      .bootstrap-datetimepicker-widget table td.second:hover {
+        background: #eeeeee;
+        cursor: pointer;
+      }
+
+      .bootstrap-datetimepicker-widget table td.old,
+      .bootstrap-datetimepicker-widget table td.new {
+        color: #777777;
+      }
+
+      .bootstrap-datetimepicker-widget table td.today {
+        position: relative;
+      }
+
+      .bootstrap-datetimepicker-widget table td.today:before {
+        content: "";
+        display: inline-block;
+        border: solid transparent;
+        border-width: 0 0 7px 7px;
+        border-bottom-color: #337ab7;
+        border-top-color: rgba(0, 0, 0, 0.2);
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+      }
+
+      .bootstrap-datetimepicker-widget table td.active,
+      .bootstrap-datetimepicker-widget table td.active:hover {
+        background-color: #337ab7;
+        color: #ffffff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+
+      .bootstrap-datetimepicker-widget table td.active.today:before {
+        border-bottom-color: #fff;
+      }
+
+      .bootstrap-datetimepicker-widget table td.disabled,
+      .bootstrap-datetimepicker-widget table td.disabled:hover {
+        background: none;
+        color: #777777;
+        cursor: not-allowed;
+      }
+
+      .bootstrap-datetimepicker-widget table td span {
+        display: inline-block;
+        width: 54px;
+        height: 54px;
+        line-height: 54px;
+        margin: 2px 1.5px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      .bootstrap-datetimepicker-widget table td span:hover {
+        background: #eeeeee;
+      }
+
+      .bootstrap-datetimepicker-widget table td span.active {
+        background-color: #337ab7;
+        color: #ffffff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+
+      .bootstrap-datetimepicker-widget table td span.old {
+        color: #777777;
+      }
+
+      .bootstrap-datetimepicker-widget table td span.disabled,
+      .bootstrap-datetimepicker-widget table td span.disabled:hover {
+        background: none;
+        color: #777777;
+        cursor: not-allowed;
+      }
+
+      .bootstrap-datetimepicker-widget.usetwentyfour td.hour {
+        height: 27px;
+        line-height: 27px;
+      }
+
+      .bootstrap-datetimepicker-widget.wider {
+        width: 21em;
+      }
+
+      .bootstrap-datetimepicker-widget .datepicker-decades .decade {
+        line-height: 1.8em !important;
+      }
+
+      .input-group.date .input-group-addon {
+        cursor: pointer;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+
+      /*! Datetimepicker End */
+
+
+      .bootstrap-datetimepicker-widget.dropdown-menu {
+        border: 1px solid #34495e;
+        border-radius: 0;
+        box-shadow: none;
+        margin: 2px 0 0 0;
+        padding: 0;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before,
+      .bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+        display: none;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu table td,
+      .bootstrap-datetimepicker-widget.dropdown-menu table th {
+        border-radius: 0;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu table td.active,
+      .bootstrap-datetimepicker-widget.dropdown-menu table td.active:hover,
+      .bootstrap-datetimepicker-widget.dropdown-menu table td span.active {
+        background-color: #2242D5;
+        text-shadow: none;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu table th {
+        height: 28px;
+        line-height: 28px;
+        width: 37px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu table tr:first-of-type th {
+        border-bottom: 1px solid #34495e;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu table td.day {
+        height: 24px;
+        line-height: 24px;
+        width: auto;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu table td span {
+        width: 25%;
+        margin: 0;
+        border-radius: 0;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .datepicker-months tbody tr td,
+      .bootstrap-datetimepicker-widget.dropdown-menu .datepicker-years tbody tr td,
+      .bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td {
+        padding: 0;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td {
+        height: 27px;
+        line-height: 27px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .datepicker-decades tbody tr td span {
+        display: block;
+        float: left;
+        width: 50%;
+        height: 27px;
+        line-height: 27px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td {
+        padding: 0;
+        width: 30%;
+        height: 20px;
+        line-height: 20px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td:nth-child(2) {
+        width: 10%;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td a,
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span,
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+        border: none;
+        border-radius: 0;
+        height: 35px;
+        line-height: 2;
+        padding: 0;
+        width: 100%;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td span {
+        color: #333;
+        margin-top: -1px;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button {
+        background-color: #fff;
+        color: #333;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .timepicker-picker table td button:hover {
+        background-color: #eee;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .collapse+.picker-switch {
+        border-bottom: 1px solid #34495e;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .in+.picker-switch {
+        border: none;
+        border-top: 1px solid #34495e;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch td a {
+        line-height: 38px;
+        height: 38px;
+        padding: 0;
+        display: block;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch td a span {
+        background: #496785;
+        color: #fff;
+        margin-top: -1px;
+        line-height: 38px;
+        height: 38px;
+        width: 100%;
+      }
+
+      .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch td a span:hover {
+        background: #34495e;
+      }
+
+      .collapse:not(.show){
+      display: block;
+    }
+    .bootstrap-datetimepicker-widget.dropdown-menu .picker-switch td a span{
+      display: none;
+    }
+    </style>
   <div class="container">
-        <div class="main__container">
+        <div class="main__container m-0">
         <div class="back__icon">
             <a href="/home"><img src="/static/assets/images/arrow-left.svg"></a>
         </div>
@@ -125,13 +742,13 @@ dropdown-menu.show{
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Number of Days</label>
                                                     <select id='number_days' class="selectpicker" multiple data-live-search="true">
-                                                        <option value="1" selected>Monday</option>
-                                                        <option value="2">Tuesday</option>
-                                                        <option value="3">Wednesday</option>
-                                                        <option value="4">Thursday</option>
-                                                        <option value="5">Friday</option>
-                                                        <option value="6">Saturday</option>
-                                                        <option value="7">Sunday</option>
+                                                        <option value="Monday" selected>Monday</option>
+                                                        <option value="Tuesday">Tuesday</option>
+                                                        <option value="Wednesday">Wednesday</option>
+                                                        <option value="Thursday">Thursday</option>
+                                                        <option value="Friday">Friday</option>
+                                                        <option value="Saturday">Saturday</option>
+                                                        <option value="Sunday">Sunday</option>
                                                     </select>
 <!--                                                    <select id='select-days' class="selectpicker" multiple data-live-search="true">-->
 <!--                                                    <option value="1">One</option>-->
@@ -151,6 +768,10 @@ dropdown-menu.show{
                                                         <option value="5">Before Dinner - </option>
                                                         <option value="6">After Dinner - </option>
                                                     </select>
+<!--                                                    <input type="text" id="demo"/>-->
+                                                         <div class="input-group date-time" id="datetimepicker">
+                                                        <input class="form-control input-group-addon" type="text" />
+                                                      </div>
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Choose the level of engagement you desire</label>
@@ -695,14 +1316,45 @@ dropdown-menu.show{
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+ <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 <script type="text/javascript">
     jQuery('#number_days').selectpicker();
 </script>
+    <script>
 
+      $("#datetimepicker").datetimepicker({
+      defaultDate: moment(),
+        icons: {
+          time: "fa fa-clock-o",
+          date: "fa fa-calendar",
+          up: "fa fa-chevron-up",
+          down: "fa fa-chevron-down",
+          next: "fa fa-chevron-right",
+          previous: "fa fa-chevron-left"
+        }
+      });
+      $("#datepicker").datetimepicker({
+        format: "L",
+        icons: {
+          next: "fa fa-chevron-right",
+          previous: "fa fa-chevron-left"
+        }
+      });
+      $("#timepicker").datetimepicker({
+        format: "LT",
+        icons: {
+          up: "fa fa-chevron-up",
+          down: "fa fa-chevron-down"
+        }
+      });
+      </script>
 <script>
+
 
 function updateScheduleTime(data){
     medicine_name = document.getElementById('medicine_name').value
@@ -725,89 +1377,113 @@ function changeFileStatus(event){
 
 function savePrescription(){
 $('.loader').css('display','block')
-    var formData = {}
+    var fileFormData = new FormData();
     subscriber1 = document.getElementById('subscriber1').value
-    console.log(subscriber1)
+    var input = document.getElementById("myfile").files
+    console.log('-----------------------')
+    console.log(input)
     if (subscriber1){
-        formData['subscriber1'] = subscriber1
+        fileFormData.append('subscriber1',subscriber1);
+<!--        formData['subscriber1'] = subscriber1-->
     }
     subscriber2 = document.getElementById('subscriber2').value
     if (subscriber2){
-        formData['subscriber2'] = subscriber2
+        fileFormData.append('subscriber2',subscriber2);
     }
     subscriber3 = document.getElementById('subscriber3').value
     if (subscriber3){
-        formData['subscriber3'] = subscriber3
+        fileFormData.append('subscriber3',subscriber3);
     }
     subscriber4 = document.getElementById('subscriber4').value
     if (subscriber4){
-        formData['subscriber4'] = subscriber4
+        fileFormData.append('subscriber4',subscriber4);
     }
 
     medicine_name = document.getElementById('medicine_name').value
     if (medicine_name){
-        formData['medicine_name'] = medicine_name
+        fileFormData.append('medicine_name',medicine_name);
     }
     medicine_type = $("select#medicine_type option").filter(":selected").val();
     if (medicine_type){
-        formData['medicine_type'] = medicine_type
+        fileFormData.append('medicine_type',medicine_type);
     }
-    number_days = $("select#number_days option").filter(":selected").val();
+<!--    number_days = $("select#number_days option").filter(":selected").val();-->
+    number_days = $("#number_days").val();
+    console.log(number_days)
     if (number_days){
-        formData['number_days'] = number_days
+        var newArray = new Array();
+        for (let li of number_days) {
+        console.log(li)
+            newArray.push(li);
+        }
+        console.log(newArray)
+        fileFormData.append('number_days',newArray);
     }
 
     schedule_time = $("select#schedule_time option").filter(":selected").val();
     if (schedule_time){
+        fileFormData.append('number_days',newArray);
         formData['schedule_time'] = schedule_time
     }
     engagement = $("select#engagement option").filter(":selected").val();
     if (engagement){
+        fileFormData.append('number_days',newArray);
         formData['engagement'] = engagement
     }
     doctor_name = document.getElementById('doctor_name').value
     if (doctor_name){
+        fileFormData.append('number_days',newArray);
         formData['doctor_name'] = doctor_name
     }
     doctor_phone_no = document.getElementById('doctor_phone_no').value
     if (doctor_phone_no){
+        fileFormData.append('number_days',newArray);
         formData['doctor_phone_no'] = doctor_phone_no
     }
     hospital_name = document.getElementById('hospital_name').value
     if (hospital_name){
+        fileFormData.append('number_days',newArray);
         formData['hospital_name'] = hospital_name
     }
     ailment = document.getElementById('ailment').value
     if (ailment){
+        fileFormData.append('number_days',newArray);
         formData['ailment'] = ailment
     }
     city = document.getElementById('city').value
     if (city){
+        fileFormData.append('number_days',newArray);
         formData['city'] = city
     }
 
     caregiver_name = document.getElementById('caregiver_name').value
     if (caregiver_name){
+        fileFormData.append('number_days',newArray);
         formData['caregiver_name'] = caregiver_name
     }
     phone_no = document.getElementById('phone_no').value
     if (phone_no){
+        fileFormData.append('number_days',newArray);
         formData['phone_no'] = phone_no
     }
     email = document.getElementById('email').value
     if (email){
+        fileFormData.append('number_days',newArray);
         formData['email'] = email
     }
     relation = document.getElementById('relation').value
     if (relation){
-        formData['relation'] = relation
+        fileFormData.append('relation',relation);
     }
 
 <!--    var form = $('file-form')[0];-->
-<!--    var fileFormData = new FormData(form);-->
+
 <!--    fileFormData.append('files', $('input[type=file]')[0].files);-->
 <!--    console.log(fileFormData)-->
-
+   for (var file of input){
+   fileFormData.append("files[]", file);
+   }
+    console.log('=================================')
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     $.ajax({
           type: 'POST',
@@ -816,8 +1492,10 @@ $('.loader').css('display','block')
           'X-CSRFToken': csrftoken,
           'contentType': 'application/json',
           },
-          data:formData,
-          dataType: 'json',
+          contentType: false, //this is requireded please see answers above
+            processData: false,
+          data:fileFormData,
+<!--          dataType: 'json',-->
           success: function(data){
           $('.loader').css('display','none')
               window.location.reload()
@@ -830,5 +1508,18 @@ $('.loader').css('display','block')
 }
 
 </script>
+<script type="text/javascript" src=
+"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
+    </script>
+<script src=
+"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
+        </script>
 
+<script>
+
+$('#demo').datetimepicker({
+    defaultDate: new Date(),
+    format:'DD/MM/YYYY'
+});
+</script>
 {% endblock content %}

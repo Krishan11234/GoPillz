@@ -138,26 +138,26 @@
     <script>
       function resentOtp(){
        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-       window.location.reload()
-<!--        phone_no = '{{phone_no}}'-->
-<!--        data = JSON.stringify({'phone':phone_no})-->
-<!--        $.ajax({-->
-<!--            type: 'POST',-->
-<!--            url:'/signup',-->
-<!--            processData: false,-->
-<!--            headers:{-->
-<!--            'X-CSRFToken': csrftoken,-->
-<!--            'contentType': 'application/json',-->
-<!--            },-->
-<!--            data:data,-->
-<!--            dataType: 'json',-->
-<!--            success: function(data){-->
-<!--            alert("OTP Sent");-->
-<!--            },-->
-<!--            error: function(){-->
-<!--            alert("Cannot Sent OTP");-->
-<!--            },-->
-<!--        });-->
+        phoneNo = '{{phone_no}}'
+        data = JSON.stringify({"phone_no": phoneNo});
+
+        $.ajax({
+            type: 'POST',
+            url:'/otp_verification',
+            processData: false,
+            headers:{
+            'X-CSRFToken': csrftoken,
+            'contentType': 'application/json',
+            },
+            data:data,
+            dataType: 'json',
+            success: function(data){
+            alert("OTP Sent");
+            },
+            error: function(){
+            alert("Cannot Sent OTP");
+            },
+        });
       }
     </script>
    {% endblock content %}

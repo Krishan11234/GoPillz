@@ -51,6 +51,13 @@ class SignUp(generics.GenericAPIView):
 
     def get(self, request):
         content = {}
+        if request.COOKIES.get('verification', '') == 'True':
+            content['phone_no'] = request.COOKIES.get('phone_no', '')
+            if content['phone_no']:
+                response = render(request, self.success_template, content)
+                response.delete_cookie("verification")
+                response.delete_cookie("phone_no")
+                return response
         return render(request, self.template_name, content)
 
     # @method_decorator(csrf_exempt)
@@ -158,7 +165,10 @@ class VerifyOtp(generics.GenericAPIView):
                 print(e)
         error_message = 'OTP Verification Failed'
         messages.error(request, error_message)
-        return redirect('/signup')
+        response = redirect('/signup')
+        response.set_cookie('verification', True, max_age=1000)
+        response.set_cookie('phone_no', request.data['phone_no'], max_age=1000)
+        return response
 
 
 class ContactUs(generics.GenericAPIView):

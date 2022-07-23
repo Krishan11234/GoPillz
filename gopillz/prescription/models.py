@@ -11,9 +11,15 @@ class Subscriber(models.Model):
 class Medicine(models.Model):
     medicine_name = models.CharField(max_length=100)
     medicine_type = models.CharField(max_length=100, null=True, db_index=True, choices=MEDICINE_TYPE)
-    number_days = models.CharField(max_length=100, null=True, db_index=True, choices=NUMBER_DAYS)
-    schedule_time = models.CharField(max_length=100, null=True, db_index=True, choices=SCHEDULE_TIME)
+    # number_days = models.CharField(max_length=100, null=True, db_index=True, choices=NUMBER_DAYS)
+    schedule_time = models.CharField(max_length=100, null=True, db_index=True)
+    datetime = models.DateTimeField(null=True)
     level_of_engagement = models.CharField(max_length=100, null=True, db_index=True, choices=LEVEL_ENGAGEMENT)
+
+
+class Days(models.Model):
+    name = models.CharField(max_length=100)
+    medicine_id = models.ForeignKey(Medicine, on_delete=models.CASCADE)
 
 
 class Doctor(models.Model):
