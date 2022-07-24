@@ -55,6 +55,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
 
         prescription = Prescription.objects.create(user=user, medicine=medicine_data, caregiver=caregiver_data,
                                            doctor=doctor_data)
+
         if 'subscriber' in validated_data['validated_data']:
             for value in validated_data['validated_data']['subscriber']:
                 subscriber_obj = Subscriber.objects.create(subscriber_name=value['subscriber_name'])
@@ -63,3 +64,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
         if 'number_days' in validated_data['validated_data']:
             for record in validated_data['validated_data']['number_days']:
                 Days.objects.create(medicine_id=prescription.medicine, name=record)
+
+        if 'files' in validated_data:
+            for record in validated_data['files'].getlist('files[]'):
+                PrescriptionFiles.objects.create(name=record)

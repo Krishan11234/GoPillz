@@ -1422,54 +1422,54 @@ $('.loader').css('display','block')
 
     schedule_time = $("select#schedule_time option").filter(":selected").val();
     if (schedule_time){
-        fileFormData.append('number_days',newArray);
-        formData['schedule_time'] = schedule_time
+        fileFormData.append('schedule_time',schedule_time);
+<!--        formData['schedule_time'] = schedule_time-->
     }
     engagement = $("select#engagement option").filter(":selected").val();
     if (engagement){
-        fileFormData.append('number_days',newArray);
-        formData['engagement'] = engagement
+        fileFormData.append('engagement',engagement);
+<!--        formData['engagement'] = engagement-->
     }
     doctor_name = document.getElementById('doctor_name').value
     if (doctor_name){
-        fileFormData.append('number_days',newArray);
-        formData['doctor_name'] = doctor_name
+        fileFormData.append('doctor_name',doctor_name);
+<!--        formData['doctor_name'] = doctor_name-->
     }
     doctor_phone_no = document.getElementById('doctor_phone_no').value
     if (doctor_phone_no){
-        fileFormData.append('number_days',newArray);
-        formData['doctor_phone_no'] = doctor_phone_no
+        fileFormData.append('doctor_phone_no',doctor_phone_no);
+<!--        formData['doctor_phone_no'] = doctor_phone_no-->
     }
     hospital_name = document.getElementById('hospital_name').value
     if (hospital_name){
-        fileFormData.append('number_days',newArray);
-        formData['hospital_name'] = hospital_name
+        fileFormData.append('hospital_name',hospital_name);
+<!--        formData['hospital_name'] = hospital_name-->
     }
     ailment = document.getElementById('ailment').value
     if (ailment){
-        fileFormData.append('number_days',newArray);
-        formData['ailment'] = ailment
+        fileFormData.append('ailment',ailment);
+<!--        formData['ailment'] = ailment-->
     }
     city = document.getElementById('city').value
     if (city){
-        fileFormData.append('number_days',newArray);
-        formData['city'] = city
+        fileFormData.append('city',city);
+<!--        formData['city'] = city-->
     }
 
     caregiver_name = document.getElementById('caregiver_name').value
     if (caregiver_name){
-        fileFormData.append('number_days',newArray);
-        formData['caregiver_name'] = caregiver_name
+        fileFormData.append('caregiver_name',caregiver_name);
+<!--        formData['caregiver_name'] = caregiver_name-->
     }
     phone_no = document.getElementById('phone_no').value
     if (phone_no){
-        fileFormData.append('number_days',newArray);
-        formData['phone_no'] = phone_no
+        fileFormData.append('phone_no',phone_no);
+<!--        formData['phone_no'] = phone_no-->
     }
     email = document.getElementById('email').value
     if (email){
-        fileFormData.append('number_days',newArray);
-        formData['email'] = email
+        fileFormData.append('email',email);
+<!--        formData['email'] = email-->
     }
     relation = document.getElementById('relation').value
     if (relation){
@@ -1477,10 +1477,14 @@ $('.loader').css('display','block')
     }
 
 <!--    var form = $('file-form')[0];-->
-
+<!--    date = document.getElementById('datetimepicker').value-->
+    date = $("#datetimepicker").datetimepicker( 'getDate' );
+    console.log(date)
 <!--    fileFormData.append('files', $('input[type=file]')[0].files);-->
 <!--    console.log(fileFormData)-->
    for (var file of input){
+   console.log('--------------------')
+   console.log(file)
    fileFormData.append("files[]", file);
    }
     console.log('=================================')

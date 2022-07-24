@@ -37,9 +37,13 @@ class Caregiver(models.Model):
     relation = models.CharField(max_length=255)
 
 
+class PrescriptionFiles(models.Model):
+    name = models.FileField(upload_to='prescription/', blank=True, null=True)
+
+
 class Prescription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    upload_prescription = models.FileField(upload_to='prescription/', blank=True, null=True)
+    upload_prescription = models.ManyToManyField(PrescriptionFiles, blank=True, null=True)
     medicine = models.ForeignKey(Medicine, blank=True, null=True, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, blank=True, null=True, on_delete=models.CASCADE)
     caregiver = models.ForeignKey(Caregiver, blank=True, null=True, on_delete=models.CASCADE)

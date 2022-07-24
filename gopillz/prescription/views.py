@@ -23,6 +23,7 @@ class Prescription(generics.GenericAPIView):
                 if 'number_days[]' in request.data:
                     medicine_data['validated_data']['number_days'] = request.data.getlist("number_days[]")
                 medicine_data['user'] = request.user
+                medicine_data['files'] = request.FILES
                 prescription_serializer.create(validated_data=medicine_data)
                 error_message = 'Data Saved Successfully ADD Another'
                 messages.success(request, error_message)
