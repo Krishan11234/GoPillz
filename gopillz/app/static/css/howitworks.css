@@ -117,7 +117,8 @@
     background-color: #DEE3F9;
   }
   .right__container{
-        margin: auto;
+        margin: 10px auto;
+        text-align:center;
       }
       //responsive
    @media  (max-width:992px) {
