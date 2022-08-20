@@ -8,6 +8,17 @@
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"-->
 <!--        rel="stylesheet">-->
 <style>
+.normal__state{
+                          margin-bottom: 0;
+                        font-size: 15px;
+                        padding: 5px 15px;
+                        list-style-type: none;
+                        color: #1B1B1B;
+                }
+                .active__state{
+                   background-color: #e8e8e8;
+                   color: #2242d5;
+                }
 .collapse:not(.show){
 display:block;
 }
@@ -684,7 +695,10 @@ dropdown-menu.show{
                             <label>Upload Prescription <span id="file-uploading"></span></label>
                             <div class="browse__button">
                                 <input type="file" id="myfile" onchange ="changeFileStatus(this)" name="myfile" multiple>
-                                <p>Drag your files here or click in this area.</p>
+                                <label id="fileLabel">
+                                <i class="fa fa-cloud-upload"></i> Upload Image
+                              </label>
+<!--                                <p>Drag your files here or click in this area.</p>-->
                             </div>
 
                             <span>File type: jpg, svg, png</span>
@@ -742,13 +756,13 @@ dropdown-menu.show{
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Number of Days</label>
                                                     <select id='number_days' class="selectpicker" multiple data-live-search="true">
-                                                        <option value="Monday" selected>Monday</option>
-                                                        <option value="Tuesday">Tuesday</option>
-                                                        <option value="Wednesday">Wednesday</option>
-                                                        <option value="Thursday">Thursday</option>
-                                                        <option value="Friday">Friday</option>
-                                                        <option value="Saturday">Saturday</option>
-                                                        <option value="Sunday">Sunday</option>
+                                                        <option value="1" selected>Monday</option>
+                                                        <option value="2">Tuesday</option>
+                                                        <option value="3">Wednesday</option>
+                                                        <option value="4">Thursday</option>
+                                                        <option value="5">Friday</option>
+                                                        <option value="6">Saturday</option>
+                                                        <option value="7">Sunday</option>
                                                     </select>
 <!--                                                    <select id='select-days' class="selectpicker" multiple data-live-search="true">-->
 <!--                                                    <option value="1">One</option>-->
@@ -761,12 +775,12 @@ dropdown-menu.show{
                                                 <div class="col-12 col-lg-6 mb-3">
                                                     <label>Schedule Time</label>
                                                     <select id='schedule_time' class="form-select">
-                                                        <option value="1">Before Breakfast - </option>
-                                                        <option value="2">After Breakfast - </option>
-                                                        <option value="3">Before Lunch - </option>
-                                                        <option value="4">After Lunch - </option>
-                                                        <option value="5">Before Dinner - </option>
-                                                        <option value="6">After Dinner - </option>
+                                                        <option value="Before Breakfast -">Before Breakfast - </option>
+                                                        <option value="After Breakfast -">After Breakfast - </option>
+                                                        <option value="Before Lunch -">Before Lunch - </option>
+                                                        <option value="After Lunch -">After Lunch - </option>
+                                                        <option value="Before Dinner -">Before Dinner - </option>
+                                                        <option value="After Dinner -">After Dinner - </option>
                                                     </select>
 <!--                                                    <input type="text" id="demo"/>-->
                                                          <div class="input-group date-time" id="datetimepicker">
@@ -1298,18 +1312,57 @@ dropdown-menu.show{
                         <button onclick="savePrescription()" class="submit__btn">Submit</button>
                 </div>
             </div>
-            <div class="col-12 col-lg-5 right__container">
-<!--                <div id="slider">-->
-<!--                    <div class="slides">-->
-                        <img src="/static/assets/images/slider1img.png" />
-<!--                    </div>-->
-<!--                    <div class="slides">-->
-<!--                        <img src="/static/assets/images/frame2.png" />-->
-<!--                    </div>-->
-<!--                    <div id="dot"><span class="dot"></span><span class="dot"></span></div>-->
-<!--                </div>-->
+         <div class="col-12 col-lg-5 right__container">
+	<div style="
+    position: relative;
+"> <img src="/static/assets/images/slider1img.png">
+		<div style="left: 140px;
+    height: 185px;
+    min-height:185px;
+    text-align: left;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    width: 250px;
+    padding: 15px 0;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+">
+			<h4 style="
+    font-size: 13px;
+    color: grey;
+    padding: 0 15px;
+">Select Time</h4>
 
-            </div>
+			<ul style="padding-left: 0;margin-bottom: 0;height: 138px;overflow: auto;">
+					<li class="active__state normal__state">
+					<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+					<label for="vehicle1">Before Breakfast - </label>
+                </li>
+				<li class="normal__state">
+					<input type="checkbox" id="vehicle2" name="vehicle2" value="Bike">
+					<label for="vehicle2">After Breakfast - </label>
+                </li>
+                <li class="normal__state">
+					<input type="checkbox" id="vehicle3" name="vehicle3" value="Bike">
+					<label for="vehicle3">Before Lunch - </label>
+                </li>
+				<li class="normal__state">
+					<input type="checkbox" id="vehicle4" name="vehicle4" value="Bike">
+					<label for="vehicle4">After Lunch - </label>
+                </li>
+                <li class="normal__state">
+					<input type="checkbox" id="vehicle5" name="vehicle5" value="Bike">
+					<label for="vehicle5">Before Dinner - </label>
+                </li>
+				<li class="normal__state">
+					<input type="checkbox" id="vehicle6" name="vehicle6" value="Bike">
+					<label for="vehicle6">After Dinner - </label>
+                </li>
+
+			</ul>
+		</div>
+	</div>
+</div>
         </div>
     </div>
   </div>
@@ -1326,9 +1379,12 @@ dropdown-menu.show{
     jQuery('#number_days').selectpicker();
 </script>
     <script>
+    var year = (new Date).getFullYear();
 
       $("#datetimepicker").datetimepicker({
       defaultDate: moment(),
+      minDate: new Date(year, 0, 1),
+      maxDate: new Date(year+1, 11, 31),
         icons: {
           time: "fa fa-clock-o",
           date: "fa fa-calendar",
@@ -1366,13 +1422,29 @@ function updateScheduleTime(data){
         newOptionValue = splitedValue[0]+ '- ' +medicine_name
         console.log(newOptionValue)
         select.options[String(i)].text = newOptionValue
+        select.options[String(i)].value = newOptionValue
+        id = "vehicle"+String(i+1)
+        var input = document.getElementById(id);
+        var label = input.labels[0];
+        label.textContent = newOptionValue
     }
 }
 
 
 function changeFileStatus(event){
-  console.log(event.files[0].name)
+<!--s-->
+  var file = event.files[0].name;
   console.log(event.files)
+  let Filenames = ''
+  for(var i=0;i<event.files.length;i++) {
+  if (i==0){
+    Filenames = Filenames.concat(event.files[i].name);
+    }
+  else{
+   Filenames = Filenames.concat(', '+event.files[i].name);
+  }
+  }
+  $('#fileLabel').text(Filenames);
 }
 
 function savePrescription(){
@@ -1476,10 +1548,8 @@ $('.loader').css('display','block')
         fileFormData.append('relation',relation);
     }
 
-<!--    var form = $('file-form')[0];-->
-<!--    date = document.getElementById('datetimepicker').value-->
-    date = $("#datetimepicker").datetimepicker( 'getDate' );
-    console.log(date)
+    datetime = $("#datetimepicker").find("input").val()
+    fileFormData.append("datetime", datetime);
 <!--    fileFormData.append('files', $('input[type=file]')[0].files);-->
 <!--    console.log(fileFormData)-->
    for (var file of input){
@@ -1502,11 +1572,11 @@ $('.loader').css('display','block')
 <!--          dataType: 'json',-->
           success: function(data){
           $('.loader').css('display','none')
-              window.location.reload()
+<!--              window.location.reload()-->
           },
           error: function(){
           $('.loader').css('display','none')
-              window.location.reload()
+<!--              window.location.reload()-->
           },
       });
 }

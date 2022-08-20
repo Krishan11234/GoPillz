@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from .helper import MEDICINE_TYPE, NUMBER_DAYS, SCHEDULE_TIME, LEVEL_ENGAGEMENT
+from multiselectfield import MultiSelectField
 
 
 class Subscriber(models.Model):
@@ -11,7 +12,7 @@ class Subscriber(models.Model):
 class Medicine(models.Model):
     medicine_name = models.CharField(max_length=100)
     medicine_type = models.CharField(max_length=100, null=True, db_index=True, choices=MEDICINE_TYPE)
-    # number_days = models.CharField(max_length=100, null=True, db_index=True, choices=NUMBER_DAYS)
+    number_days = MultiSelectField(choices=NUMBER_DAYS, null=True)
     schedule_time = models.CharField(max_length=100, null=True, db_index=True)
     datetime = models.DateTimeField(null=True)
     level_of_engagement = models.CharField(max_length=100, null=True, db_index=True, choices=LEVEL_ENGAGEMENT)
@@ -24,7 +25,7 @@ class Days(models.Model):
 
 class Doctor(models.Model):
     doctor_name = models.CharField(max_length=100)
-    doctor_phone_no = PhoneNumberField(null=False, blank=False, unique=True)
+    doctor_phone_no = PhoneNumberField(null=True, blank=False, unique=True)
     city = models.CharField(max_length=100)
     hospital_name = models.CharField(max_length=100)
     Ailment = models.CharField(max_length=100)

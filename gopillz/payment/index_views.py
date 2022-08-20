@@ -21,6 +21,8 @@ class RenewSubscription(generics.GenericAPIView):
 
     def get(self, request):
         content = {}
+
+
         content['STRIPE_PUBLIC_KEY'] = settings.STRIPE_PUBLISHABLE_KEY_TEST
         if not request.user.is_authenticated:
             error_message = 'Please sign up to purchase plan'
@@ -39,6 +41,7 @@ class RenewSubscription(generics.GenericAPIView):
             content['plan_type'] = self.plan_format[subscription_data.plan.plan_type]
             content['price'] = subscription_data.plan.price
             content['duration'] = subscription_data.plan.duration
+            content['id'] = subscription_data.plan.id
 
         except Exception as e:
             pass
@@ -49,6 +52,7 @@ class RenewSubscription(generics.GenericAPIView):
             try:
                 for plan in plan_serializer.data:
                     temp_plan_row = {}
+                    temp_plan_row['id'] = plan['id']
                     temp_plan_row['plan_type'] = plan['plan_type']
                     temp_plan_row['plan_name'] = self.plan_format[plan['plan_type']]
                     temp_plan_row['duration'] = plan['duration']

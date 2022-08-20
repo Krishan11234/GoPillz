@@ -86,7 +86,9 @@
                       <p>
                           GoPillz sends you reminders to help you take your medicines on time.
                       </p>
+                      {% if not user.is_authenticated %}
                       <button class="btn primary__btn" type="button"  onclick="signupview()">Get Started</button>
+                      {% endif %}
                   </div>
                   <div class="col-md-6 text-end mt-2">
                       <img src="/static/assets/images/banner_image.png">
@@ -105,7 +107,7 @@
                 <div>
                     <div class="section__two__right__container">
                           <div class="parent__digital__angle mt-2">
-                            <img src="/static/assets/images/leaves_left.png" class="digital__angle__leaves__img">
+                            <img src="/static/assets/images/leaves.png" class="digital__angle__leaves__img">
                             <div class="digital__angels__section benefits__box">
                               <div class="d-flex justify-content-between">
                                 <img class="circle__img" src="/static/assets/images/bell.png">

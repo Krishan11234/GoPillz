@@ -58,6 +58,9 @@ class SignUp(generics.GenericAPIView):
                 response.delete_cookie("verification")
                 response.delete_cookie("phone_no")
                 return response
+        else:
+            if request.user.is_authenticated:
+                return redirect('/home')
         return render(request, self.template_name, content)
 
     # @method_decorator(csrf_exempt)

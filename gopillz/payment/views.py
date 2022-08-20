@@ -10,6 +10,13 @@ from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
 from django.shortcuts import redirect
 import datetime
+import json
+
+plan_format = {
+    'couple': 'Couple',
+    'single': 'Single',
+    'family_friends': 'Family&Friends',
+}
 
 
 class PaymentView(generics.GenericAPIView):
@@ -17,11 +24,6 @@ class PaymentView(generics.GenericAPIView):
     serializer_class = None
     permission_classes = (AllowAny,)
     template_name = 'payment.html'
-    plan_format = {
-        'couple': 'Couple',
-        'single': 'Single',
-        'family_friends': 'Family&Friends',
-    }
 
     def get(self, request):
         if not request.user.is_authenticated:
@@ -46,8 +48,9 @@ class PaymentView(generics.GenericAPIView):
         try:
             for plan in plan_serializer.data:
                 temp_plan_row = {}
+                temp_plan_row['id'] = plan['id']
                 temp_plan_row['plan_type'] = plan['plan_type']
-                temp_plan_row['plan_name'] = self.plan_format[plan['plan_type']]
+                temp_plan_row['plan_name'] = plan_format[plan['plan_type']]
                 temp_plan_row['duration'] = plan['duration']
                 temp_plan_row['price'] = plan['price']
                 content['plans'].append(temp_plan_row)
@@ -70,8 +73,14 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
     def post(self, request, *args, **kwargs):
         try:
             payment_method = request.data.get('payment_method')
-            plan_type = request.data.get('plan_type')
-            amount = request.data.get('amount')
+            plan_type = ''
+            amount = ''
+            plan_id = request.data.get('id')
+            plan = Plan.objects.filter(id=plan_id)
+            if plan:
+                plan_data = plan.get()
+                plan_type = plan_format[plan_data.plan_type]
+                amount = plan_data.price
 
             if plan_type == '' and amount == '':
                 error_message = 'Select Plan Type'
@@ -96,7 +105,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             renew_subscription = request.data.get('renew-subscription')
             success_url_ = DOMAIN_URL + 'success',
             cancel_url_ = DOMAIN_URL + 'payment?message=Failed',
-            amount = amount+'00'
+            amount = int(amount)*100
             if renew_subscription == True:
                 success_url_ = DOMAIN_URL + 'renew-success'
                 cancel_url_ = DOMAIN_URL + 'renew-subscription'
@@ -119,12 +128,14 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                         'payment_method': payment_method,
                         'user_id': request.user.id,
                         'plan_type': plan_type,
+                        'plan_id':plan_id
                     },
                     payment_intent_data={
                         "metadata": {
                             'payment_method': payment_method,
                             'user_id': request.user.id,
                             'plan_type': plan_type,
+                            'plan_id': plan_id
                         },
                     },
                     mode='payment',
@@ -139,6 +150,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                 payment_method_types=['card'],
                 line_items=[
                     {
+
                         'price_data': {
                             'currency': 'inr',
                             'unit_amount': amount,
@@ -154,12 +166,14 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                     'payment_method': payment_method,
                     'user_id': request.user.id,
                     'plan_type': plan_type,
+                    'plan_id': plan_id
                 },
                 payment_intent_data={
                     "metadata": {
                         'payment_method': payment_method,
                         'user_id': request.user.id,
                         'plan_type': plan_type,
+                        'plan_id': plan_id
                     },
                 },
                 mode='payment',
@@ -201,12 +215,18 @@ class RenewSuccess(generics.GenericAPIView):
 class WebHooks(generics.GenericAPIView):
     permission_classes = (AllowAny,)
 
+    def load_session_data(self, data):
+        json_data = json.loads(data.decode('utf8'))
+        print(json_data['data']['object']['status'])
+        return json_data
+
     def post(self, request, *args, **kwargs):
         payload = request.body
         sig_header = request.META['HTTP_STRIPE_SIGNATURE']
         event = None
         try:
             event = stripe.Webhook.construct_event(payload, sig_header, settings.DJSTRIPE_WEBHOOK_SECRET)
+            print(event['type'])
         except Exception as e:
             return HttpResponse(status=400)
 
@@ -217,7 +237,10 @@ class WebHooks(generics.GenericAPIView):
             session = event['data']['object']
             metadata = session.get('metadata')
 
-            plan = Plan.objects.get(price=session.get('amount_total', ''))
+            plan = Plan.objects.filter(id=metadata.get('plan_id', ''))
+            if not plan:
+                return HttpResponse(status=400)
+            plan = plan.get()
             payment_method = PaymentMethod.objects.get(method_name='Stripe')
             expires_at = session['expires_at']
             date = datetime.datetime.fromtimestamp(expires_at)

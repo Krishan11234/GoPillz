@@ -50,6 +50,7 @@
               <a href="/home"><img src="/static/assets/images/arrow-left.svg" ></a>
             </div>
             {% csrf_token %}
+            <input type="hidden" id="planId" value="{{content.id}}">
             <div class="loader" style="display:None"></div>
           <div class="chooseplan" >
             <span style="color:#1E2751;font-weight:bold">Current Plan</span><a href="renew-subscription?upgrade=True" style="font-weight:500;float:right;color:#2242D5">Upgrade Plan</a>
@@ -124,9 +125,11 @@
         // Create an instance of the Stripe object with your publishable API key
         var stripe = Stripe("{{ content.STRIPE_PUBLIC_KEY }}");
         var checkoutButton = document.getElementById("checkout-button");
+
         checkoutButton.addEventListener("click", function () {
         planType = $('#plan_type span.main_text').text();
         totalAmount = $('#total_amount span.main_text').text();
+        plan_id =  document.getElementById("planId").value
         SelectedPaymentOption = null
         if($("#rayzor").prop('checked') == true){
           SelectedPaymentOption = "rayzor"
@@ -141,7 +144,7 @@
           SelectedPaymentOption = "stripe"
         }
         const dataToSend = JSON.stringify({"payment_method": SelectedPaymentOption,
-        "plan_type":planType,"amount":totalAmount,"renew-subscription":true
+        "id":plan_id, "renew-subscription":true
         });
         console.log(SelectedPaymentOption)
           $('.loader').css('display','block')

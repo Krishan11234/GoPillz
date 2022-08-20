@@ -19,6 +19,7 @@
           </div>
         </div>
         <div class="row" style="border-radius: 8px;background-color: white;margin: 2% 5%;">
+             <input type="hidden" id="planId">
           <div class="planinfo"><div style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Summary<span class="main_text" style="float:right;font-size:13px;color:#2242D5;font-weight:400"> </span></div></div>
           <div class="planinfo" id="plan_type"><div style="margin:0 10px;padding-bottom:10px;border-bottom:1px solid #dedede;font-weight:bold">Plan Type: <span style="float:right;font-size:13px;color:#2242D5;font-weight:400" class="main_text"></span></div>
           </div>
@@ -48,7 +49,7 @@
         <div class="loader" style="display:None"></div>
         {% for plan in content.plans %}
         {% if content.active_plan ==  plan.duration%}
-        <button id='{{content.active_plan}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_name}}','{{plan.price}}')" style="text-align:left;border: 2px solid #2242D5 ; width:100%; margin-bottom:2%;background-color:#FBFBFB;">
+        <button id='{{content.active_plan}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_name}}','{{plan.price}}','{{plan.id}}')" style="text-align:left;border: 2px solid #2242D5 ; width:100%; margin-bottom:2%;background-color:#FBFBFB;">
           <div style="margin-left: 2%; margin-top: 2%;font-weight:bold">{{ plan.plan_name }}</div>
           <div style="margin-left: 2%; margin-bottom: 2%;font-weight:500">
             <span style="color: #2242d5">&#x20b9;{{ plan.price }}/</span
@@ -56,7 +57,7 @@
           </div>
         </button>
         {% else %}
-        <button id='{{plan.duration}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_name}}','{{plan.price}}')" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 2%; text-align: left; display:none;background-color:#FBFBFB;">
+        <button id='{{plan.duration}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_name}}','{{plan.price}}','{{plan.id}}')" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 2%; text-align: left; display:none;background-color:#FBFBFB;">
           <div style="margin-left: 2%; margin-top: 2%">{{ plan.plan_name }}</div>
           <div style="margin-left: 2%; margin-bottom: 2%">
             <span style="color: #2242d5">&#x20b9;{{ plan.price }}/</span
@@ -188,7 +189,8 @@
           window.location.assign("/renew-subscription?upgrade=True&val=yearly")
         }
      }
-      function selectArea(data,plan,type,price){
+      function selectArea(data,plan,type,price,plan_id){
+      console.log(plan_id)
 <!--        loaderClass = document.getElementsByClassName("loader")-->
         $('.loader').css('display','block')
         currentPlan = data.id
@@ -205,15 +207,20 @@
         $('#plan_type span.main_text').text(type);
         $('#total_amount span.main_text').text(price);
         $('.loader').css('display','none')
+        $('#planId').val(plan_id);
       }
 
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         // Create an instance of the Stripe object with your publishable API key
         var stripe = Stripe("{{ content.STRIPE_PUBLIC_KEY }}");
         var checkoutButton = document.getElementById("checkout-button");
+
         checkoutButton.addEventListener("click", function () {
         planType = $('#plan_type span.main_text').text();
         totalAmount = $('#total_amount span.main_text').text();
+        plan_id =  document.getElementById("planId").value
+        console.log('-------------------------')
+        console.log(plan_id)
         SelectedPaymentOption = null
         if($("#rayzor").prop('checked') == true){
           SelectedPaymentOption = "rayzor"
@@ -228,7 +235,7 @@
           SelectedPaymentOption = "stripe"
         }
         const dataToSend = JSON.stringify({"payment_method": SelectedPaymentOption,
-        "plan_type":planType,"amount":totalAmount,"renew-subscription":true
+        "id":plan_id, "renew-subscription":true
         });
         console.log(SelectedPaymentOption)
           $('.loader').css('display','block')

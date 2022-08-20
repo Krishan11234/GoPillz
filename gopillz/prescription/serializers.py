@@ -1,5 +1,6 @@
-from rest_framework import serializers
+from rest_framework import serializers, fields
 from .models import *
+from .helper import NUMBER_DAYS
 
 
 class SubscriberSerializer(serializers.ModelSerializer):
@@ -9,12 +10,15 @@ class SubscriberSerializer(serializers.ModelSerializer):
 
 
 class MedicineSerializer(serializers.ModelSerializer):
+    number_days = fields.MultipleChoiceField(choices=NUMBER_DAYS)
+
     class Meta:
         model = Medicine
-        fields = ('medicine_name', 'medicine_type', 'schedule_time', 'level_of_engagement', 'datetime')
+        fields = ('medicine_name', 'medicine_type', 'schedule_time', 'level_of_engagement', 'datetime', 'number_days')
 
 
 class DoctorSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Doctor
         fields = ('doctor_name', 'doctor_phone_no', 'city', 'hospital_name', 'Ailment')
@@ -34,7 +38,7 @@ class PrescriptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Prescription
-        fields = ('medicine', 'doctor', 'caregiver', 'subscriber')
+        fields = ('medicine', 'doctor', 'caregiver', 'subscriber', )
 
     def create(self, validated_data):
         medicine_data = None

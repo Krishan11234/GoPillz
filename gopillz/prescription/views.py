@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import PrescriptionSerializer
 from django.contrib import messages
 from rest_framework.response import Response
-
+from datetime import datetime
 
 class Prescription(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
@@ -64,7 +64,7 @@ class Prescription(generics.GenericAPIView):
             request_data['medicine'][0]['medicine_type'] = data['medicine_type']
         if 'number_days' in data:
             request_data['medicine'][0]['medicine_name'] = ''
-            request_data['medicine'][0]['number_days'] = data['number_days']
+            request_data['medicine'][0]['number_days'] = data['number_days'].split(',')
         if 'schedule_time' in data:
             request_data['medicine'][0]['medicine_name'] = ''
             request_data['medicine'][0]['schedule_time'] = data['schedule_time']
@@ -73,6 +73,8 @@ class Prescription(generics.GenericAPIView):
             request_data['medicine'][0]['level_of_engagement'] = data['engagement']
         if 'medicine_name' in data:
             request_data['medicine'][0]['medicine_name'] = data['medicine_name']
+        if 'datetime' in data:
+            request_data['medicine'][0]['datetime'] = self.format_datetime(data['datetime'])
 
         if 'doctor_name' in data:
             request_data['doctor'][0]['doctor_name'] = data['doctor_name']
@@ -102,6 +104,35 @@ class Prescription(generics.GenericAPIView):
             request_data.pop('caregiver')
 
         return request_data
+
+    def format_datetime(self, string_date):
+        splitted_date = string_date.split(' ')
+        date = splitted_date[0]
+        am_pm_time = ' '.join(splitted_date[1:])
+        hourly_time = self.timeConversion(am_pm_time).strip()
+        date_time_str = date+' '+hourly_time
+        date_time_obj = datetime.strptime(date_time_str, '%m/%d/%Y %H:%M')
+        final_date_time_str = date_time_obj.strftime('%Y-%m-%d %H:%M')
+        return final_date_time_str
+
+    def timeConversion(self, s):
+        if "PM" in s:
+            s = s.replace("PM", " ")
+            t = s.split(":")
+            if t[0] != '12':
+                t[0] = str(int(t[0]) + 12)
+                s = (":").join(t)
+            return s
+        else:
+            s = s.replace("AM", " ")
+            t = s.split(":")
+            # if len(t[0])==1:
+            #     t[0] = '0'+ t[0]
+            # s=':'.join(t)
+            if t[0] == '12':
+                t[0] = '00'
+                s = (":").join(t)
+            return s
 
 
 class PrescriptionView(generics.GenericAPIView):

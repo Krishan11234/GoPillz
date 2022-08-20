@@ -5,7 +5,7 @@ from .models import Plan, Payment, PaymentMethod
 class PlanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Plan
-        fields = ('plan_type', 'price', 'duration')
+        fields = ('id', 'plan_type', 'price', 'duration')
 
 
 class PaymentMethodSerializer(serializers.ModelSerializer):

@@ -85,7 +85,9 @@
                       <p>
                           GoPillz sends you reminders to help you take your medicines on time.
                       </p>
+                      {% if not user.is_authenticated %}
                       <button class="btn primary__btn" type="button"  onclick="signupview()">Get Started</button>
+                      {% endif %}
                   </div>
                   <div class="col-md-6 text-end mt-2">
                       <img src="/static/assets/images/banner_image.png">
@@ -145,6 +147,7 @@
                 </div>
               </div>
             </div>
+
      <div class="section__three">
                   <div class="subscribe__health__benefits" id="pricingplans">
                            <h5>Subscribe For Health Benefits</h5>

@@ -1,5 +1,5 @@
 MEDICINE_TYPE = (
-    ("no_coupon", "adhesive(s)"),
+    ("adhesive", "adhesive(s)"),
     ("capsule", "capsule(s)"),
     ("cachet", "cachet(s)"),
     ("cream", "cream(s)"),
