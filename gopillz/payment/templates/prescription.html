@@ -674,17 +674,21 @@ dropdown-menu.show{
       display: none;
     }
     </style>
+
   <div class="container">
         <div class="main__container m-0">
         <div class="back__icon">
             <a href="/home"><img src="/static/assets/images/arrow-left.svg"></a>
         </div>
         <div>
+
             <h1 class="main__heading">Tell Us About Yourself</h1>
 <!--            <p class="page__info">For existing users only, please <a href="#">Login</a> and update your prescription-->
 <!--                details</p>-->
         </div>
-        {% include 'messages.html' %}
+              <div id="django-message">
+            </div>
+  </div>
         <div class="row">
             <div class="loader" style="display:None"></div>
             <div class="col-12 col-lg-7 left__container">
@@ -1510,38 +1514,31 @@ $('.loader').css('display','block')
     doctor_phone_no = document.getElementById('doctor_phone_no').value
     if (doctor_phone_no){
         fileFormData.append('doctor_phone_no',doctor_phone_no);
-<!--        formData['doctor_phone_no'] = doctor_phone_no-->
     }
     hospital_name = document.getElementById('hospital_name').value
     if (hospital_name){
         fileFormData.append('hospital_name',hospital_name);
-<!--        formData['hospital_name'] = hospital_name-->
     }
     ailment = document.getElementById('ailment').value
     if (ailment){
         fileFormData.append('ailment',ailment);
-<!--        formData['ailment'] = ailment-->
     }
     city = document.getElementById('city').value
     if (city){
         fileFormData.append('city',city);
-<!--        formData['city'] = city-->
     }
 
     caregiver_name = document.getElementById('caregiver_name').value
     if (caregiver_name){
         fileFormData.append('caregiver_name',caregiver_name);
-<!--        formData['caregiver_name'] = caregiver_name-->
     }
     phone_no = document.getElementById('phone_no').value
     if (phone_no){
         fileFormData.append('phone_no',phone_no);
-<!--        formData['phone_no'] = phone_no-->
     }
     email = document.getElementById('email').value
     if (email){
         fileFormData.append('email',email);
-<!--        formData['email'] = email-->
     }
     relation = document.getElementById('relation').value
     if (relation){
@@ -1550,14 +1547,9 @@ $('.loader').css('display','block')
 
     datetime = $("#datetimepicker").find("input").val()
     fileFormData.append("datetime", datetime);
-<!--    fileFormData.append('files', $('input[type=file]')[0].files);-->
-<!--    console.log(fileFormData)-->
-   for (var file of input){
-   console.log('--------------------')
-   console.log(file)
-   fileFormData.append("files[]", file);
-   }
-    console.log('=================================')
+       for (var file of input){
+       fileFormData.append("files[]", file);
+       }
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     $.ajax({
           type: 'POST',
@@ -1569,14 +1561,25 @@ $('.loader').css('display','block')
           contentType: false, //this is requireded please see answers above
             processData: false,
           data:fileFormData,
-<!--          dataType: 'json',-->
           success: function(data){
           $('.loader').css('display','none')
-<!--              window.location.reload()-->
+            $("#message-body").remove();
+            $('#django-message').append('<div class="container" id="message-body"><div class="alert alert-dismissible fade show" role="alert"><a></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>');
+            mainDiv = document.getElementById('message-body'),
+            childDiv = mainDiv.getElementsByTagName('div')[0]
+            childDiv.classList.add('alert-'+data.status);
+            childDiv.getElementsByTagName('a')[0].text = data.message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           },
-          error: function(){
+          error: function(data){
           $('.loader').css('display','none')
-<!--              window.location.reload()-->
+            $("#message-body").remove();
+            $('#django-message').append('<div class="container" id="message-body"><div class="alert alert-dismissible fade show" role="alert"><a></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>');
+            mainDiv = document.getElementById('message-body'),
+            childDiv = mainDiv.getElementsByTagName('div')[0]
+            childDiv.classList.add('alert-'+data.status);
+            childDiv.getElementsByTagName('a')[0].text = data.message
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           },
       });
 }
@@ -1589,11 +1592,4 @@ $('.loader').css('display','block')
 "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js">
         </script>
 
-<script>
-
-$('#demo').datetimepicker({
-    defaultDate: new Date(),
-    format:'DD/MM/YYYY'
-});
-</script>
 {% endblock content %}

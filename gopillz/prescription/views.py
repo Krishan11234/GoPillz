@@ -5,6 +5,8 @@ from .serializers import PrescriptionSerializer
 from django.contrib import messages
 from rest_framework.response import Response
 from datetime import datetime
+from django.http import JsonResponse
+
 
 class Prescription(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
@@ -26,23 +28,32 @@ class Prescription(generics.GenericAPIView):
                 medicine_data['files'] = request.FILES
                 prescription_serializer.create(validated_data=medicine_data)
                 error_message = 'Data Saved Successfully ADD Another'
-                messages.success(request, error_message)
-                response['status'] = True
-                return response
+                # messages.success(request, error_message)
+                # response['status'] = True
+                return JsonResponse({
+                    'message': error_message,
+                    'status': 'info'
+                })
 
             error_message = 'Validation Failed Check Data and Try again'
-            messages.error(request, error_message)
-            response['status'] = True
-            return response
+            # messages.error(request, error_message)
+            # response['status'] = True
+            return JsonResponse({
+                'message': error_message,
+                'status': 'warning'
+            })
 
         except Exception as e:
             error_message = 'Validation Failed Check Data and Try again'
             if 'medicine' in e.args[0]:
                 error_message = 'Medicine Name Cannot Blank'
 
-            messages.error(request, error_message)
-            response['status'] = True
-            return response
+            # messages.error(request, error_message)
+            # response['status'] = True
+            return JsonResponse({
+                'message': error_message,
+                'status': 'warning'
+            })
 
     def prepare_request_data(self, data):
         request_data = {'medicine': [{}], 'doctor': [{}], 'caregiver': [{}], 'subscriber': []}
