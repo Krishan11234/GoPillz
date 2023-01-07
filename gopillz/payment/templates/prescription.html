@@ -713,18 +713,6 @@ dropdown-menu.show{
                                 <label>Subscriber Name 1</label>
                                 <input type="text" id='subscriber1' class="form-control" placeholder="Enter Full Name">
                             </div>
-                            <div class="col-12 col-lg-6 mb-3">
-                                <label>Subscriber Name 2</label>
-                                <input type="text" id='subscriber2' class="form-control" placeholder="Enter Full Name">
-                            </div>
-                            <div class="col-12 col-lg-6 mb-3">
-                                <label>Subscriber Name 3</label>
-                                <input type="text" id='subscriber3' class="form-control" placeholder="Enter Full Name">
-                            </div>
-                            <div class="col-12 col-lg-6 mb-3">
-                                <label>Subscriber Name 4</label>
-                                <input type="text" id='subscriber4' class="form-control" placeholder="Enter Full Name">
-                            </div>
                         </div>
                         <div>
                             <div class="accordion accordion-flush" id="medicineDetailAccordian">
@@ -1320,51 +1308,51 @@ dropdown-menu.show{
 	<div style="
     position: relative;
 "> <img src="/static/assets/images/slider1img.png">
-		<div style="left: 140px;
-    height: 185px;
-    min-height:185px;
-    text-align: left;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    width: 250px;
-    padding: 15px 0;
-    background: #fff;
-    position: absolute;
-    bottom: 0;
-">
-			<h4 style="
-    font-size: 13px;
-    color: grey;
-    padding: 0 15px;
-">Select Time</h4>
+<!--		<div style="left: 140px;-->
+<!--    height: 185px;-->
+<!--    min-height:185px;-->
+<!--    text-align: left;-->
+<!--    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;-->
+<!--    width: 250px;-->
+<!--    padding: 15px 0;-->
+<!--    background: #fff;-->
+<!--    position: absolute;-->
+<!--    bottom: 0;-->
+<!--">-->
+<!--			<h4 style="-->
+<!--    font-size: 13px;-->
+<!--    color: grey;-->
+<!--    padding: 0 15px;-->
+<!--">Select Time</h4>-->
 
-			<ul style="padding-left: 0;margin-bottom: 0;height: 138px;overflow: auto;">
-					<li class="active__state normal__state">
-					<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-					<label for="vehicle1">Before Breakfast - </label>
-                </li>
-				<li class="normal__state">
-					<input type="checkbox" id="vehicle2" name="vehicle2" value="Bike">
-					<label for="vehicle2">After Breakfast - </label>
-                </li>
-                <li class="normal__state">
-					<input type="checkbox" id="vehicle3" name="vehicle3" value="Bike">
-					<label for="vehicle3">Before Lunch - </label>
-                </li>
-				<li class="normal__state">
-					<input type="checkbox" id="vehicle4" name="vehicle4" value="Bike">
-					<label for="vehicle4">After Lunch - </label>
-                </li>
-                <li class="normal__state">
-					<input type="checkbox" id="vehicle5" name="vehicle5" value="Bike">
-					<label for="vehicle5">Before Dinner - </label>
-                </li>
-				<li class="normal__state">
-					<input type="checkbox" id="vehicle6" name="vehicle6" value="Bike">
-					<label for="vehicle6">After Dinner - </label>
-                </li>
+<!--			<ul style="padding-left: 0;margin-bottom: 0;height: 138px;overflow: auto;">-->
+<!--					<li class="active__state normal__state">-->
+<!--					<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">-->
+<!--					<label for="vehicle1">Before Breakfast - </label>-->
+<!--                </li>-->
+<!--				<li class="normal__state">-->
+<!--					<input type="checkbox" id="vehicle2" name="vehicle2" value="Bike">-->
+<!--					<label for="vehicle2">After Breakfast - </label>-->
+<!--                </li>-->
+<!--                <li class="normal__state">-->
+<!--					<input type="checkbox" id="vehicle3" name="vehicle3" value="Bike">-->
+<!--					<label for="vehicle3">Before Lunch - </label>-->
+<!--                </li>-->
+<!--				<li class="normal__state">-->
+<!--					<input type="checkbox" id="vehicle4" name="vehicle4" value="Bike">-->
+<!--					<label for="vehicle4">After Lunch - </label>-->
+<!--                </li>-->
+<!--                <li class="normal__state">-->
+<!--					<input type="checkbox" id="vehicle5" name="vehicle5" value="Bike">-->
+<!--					<label for="vehicle5">Before Dinner - </label>-->
+<!--                </li>-->
+<!--				<li class="normal__state">-->
+<!--					<input type="checkbox" id="vehicle6" name="vehicle6" value="Bike">-->
+<!--					<label for="vehicle6">After Dinner - </label>-->
+<!--                </li>-->
 
-			</ul>
-		</div>
+<!--			</ul>-->
+<!--		</div>-->
 	</div>
 </div>
         </div>
@@ -1461,18 +1449,6 @@ $('.loader').css('display','block')
     if (subscriber1){
         fileFormData.append('subscriber1',subscriber1);
 <!--        formData['subscriber1'] = subscriber1-->
-    }
-    subscriber2 = document.getElementById('subscriber2').value
-    if (subscriber2){
-        fileFormData.append('subscriber2',subscriber2);
-    }
-    subscriber3 = document.getElementById('subscriber3').value
-    if (subscriber3){
-        fileFormData.append('subscriber3',subscriber3);
-    }
-    subscriber4 = document.getElementById('subscriber4').value
-    if (subscriber4){
-        fileFormData.append('subscriber4',subscriber4);
     }
 
     medicine_name = document.getElementById('medicine_name').value
