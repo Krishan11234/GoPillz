@@ -7,6 +7,12 @@ from multiselectfield import MultiSelectField
 
 class Subscriber(models.Model):
     subscriber_name = models.CharField(max_length=100)
+    phone_number = PhoneNumberField(null=True, blank=False, unique=True)
+    address = models.CharField(max_length=100, null=True, blank=False)
+    city = models.CharField(max_length=100, null=True, blank=False)
+    country = models.CharField(max_length=100, null=True, blank=False)
+    pin_code = models.IntegerField(null=True, blank=False)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
 
 class Medicine(models.Model):

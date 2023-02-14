@@ -1,6 +1,7 @@
 import pyotp
 from django.conf import settings
 from twilio.rest import Client
+from django.contrib.auth.models import User
 
 
 class Utils:
@@ -19,12 +20,24 @@ class Utils:
             print('-----------------------', message)
             message = client.messages \
                 .create(
-                body=message,
-                from_=settings.MESSAGE_FROM,
-                to='+91' + str(to)
+                    body=message,
+                    from_=settings.MESSAGE_FROM,
+                    to='+91' + str(to)
             )
             print(message.sid)
             return True
         except Exception as ex:
             return False
 
+
+def create_staff_user(username, email, password):
+    try:
+        staff_user = User.objects.create_superuser(
+                username=username,
+                email=email,
+                password=password, is_staff=True,
+                is_active=True, is_superuser=False)
+
+        return staff_user
+    except Exception as e:
+        return None

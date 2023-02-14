@@ -139,17 +139,19 @@
       function resentOtp(){
        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         phoneNo = '{{phone_no}}'
+        var fileFormData = new FormData();
+        fileFormData.append('phone_no',phoneNo);
         data = JSON.stringify({"phone_no": phoneNo});
 
         $.ajax({
             type: 'POST',
-            url:'/otp_verification',
+            url:'/signup',
             processData: false,
             headers:{
             'X-CSRFToken': csrftoken,
             'contentType': 'application/json',
             },
-            data:data,
+            data:fileFormData,
             dataType: 'json',
             success: function(data){
             alert("OTP Sent");

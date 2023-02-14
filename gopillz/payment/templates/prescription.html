@@ -5,9 +5,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"-->
-<!--        rel="stylesheet">-->
+
 <style>
+
 .normal__state{
                           margin-bottom: 0;
                         font-size: 15px;
@@ -693,293 +693,11 @@ dropdown-menu.show{
             <div class="loader" style="display:None"></div>
             <div class="col-12 col-lg-7 left__container">
                 <div class="form__section">
-                    <form id="file-form">
                         {% csrf_token %}
-                        <div class="col-12 col-lg-12 mb-3">
-                            <label>Upload Prescription <span id="file-uploading"></span></label>
-                            <div class="browse__button">
-                                <input type="file" id="myfile" onchange ="changeFileStatus(this)" name="myfile" multiple>
-                                <label id="fileLabel">
-                                <i class="fa fa-cloud-upload"></i> Upload Image
-                              </label>
-<!--                                <p>Drag your files here or click in this area.</p>-->
-                            </div>
 
-                            <span>File type: jpg, svg, png</span>
-                        </div>
-                    </form>
-                        <div class="row">
-                            <div class="col-12 col-lg-6 mb-3">
-                                <label>Subscriber Name 1</label>
-                                <input type="text" id='subscriber1' class="form-control" placeholder="Enter Full Name">
-                            </div>
-                        </div>
                         <div>
-                            <div class="accordion accordion-flush" id="medicineDetailAccordian">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="medicineDetailHeadingOne">
-                                        <button class="accordion-button collapsed px-0" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseOne"
-                                            aria-expanded="false" aria-controls="medicine-flush-collapseOne">
-                                            Medicine 1
-                                        </button>
-                                    </h2>
-                                    <div id="medicine-flush-collapseOne" class="accordion-collapse collapse"
-                                        aria-labelledby="medicineDetailHeadingOne"
-                                        data-bs-parent="#medicineDetailAccordian">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Name of Medicine</label>
-                                                    <input onchange="updateScheduleTime(this)" id='medicine_name' type="text" class="form-control"
-                                                        placeholder="Enter Medicine Name">
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Medicine Type</label>
-
-                                                    <select id='medicine_type' class="form-select">
-                                                        <option value="adhesive">adhesive(s)</option>
-                                                        <option value="capsule" selected>capsule(s)</option>
-                                                        <option value="cachet">cachet(s)</option>
-                                                        <option value="cream">cream(s)</option>
-                                                        <option value="dragee">dragee(s)</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Number of Days</label>
-                                                    <select id='number_days' class="selectpicker" multiple data-live-search="true">
-                                                        <option value="1" selected>Monday</option>
-                                                        <option value="2">Tuesday</option>
-                                                        <option value="3">Wednesday</option>
-                                                        <option value="4">Thursday</option>
-                                                        <option value="5">Friday</option>
-                                                        <option value="6">Saturday</option>
-                                                        <option value="7">Sunday</option>
-                                                    </select>
-<!--                                                    <select id='select-days' class="selectpicker" multiple data-live-search="true">-->
-<!--                                                    <option value="1">One</option>-->
-<!--                                                    <option value="2">Two</option>-->
-<!--                                                    <option value="3">Three</option>-->
-<!--                                                    <option value="4">Four</option>-->
-<!--                                                  </select>-->
-
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Schedule Time</label>
-                                                    <select id='schedule_time' class="form-select">
-                                                        <option value="Before Breakfast -">Before Breakfast - </option>
-                                                        <option value="After Breakfast -">After Breakfast - </option>
-                                                        <option value="Before Lunch -">Before Lunch - </option>
-                                                        <option value="After Lunch -">After Lunch - </option>
-                                                        <option value="Before Dinner -">Before Dinner - </option>
-                                                        <option value="After Dinner -">After Dinner - </option>
-                                                    </select>
-<!--                                                    <input type="text" id="demo"/>-->
-                                                         <div class="input-group date-time" id="datetimepicker">
-                                                        <input class="form-control input-group-addon" type="text" />
-                                                      </div>
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Choose the level of engagement you desire</label>
-                                                    <select id='engagement' class="form-select">
-                                                        <option value="1" selected>Daily - Morning and Evening</option>
-                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>
-                                                        <option value="3">As per prescription</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="medicineDetailHeadingTwo">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseTwo"-->
-<!--                                            aria-expanded="false" aria-controls="medicine-flush-collapseTwo">-->
-<!--                                            Medicine 2-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="medicine-flush-collapseTwo" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="medicineDetailHeadingTwo"-->
-<!--                                        data-bs-parent="#medicineDetailAccordian">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Name of Medicine</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Caregiver Name">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Medicine Type</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1">adhesive(s)</option>-->
-<!--                                                        <option value="2" selected>capsule(s)</option>-->
-<!--                                                        <option value="3">cachet(s)</option>-->
-<!--                                                        <option value="4">cream(s)</option>-->
-<!--                                                        <option value="5">dragee(s)</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Number of Days</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Monday</option>-->
-<!--                                                        <option value="2">Tuesday</option>-->
-<!--                                                        <option value="3">Wednesday</option>-->
-<!--                                                        <option value="4">Thursday</option>-->
-<!--                                                        <option value="5">Friday</option>-->
-<!--                                                        <option value="6">Saturday</option>-->
-<!--                                                        <option value="7">Sunday</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Schedule Time</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Before Breakfast - Simastatin</option>-->
-<!--                                                        <option value="2">After Breakfast - Loratadine</option>-->
-<!--                                                        <option value="3">Before Lunch - Montelukast</option>-->
-<!--                                                        <option value="4">After Lunch - Simvastatin</option>-->
-<!--                                                        <option value="5">Before Dinner - Loratadine</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Choose the level of engagement you desire</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Daily - Morning and Evening</option>-->
-<!--                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>-->
-<!--                                                        <option value="3">As per prescription</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="medicineDetailHeadingThree">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseThree"-->
-<!--                                            aria-expanded="false" aria-controls="medicine-flush-collapseThree">-->
-<!--                                            Medicine 3-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="medicine-flush-collapseThree" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="medicineDetailHeadingThree"-->
-<!--                                        data-bs-parent="#medicineDetailAccordian">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Name of Medicine</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Caregiver Name">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Medicine Type</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1">adhesive(s)</option>-->
-<!--                                                        <option value="2" selected>capsule(s)</option>-->
-<!--                                                        <option value="3">cachet(s)</option>-->
-<!--                                                        <option value="4">cream(s)</option>-->
-<!--                                                        <option value="5">dragee(s)</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Number of Days</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Monday</option>-->
-<!--                                                        <option value="2">Tuesday</option>-->
-<!--                                                        <option value="3">Wednesday</option>-->
-<!--                                                        <option value="4">Thursday</option>-->
-<!--                                                        <option value="5">Friday</option>-->
-<!--                                                        <option value="6">Saturday</option>-->
-<!--                                                        <option value="7">Sunday</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Schedule Time</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Before Breakfast - Simastatin</option>-->
-<!--                                                        <option value="2">After Breakfast - Loratadine</option>-->
-<!--                                                        <option value="3">Before Lunch - Montelukast</option>-->
-<!--                                                        <option value="4">After Lunch - Simvastatin</option>-->
-<!--                                                        <option value="5">Before Dinner - Loratadine</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Choose the level of engagement you desire</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Daily - Morning and Evening</option>-->
-<!--                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>-->
-<!--                                                        <option value="3">As per prescription</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="medicineDetailHeadingFour">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#medicine-flush-collapseFour"-->
-<!--                                            aria-expanded="false" aria-controls="medicine-flush-collapseFour">-->
-<!--                                            Medicine 4-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="medicine-flush-collapseFour" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="medicineDetailHeadingFour"-->
-<!--                                        data-bs-parent="#medicineDetailAccordian">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Name of Medicine</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Caregiver Name">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Medicine Type</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1">adhesive(s)</option>-->
-<!--                                                        <option value="2" selected>capsule(s)</option>-->
-<!--                                                        <option value="3">cachet(s)</option>-->
-<!--                                                        <option value="4">cream(s)</option>-->
-<!--                                                        <option value="5">dragee(s)</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Number of Days</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Monday</option>-->
-<!--                                                        <option value="2">Tuesday</option>-->
-<!--                                                        <option value="3">Wednesday</option>-->
-<!--                                                        <option value="4">Thursday</option>-->
-<!--                                                        <option value="5">Friday</option>-->
-<!--                                                        <option value="6">Saturday</option>-->
-<!--                                                        <option value="7">Sunday</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Schedule Time</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Before Breakfast - Simastatin</option>-->
-<!--                                                        <option value="2">After Breakfast - Loratadine</option>-->
-<!--                                                        <option value="3">Before Lunch - Montelukast</option>-->
-<!--                                                        <option value="4">After Lunch - Simvastatin</option>-->
-<!--                                                        <option value="5">Before Dinner - Loratadine</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Choose the level of engagement you desire</label>-->
-<!--                                                    <select class="form-select">-->
-<!--                                                        <option value="1" selected>Daily - Morning and Evening</option>-->
-<!--                                                        <option value="2">Daily - Morning,Lunch,Evening,Dinner</option>-->
-<!--                                                        <option value="3">As per prescription</option>-->
-<!--                                                    </select>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-                            </div>
                             <div class="add__btn">
-                                Add Medicine
+                                Add Subscriber
                             </div>
                             <div class="accordion accordion-flush" id="doctorDetailAccordian">
                                 <div class="accordion-item">
@@ -987,7 +705,7 @@ dropdown-menu.show{
                                         <button class="accordion-button collapsed px-0" type="button"
                                             data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseOne"
                                             aria-expanded="false" aria-controls="doctor-flush-collapseOne">
-                                            Doctor 1 Details
+                                            Subscriber Details
                                         </button>
                                     </h2>
                                     <div id="doctor-flush-collapseOne" class="accordion-collapse collapse"
@@ -996,18 +714,19 @@ dropdown-menu.show{
                                         <div class="accordion-body">
                                             <div class="row">
                                                 <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Doctor Name 1</label>
-                                                    <input id='doctor_name' type="text" class="form-control"
-                                                        placeholder="Enter Doctor Name ">
+                                                    <label>Subscriber Name</label>
+                                                    <input id='subscriber-name' type="text" class="form-control"
+                                                        placeholder="Enter Subscriber Name " required>
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Doctor’s Phone Number</label>
-                                                    <input id='doctor_phone_no' type="text" class="form-control"
-                                                        placeholder="Enter Doctor’s Phone Number">
+                                                    <label>Phone Number</label>
+                                                    <input type="tel" id='phone-no' class="form-control" value=""
+                                                        placeholder="Phone Number (+91-9*********)"
+                                                           onchange="validatePhoneNo(this.value)">
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Name of Hospital/Clinic</label>
-                                                    <input id='hospital_name' type="text" class="form-control"
+                                                    <label>Address</label>
+                                                    <input id='address' type="text" class="form-control"
                                                         placeholder="Name of Hospital/Clinic">
                                                 </div>
                                                 <div class="col-12 col-lg-6 mb-3">
@@ -1015,289 +734,273 @@ dropdown-menu.show{
                                                     <input id='city' type="text" class="form-control" placeholder="Enter City">
                                                 </div>
                                                 <div class="col-12 col-lg-12 mb-3">
-                                                    <label>Ailment for which being treated</label>
-                                                    <input id='ailment' type="text" class="form-control"
-                                                        placeholder="Enter Ailment for which being treated">
+                                                    <label>Country</label>
+                                                    <select id="country" name="country" class="form-control">
+                                                    <option>select country</option>
+                                                    <option value="AF">Afghanistan</option>
+                                                    <option value="AX">Aland Islands</option>
+                                                    <option value="AL">Albania</option>
+                                                    <option value="DZ">Algeria</option>
+                                                    <option value="AS">American Samoa</option>
+                                                    <option value="AD">Andorra</option>
+                                                    <option value="AO">Angola</option>
+                                                    <option value="AI">Anguilla</option>
+                                                    <option value="AQ">Antarctica</option>
+                                                    <option value="AG">Antigua and Barbuda</option>
+                                                    <option value="AR">Argentina</option>
+                                                    <option value="AM">Armenia</option>
+                                                    <option value="AW">Aruba</option>
+                                                    <option value="AU">Australia</option>
+                                                    <option value="AT">Austria</option>
+                                                    <option value="AZ">Azerbaijan</option>
+                                                    <option value="BS">Bahamas</option>
+                                                    <option value="BH">Bahrain</option>
+                                                    <option value="BD">Bangladesh</option>
+                                                    <option value="BB">Barbados</option>
+                                                    <option value="BY">Belarus</option>
+                                                    <option value="BE">Belgium</option>
+                                                    <option value="BZ">Belize</option>
+                                                    <option value="BJ">Benin</option>
+                                                    <option value="BM">Bermuda</option>
+                                                    <option value="BT">Bhutan</option>
+                                                    <option value="BO">Bolivia</option>
+                                                    <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                                                    <option value="BA">Bosnia and Herzegovina</option>
+                                                    <option value="BW">Botswana</option>
+                                                    <option value="BV">Bouvet Island</option>
+                                                    <option value="BR">Brazil</option>
+                                                    <option value="IO">British Indian Ocean Territory</option>
+                                                    <option value="BN">Brunei Darussalam</option>
+                                                    <option value="BG">Bulgaria</option>
+                                                    <option value="BF">Burkina Faso</option>
+                                                    <option value="BI">Burundi</option>
+                                                    <option value="KH">Cambodia</option>
+                                                    <option value="CM">Cameroon</option>
+                                                    <option value="CA">Canada</option>
+                                                    <option value="CV">Cape Verde</option>
+                                                    <option value="KY">Cayman Islands</option>
+                                                    <option value="CF">Central African Republic</option>
+                                                    <option value="TD">Chad</option>
+                                                    <option value="CL">Chile</option>
+                                                    <option value="CN">China</option>
+                                                    <option value="CX">Christmas Island</option>
+                                                    <option value="CC">Cocos (Keeling) Islands</option>
+                                                    <option value="CO">Colombia</option>
+                                                    <option value="KM">Comoros</option>
+                                                    <option value="CG">Congo</option>
+                                                    <option value="CD">Congo, Democratic Republic of the Congo</option>
+                                                    <option value="CK">Cook Islands</option>
+                                                    <option value="CR">Costa Rica</option>
+                                                    <option value="CI">Cote D'Ivoire</option>
+                                                    <option value="HR">Croatia</option>
+                                                    <option value="CU">Cuba</option>
+                                                    <option value="CW">Curacao</option>
+                                                    <option value="CY">Cyprus</option>
+                                                    <option value="CZ">Czech Republic</option>
+                                                    <option value="DK">Denmark</option>
+                                                    <option value="DJ">Djibouti</option>
+                                                    <option value="DM">Dominica</option>
+                                                    <option value="DO">Dominican Republic</option>
+                                                    <option value="EC">Ecuador</option>
+                                                    <option value="EG">Egypt</option>
+                                                    <option value="SV">El Salvador</option>
+                                                    <option value="GQ">Equatorial Guinea</option>
+                                                    <option value="ER">Eritrea</option>
+                                                    <option value="EE">Estonia</option>
+                                                    <option value="ET">Ethiopia</option>
+                                                    <option value="FK">Falkland Islands (Malvinas)</option>
+                                                    <option value="FO">Faroe Islands</option>
+                                                    <option value="FJ">Fiji</option>
+                                                    <option value="FI">Finland</option>
+                                                    <option value="FR">France</option>
+                                                    <option value="GF">French Guiana</option>
+                                                    <option value="PF">French Polynesia</option>
+                                                    <option value="TF">French Southern Territories</option>
+                                                    <option value="GA">Gabon</option>
+                                                    <option value="GM">Gambia</option>
+                                                    <option value="GE">Georgia</option>
+                                                    <option value="DE">Germany</option>
+                                                    <option value="GH">Ghana</option>
+                                                    <option value="GI">Gibraltar</option>
+                                                    <option value="GR">Greece</option>
+                                                    <option value="GL">Greenland</option>
+                                                    <option value="GD">Grenada</option>
+                                                    <option value="GP">Guadeloupe</option>
+                                                    <option value="GU">Guam</option>
+                                                    <option value="GT">Guatemala</option>
+                                                    <option value="GG">Guernsey</option>
+                                                    <option value="GN">Guinea</option>
+                                                    <option value="GW">Guinea-Bissau</option>
+                                                    <option value="GY">Guyana</option>
+                                                    <option value="HT">Haiti</option>
+                                                    <option value="HM">Heard Island and Mcdonald Islands</option>
+                                                    <option value="VA">Holy See (Vatican City State)</option>
+                                                    <option value="HN">Honduras</option>
+                                                    <option value="HK">Hong Kong</option>
+                                                    <option value="HU">Hungary</option>
+                                                    <option value="IS">Iceland</option>
+                                                    <option value="IN">India</option>
+                                                    <option value="ID">Indonesia</option>
+                                                    <option value="IR">Iran, Islamic Republic of</option>
+                                                    <option value="IQ">Iraq</option>
+                                                    <option value="IE">Ireland</option>
+                                                    <option value="IM">Isle of Man</option>
+                                                    <option value="IL">Israel</option>
+                                                    <option value="IT">Italy</option>
+                                                    <option value="JM">Jamaica</option>
+                                                    <option value="JP">Japan</option>
+                                                    <option value="JE">Jersey</option>
+                                                    <option value="JO">Jordan</option>
+                                                    <option value="KZ">Kazakhstan</option>
+                                                    <option value="KE">Kenya</option>
+                                                    <option value="KI">Kiribati</option>
+                                                    <option value="KP">Korea, Democratic People's Republic of</option>
+                                                    <option value="KR">Korea, Republic of</option>
+                                                    <option value="XK">Kosovo</option>
+                                                    <option value="KW">Kuwait</option>
+                                                    <option value="KG">Kyrgyzstan</option>
+                                                    <option value="LA">Lao People's Democratic Republic</option>
+                                                    <option value="LV">Latvia</option>
+                                                    <option value="LB">Lebanon</option>
+                                                    <option value="LS">Lesotho</option>
+                                                    <option value="LR">Liberia</option>
+                                                    <option value="LY">Libyan Arab Jamahiriya</option>
+                                                    <option value="LI">Liechtenstein</option>
+                                                    <option value="LT">Lithuania</option>
+                                                    <option value="LU">Luxembourg</option>
+                                                    <option value="MO">Macao</option>
+                                                    <option value="MK">Macedonia, the Former Yugoslav Republic of</option>
+                                                    <option value="MG">Madagascar</option>
+                                                    <option value="MW">Malawi</option>
+                                                    <option value="MY">Malaysia</option>
+                                                    <option value="MV">Maldives</option>
+                                                    <option value="ML">Mali</option>
+                                                    <option value="MT">Malta</option>
+                                                    <option value="MH">Marshall Islands</option>
+                                                    <option value="MQ">Martinique</option>
+                                                    <option value="MR">Mauritania</option>
+                                                    <option value="MU">Mauritius</option>
+                                                    <option value="YT">Mayotte</option>
+                                                    <option value="MX">Mexico</option>
+                                                    <option value="FM">Micronesia, Federated States of</option>
+                                                    <option value="MD">Moldova, Republic of</option>
+                                                    <option value="MC">Monaco</option>
+                                                    <option value="MN">Mongolia</option>
+                                                    <option value="ME">Montenegro</option>
+                                                    <option value="MS">Montserrat</option>
+                                                    <option value="MA">Morocco</option>
+                                                    <option value="MZ">Mozambique</option>
+                                                    <option value="MM">Myanmar</option>
+                                                    <option value="NA">Namibia</option>
+                                                    <option value="NR">Nauru</option>
+                                                    <option value="NP">Nepal</option>
+                                                    <option value="NL">Netherlands</option>
+                                                    <option value="AN">Netherlands Antilles</option>
+                                                    <option value="NC">New Caledonia</option>
+                                                    <option value="NZ">New Zealand</option>
+                                                    <option value="NI">Nicaragua</option>
+                                                    <option value="NE">Niger</option>
+                                                    <option value="NG">Nigeria</option>
+                                                    <option value="NU">Niue</option>
+                                                    <option value="NF">Norfolk Island</option>
+                                                    <option value="MP">Northern Mariana Islands</option>
+                                                    <option value="NO">Norway</option>
+                                                    <option value="OM">Oman</option>
+                                                    <option value="PK">Pakistan</option>
+                                                    <option value="PW">Palau</option>
+                                                    <option value="PS">Palestinian Territory, Occupied</option>
+                                                    <option value="PA">Panama</option>
+                                                    <option value="PG">Papua New Guinea</option>
+                                                    <option value="PY">Paraguay</option>
+                                                    <option value="PE">Peru</option>
+                                                    <option value="PH">Philippines</option>
+                                                    <option value="PN">Pitcairn</option>
+                                                    <option value="PL">Poland</option>
+                                                    <option value="PT">Portugal</option>
+                                                    <option value="PR">Puerto Rico</option>
+                                                    <option value="QA">Qatar</option>
+                                                    <option value="RE">Reunion</option>
+                                                    <option value="RO">Romania</option>
+                                                    <option value="RU">Russian Federation</option>
+                                                    <option value="RW">Rwanda</option>
+                                                    <option value="BL">Saint Barthelemy</option>
+                                                    <option value="SH">Saint Helena</option>
+                                                    <option value="KN">Saint Kitts and Nevis</option>
+                                                    <option value="LC">Saint Lucia</option>
+                                                    <option value="MF">Saint Martin</option>
+                                                    <option value="PM">Saint Pierre and Miquelon</option>
+                                                    <option value="VC">Saint Vincent and the Grenadines</option>
+                                                    <option value="WS">Samoa</option>
+                                                    <option value="SM">San Marino</option>
+                                                    <option value="ST">Sao Tome and Principe</option>
+                                                    <option value="SA">Saudi Arabia</option>
+                                                    <option value="SN">Senegal</option>
+                                                    <option value="RS">Serbia</option>
+                                                    <option value="CS">Serbia and Montenegro</option>
+                                                    <option value="SC">Seychelles</option>
+                                                    <option value="SL">Sierra Leone</option>
+                                                    <option value="SG">Singapore</option>
+                                                    <option value="SX">Sint Maarten</option>
+                                                    <option value="SK">Slovakia</option>
+                                                    <option value="SI">Slovenia</option>
+                                                    <option value="SB">Solomon Islands</option>
+                                                    <option value="SO">Somalia</option>
+                                                    <option value="ZA">South Africa</option>
+                                                    <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                                    <option value="SS">South Sudan</option>
+                                                    <option value="ES">Spain</option>
+                                                    <option value="LK">Sri Lanka</option>
+                                                    <option value="SD">Sudan</option>
+                                                    <option value="SR">Suriname</option>
+                                                    <option value="SJ">Svalbard and Jan Mayen</option>
+                                                    <option value="SZ">Swaziland</option>
+                                                    <option value="SE">Sweden</option>
+                                                    <option value="CH">Switzerland</option>
+                                                    <option value="SY">Syrian Arab Republic</option>
+                                                    <option value="TW">Taiwan, Province of China</option>
+                                                    <option value="TJ">Tajikistan</option>
+                                                    <option value="TZ">Tanzania, United Republic of</option>
+                                                    <option value="TH">Thailand</option>
+                                                    <option value="TL">Timor-Leste</option>
+                                                    <option value="TG">Togo</option>
+                                                    <option value="TK">Tokelau</option>
+                                                    <option value="TO">Tonga</option>
+                                                    <option value="TT">Trinidad and Tobago</option>
+                                                    <option value="TN">Tunisia</option>
+                                                    <option value="TR">Turkey</option>
+                                                    <option value="TM">Turkmenistan</option>
+                                                    <option value="TC">Turks and Caicos Islands</option>
+                                                    <option value="TV">Tuvalu</option>
+                                                    <option value="UG">Uganda</option>
+                                                    <option value="UA">Ukraine</option>
+                                                    <option value="AE">United Arab Emirates</option>
+                                                    <option value="GB">United Kingdom</option>
+                                                    <option value="US">United States</option>
+                                                    <option value="UM">United States Minor Outlying Islands</option>
+                                                    <option value="UY">Uruguay</option>
+                                                    <option value="UZ">Uzbekistan</option>
+                                                    <option value="VU">Vanuatu</option>
+                                                    <option value="VE">Venezuela</option>
+                                                    <option value="VN">Viet Nam</option>
+                                                    <option value="VG">Virgin Islands, British</option>
+                                                    <option value="VI">Virgin Islands, U.s.</option>
+                                                    <option value="WF">Wallis and Futuna</option>
+                                                    <option value="EH">Western Sahara</option>
+                                                    <option value="YE">Yemen</option>
+                                                    <option value="ZM">Zambia</option>
+                                                    <option value="ZW">Zimbabwe</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-12 col-lg-12 mb-3">
+                                                    <label>Pin Code</label>
+                                                    <input id='pin-code' type="tel" class="form-control" value=""
+                                                           onchange="validatePinCode(this.value)"
+                                                            placeholder="Enter Pin Code">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="doctorDetailHeadingTwo">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseTwo"-->
-<!--                                            aria-expanded="false" aria-controls="doctor-flush-collapseTwo">-->
-<!--                                            Doctor 2 Details-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="doctor-flush-collapseTwo" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="doctorDetailHeadingTwo"-->
-<!--                                        data-bs-parent="#doctorDetailAccordian">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Doctor Name 2</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Doctor Name 4">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Doctor’s Phone Number</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Doctor’s Phone Number">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Name of Hospital/Clinic</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Name of Hospital/Clinic">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>City</label>-->
-<!--                                                    <input type="text" class="form-control" placeholder="Enter City">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-12 mb-3">-->
-<!--                                                    <label>Ailment for which being treated</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Ailment for which being treated">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="doctorDetailHeadingThree">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseThree"-->
-<!--                                            aria-expanded="false" aria-controls="doctor-flush-collapseThree">-->
-<!--                                            Doctor 3 Details-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="doctor-flush-collapseThree" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="doctorDetailHeadingThree"-->
-<!--                                        data-bs-parent="#doctorDetailAccordian">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Doctor Name 3</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Doctor Name 4">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Doctor’s Phone Number</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Doctor’s Phone Number">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Name of Hospital/Clinic</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Name of Hospital/Clinic">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>City</label>-->
-<!--                                                    <input type="text" class="form-control" placeholder="Enter City">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-12 mb-3">-->
-<!--                                                    <label>Ailment for which being treated</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Ailment for which being treated">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="doctorDetailHeadingFour">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#doctor-flush-collapseFour"-->
-<!--                                            aria-expanded="false" aria-controls="doctor-flush-collapseFour">-->
-<!--                                            Doctor 4 Details-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="doctor-flush-collapseFour" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="doctorDetailHeadingFour"-->
-<!--                                        data-bs-parent="#doctorDetailAccordian">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Doctor Name 4</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Doctor Name 4">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Doctor’s Phone Number</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Doctor’s Phone Number">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Name of Hospital/Clinic</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Name of Hospital/Clinic">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>City</label>-->
-<!--                                                    <input type="text" class="form-control" placeholder="Enter City">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-12 mb-3">-->
-<!--                                                    <label>Ailment for which being treated</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Ailment for which being treated">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-                            </div>
-                            <div class="add__btn">
-                                Add Doctor
-                            </div>
-                            <div class="accordion accordion-flush" id="accordionFlushExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingOne">
-                                        <button class="accordion-button collapsed px-0" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                            aria-expanded="false" aria-controls="flush-collapseOne">
-                                            Caregiver 1 Details
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body">
-                                            <div class="row">
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Caregiver Name</label>
-                                                    <input id='caregiver_name' type="text" class="form-control"
-                                                        placeholder="Enter Caregiver Name">
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Phone Number</label>
-                                                    <input id='phone_no' type="text" class="form-control"
-                                                        placeholder="Enter Phone Number">
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Email</label>
-                                                    <input id='email' type="text" class="form-control"
-                                                        placeholder="Enter Email Id">
-                                                </div>
-                                                <div class="col-12 col-lg-6 mb-3">
-                                                    <label>Relation</label>
-                                                    <input id='relation' type="text" class="form-control"
-                                                        placeholder="Enter Relation">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="flush-headingTwo">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"-->
-<!--                                            aria-expanded="false" aria-controls="flush-collapseTwo">-->
-<!--                                            Caregiver 2 Details-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="flush-collapseTwo" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Caregiver Name</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Caregiver Name">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Phone Number</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Phone Number">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Email</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Email Id">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Relation</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Relation">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="flush-headingThree">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"-->
-<!--                                            aria-expanded="false" aria-controls="flush-collapseThree">-->
-<!--                                            Caregiver 3 Details-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="flush-collapseThree" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Caregiver Name</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Caregiver Name">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Phone Number</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Phone Number">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Email</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Email Id">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Relation</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Relation">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="accordion-item">-->
-<!--                                    <h2 class="accordion-header" id="flush-headingFour">-->
-<!--                                        <button class="accordion-button collapsed px-0" type="button"-->
-<!--                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseFour"-->
-<!--                                            aria-expanded="false" aria-controls="flush-collapseFour">-->
-<!--                                            Caregiver 4 Details-->
-<!--                                        </button>-->
-<!--                                    </h2>-->
-<!--                                    <div id="flush-collapseFour" class="accordion-collapse collapse"-->
-<!--                                        aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">-->
-<!--                                        <div class="accordion-body">-->
-<!--                                            <div class="row">-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Caregiver Name</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Caregiver Name">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Phone Number</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Phone Number">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Email</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Email Id">-->
-<!--                                                </div>-->
-<!--                                                <div class="col-12 col-lg-6 mb-3">-->
-<!--                                                    <label>Relation</label>-->
-<!--                                                    <input type="text" class="form-control"-->
-<!--                                                        placeholder="Enter Relation">-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-                            </div>
-                            <div class="add__btn">
-                                Add Caregiver
                             </div>
 
                         </div>
@@ -1308,51 +1011,7 @@ dropdown-menu.show{
 	<div style="
     position: relative;
 "> <img src="/static/assets/images/slider1img.png">
-<!--		<div style="left: 140px;-->
-<!--    height: 185px;-->
-<!--    min-height:185px;-->
-<!--    text-align: left;-->
-<!--    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;-->
-<!--    width: 250px;-->
-<!--    padding: 15px 0;-->
-<!--    background: #fff;-->
-<!--    position: absolute;-->
-<!--    bottom: 0;-->
-<!--">-->
-<!--			<h4 style="-->
-<!--    font-size: 13px;-->
-<!--    color: grey;-->
-<!--    padding: 0 15px;-->
-<!--">Select Time</h4>-->
 
-<!--			<ul style="padding-left: 0;margin-bottom: 0;height: 138px;overflow: auto;">-->
-<!--					<li class="active__state normal__state">-->
-<!--					<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">-->
-<!--					<label for="vehicle1">Before Breakfast - </label>-->
-<!--                </li>-->
-<!--				<li class="normal__state">-->
-<!--					<input type="checkbox" id="vehicle2" name="vehicle2" value="Bike">-->
-<!--					<label for="vehicle2">After Breakfast - </label>-->
-<!--                </li>-->
-<!--                <li class="normal__state">-->
-<!--					<input type="checkbox" id="vehicle3" name="vehicle3" value="Bike">-->
-<!--					<label for="vehicle3">Before Lunch - </label>-->
-<!--                </li>-->
-<!--				<li class="normal__state">-->
-<!--					<input type="checkbox" id="vehicle4" name="vehicle4" value="Bike">-->
-<!--					<label for="vehicle4">After Lunch - </label>-->
-<!--                </li>-->
-<!--                <li class="normal__state">-->
-<!--					<input type="checkbox" id="vehicle5" name="vehicle5" value="Bike">-->
-<!--					<label for="vehicle5">Before Dinner - </label>-->
-<!--                </li>-->
-<!--				<li class="normal__state">-->
-<!--					<input type="checkbox" id="vehicle6" name="vehicle6" value="Bike">-->
-<!--					<label for="vehicle6">After Dinner - </label>-->
-<!--                </li>-->
-
-<!--			</ul>-->
-<!--		</div>-->
 	</div>
 </div>
         </div>
@@ -1415,10 +1074,11 @@ function updateScheduleTime(data){
         console.log(newOptionValue)
         select.options[String(i)].text = newOptionValue
         select.options[String(i)].value = newOptionValue
-        id = "vehicle"+String(i+1)
-        var input = document.getElementById(id);
-        var label = input.labels[0];
-        label.textContent = newOptionValue
+<!--        id = "vehicle"+String(i+1)-->
+<!--        var input = document.getElementById(id);-->
+<!--        console.log(input)-->
+<!--        var label = input.labels[0];-->
+<!--        label.textContent = newOptionValue-->
     }
 }
 
@@ -1439,128 +1099,9 @@ function changeFileStatus(event){
   $('#fileLabel').text(Filenames);
 }
 
-function savePrescription(){
-$('.loader').css('display','block')
-    var fileFormData = new FormData();
-    subscriber1 = document.getElementById('subscriber1').value
-    var input = document.getElementById("myfile").files
-    console.log('-----------------------')
-    console.log(input)
-    if (subscriber1){
-        fileFormData.append('subscriber1',subscriber1);
-<!--        formData['subscriber1'] = subscriber1-->
-    }
-
-    medicine_name = document.getElementById('medicine_name').value
-    if (medicine_name){
-        fileFormData.append('medicine_name',medicine_name);
-    }
-    medicine_type = $("select#medicine_type option").filter(":selected").val();
-    if (medicine_type){
-        fileFormData.append('medicine_type',medicine_type);
-    }
-<!--    number_days = $("select#number_days option").filter(":selected").val();-->
-    number_days = $("#number_days").val();
-    console.log(number_days)
-    if (number_days){
-        var newArray = new Array();
-        for (let li of number_days) {
-        console.log(li)
-            newArray.push(li);
-        }
-        console.log(newArray)
-        fileFormData.append('number_days',newArray);
-    }
-
-    schedule_time = $("select#schedule_time option").filter(":selected").val();
-    if (schedule_time){
-        fileFormData.append('schedule_time',schedule_time);
-<!--        formData['schedule_time'] = schedule_time-->
-    }
-    engagement = $("select#engagement option").filter(":selected").val();
-    if (engagement){
-        fileFormData.append('engagement',engagement);
-<!--        formData['engagement'] = engagement-->
-    }
-    doctor_name = document.getElementById('doctor_name').value
-    if (doctor_name){
-        fileFormData.append('doctor_name',doctor_name);
-<!--        formData['doctor_name'] = doctor_name-->
-    }
-    doctor_phone_no = document.getElementById('doctor_phone_no').value
-    if (doctor_phone_no){
-        fileFormData.append('doctor_phone_no',doctor_phone_no);
-    }
-    hospital_name = document.getElementById('hospital_name').value
-    if (hospital_name){
-        fileFormData.append('hospital_name',hospital_name);
-    }
-    ailment = document.getElementById('ailment').value
-    if (ailment){
-        fileFormData.append('ailment',ailment);
-    }
-    city = document.getElementById('city').value
-    if (city){
-        fileFormData.append('city',city);
-    }
-
-    caregiver_name = document.getElementById('caregiver_name').value
-    if (caregiver_name){
-        fileFormData.append('caregiver_name',caregiver_name);
-    }
-    phone_no = document.getElementById('phone_no').value
-    if (phone_no){
-        fileFormData.append('phone_no',phone_no);
-    }
-    email = document.getElementById('email').value
-    if (email){
-        fileFormData.append('email',email);
-    }
-    relation = document.getElementById('relation').value
-    if (relation){
-        fileFormData.append('relation',relation);
-    }
-
-    datetime = $("#datetimepicker").find("input").val()
-    fileFormData.append("datetime", datetime);
-       for (var file of input){
-       fileFormData.append("files[]", file);
-       }
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    $.ajax({
-          type: 'POST',
-          url:'/prescription',
-          headers:{
-          'X-CSRFToken': csrftoken,
-          'contentType': 'application/json',
-          },
-          contentType: false, //this is requireded please see answers above
-            processData: false,
-          data:fileFormData,
-          success: function(data){
-          $('.loader').css('display','none')
-            $("#message-body").remove();
-            $('#django-message').append('<div class="container" id="message-body"><div class="alert alert-dismissible fade show" role="alert"><a></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>');
-            mainDiv = document.getElementById('message-body'),
-            childDiv = mainDiv.getElementsByTagName('div')[0]
-            childDiv.classList.add('alert-'+data.status);
-            childDiv.getElementsByTagName('a')[0].text = data.message
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          },
-          error: function(data){
-          $('.loader').css('display','none')
-            $("#message-body").remove();
-            $('#django-message').append('<div class="container" id="message-body"><div class="alert alert-dismissible fade show" role="alert"><a></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>');
-            mainDiv = document.getElementById('message-body'),
-            childDiv = mainDiv.getElementsByTagName('div')[0]
-            childDiv.classList.add('alert-'+data.status);
-            childDiv.getElementsByTagName('a')[0].text = data.message
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          },
-      });
-}
-
 </script>
+<script rel="text/javascript" src='/static/js/subscriber.js'></script>
+
 <script type="text/javascript" src=
 "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js">
     </script>

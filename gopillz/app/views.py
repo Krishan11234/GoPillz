@@ -69,7 +69,7 @@ class SignUp(generics.GenericAPIView):
             data = self.create_user_data(request.data)
             serializer = self.get_serializer(data=data)
             # if serializer.is_valid(raise_exception=True):
-            #     pass
+            #     pass0
             serializer.create(validated_data=data)
             context = {'phone_no': data['phone']}
             if self.send_otp_to_mobile(data):

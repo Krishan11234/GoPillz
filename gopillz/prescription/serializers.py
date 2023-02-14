@@ -30,45 +30,11 @@ class CaregiverSerializer(serializers.ModelSerializer):
         fields = ('caregiver_name', 'phone_no', 'email', 'relation',)
 
 
-class PrescriptionSerializer(serializers.ModelSerializer):
-    medicine = MedicineSerializer(many=True, required=False)
-    doctor = DoctorSerializer(many=True, required=False)
-    caregiver = CaregiverSerializer(many=True, required=False)
-    subscriber = SubscriberSerializer(many=True, required=False)
-
+class SubscribeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Prescription
-        fields = ('medicine', 'doctor', 'caregiver', 'subscriber', )
+        model = Subscriber
+        fields = ('subscriber_name', 'phone_number', 'address', 'city','country','pin_code')
 
-    def create(self, validated_data):
-        medicine_data = None
-        caregiver_data = None
-        doctor_data = None
-        if 'medicine' in validated_data['validated_data']:
-            medicine_data = validated_data['validated_data'].pop('medicine')
-            medicine_data = Medicine.objects.create(**medicine_data[0])
-
-        if 'caregiver' in validated_data['validated_data']:
-            caregiver_data = validated_data['validated_data'].pop('caregiver')
-            caregiver_data = Caregiver.objects.create(**caregiver_data['caregiver'][0])
-
-        if 'doctor' in validated_data['validated_data']:
-            doctor_data = validated_data['validated_data'].pop('doctor')
-            doctor_data = Doctor.objects.create(**doctor_data['doctor'][0])
-        user = validated_data.pop('user')
-
-        prescription = Prescription.objects.create(user=user, medicine=medicine_data, caregiver=caregiver_data,
-                                           doctor=doctor_data)
-
-        if 'subscriber' in validated_data['validated_data']:
-            for value in validated_data['validated_data']['subscriber']:
-                subscriber_obj = Subscriber.objects.create(subscriber_name=value['subscriber_name'])
-                prescription.subscriber.add(subscriber_obj)
-
-        if 'number_days' in validated_data['validated_data']:
-            for record in validated_data['validated_data']['number_days']:
-                Days.objects.create(medicine_id=prescription.medicine, name=record)
-
-        if 'files' in validated_data:
-            for record in validated_data['files'].getlist('files[]'):
-                PrescriptionFiles.objects.create(name=record)
+    def save_record(self, validated_data, user):
+        validated_data['added_by'] = user
+        Subscriber.objects.create(**validated_data)

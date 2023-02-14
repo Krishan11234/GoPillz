@@ -1,7 +1,7 @@
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
-from .serializers import PrescriptionSerializer
+from .serializers import SubscribeSerializer
 from django.contrib import messages
 from rest_framework.response import Response
 from datetime import datetime
@@ -11,110 +11,60 @@ from django.http import JsonResponse
 class Prescription(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = [TemplateHTMLRenderer]
-    serializer_class = PrescriptionSerializer
+    serializer_class = SubscribeSerializer
     template_name = "prescription.html"
 
     def post(self, request):
         request_data = self.prepare_request_data(request.data)
-        prescription_serializer = self.serializer_class(data=request_data)
-        response = Response()
+        subscriber_serializer = self.serializer_class(data=request_data)
         try:
-            if prescription_serializer.is_valid(raise_exception=True):
-                medicine_data = {}
-                medicine_data['validated_data'] = prescription_serializer.validated_data
-                if 'number_days[]' in request.data:
-                    medicine_data['validated_data']['number_days'] = request.data.getlist("number_days[]")
-                medicine_data['user'] = request.user
-                medicine_data['files'] = request.FILES
-                prescription_serializer.create(validated_data=medicine_data)
-                error_message = 'Data Saved Successfully ADD Another'
-                # messages.success(request, error_message)
-                # response['status'] = True
+            if subscriber_serializer.is_valid(raise_exception=True):
+                subscriber_serializer.save_record(validated_data=subscriber_serializer.validated_data, user=request.user)
+                message = "Subscriber Successfully added"
                 return JsonResponse({
-                    'message': error_message,
+                    'message': message,
                     'status': 'info'
                 })
 
-            error_message = 'Validation Failed Check Data and Try again'
-            # messages.error(request, error_message)
-            # response['status'] = True
-            return JsonResponse({
-                'message': error_message,
-                'status': 'warning'
-            })
-
         except Exception as e:
-            error_message = 'Validation Failed Check Data and Try again'
-            if 'medicine' in e.args[0]:
-                error_message = 'Medicine Name Cannot Blank'
+            error_message = ' Failed Check Data and Try again'
+            if 'phone_number' in e.args[0]:
+                error_message = str(e.args[0]['phone_number'][0])
 
-            # messages.error(request, error_message)
-            # response['status'] = True
             return JsonResponse({
                 'message': error_message,
-                'status': 'warning'
+                'status': 'danger'
             })
 
     def prepare_request_data(self, data):
-        request_data = {'medicine': [{}], 'doctor': [{}], 'caregiver': [{}], 'subscriber': []}
-        subscriber_data = data.get('subscriber1', '')
-        if len(subscriber_data) > 0:
-            request_data['subscriber'].append({'subscriber_name': subscriber_data})
-        subscriber_data = data.get('subscriber2', '')
-        if len(subscriber_data) > 0:
-            request_data['subscriber'].append({'subscriber_name': subscriber_data})
-        subscriber_data = data.get('subscriber3', '')
-        if len(subscriber_data) > 0:
-            request_data['subscriber'].append({'subscriber_name': subscriber_data})
-        subscriber_data = data.get('subscriber4', '')
-        if len(subscriber_data) > 0:
-            request_data['subscriber'].append({'subscriber_name': subscriber_data})
+        request_data = {}
+        try:
+            subscriber_name = data.get('subscriber_name', '')
+            if len(subscriber_name) > 0:
+                request_data['subscriber_name'] = subscriber_name
 
-        if 'medicine_type' in data:
-            request_data['medicine'][0]['medicine_name'] = ''
-            request_data['medicine'][0]['medicine_type'] = data['medicine_type']
-        if 'number_days' in data:
-            request_data['medicine'][0]['medicine_name'] = ''
-            request_data['medicine'][0]['number_days'] = data['number_days'].split(',')
-        if 'schedule_time' in data:
-            request_data['medicine'][0]['medicine_name'] = ''
-            request_data['medicine'][0]['schedule_time'] = data['schedule_time']
-        if 'engagement' in data:
-            request_data['medicine'][0]['medicine_name'] = ''
-            request_data['medicine'][0]['level_of_engagement'] = data['engagement']
-        if 'medicine_name' in data:
-            request_data['medicine'][0]['medicine_name'] = data['medicine_name']
-        if 'datetime' in data:
-            request_data['medicine'][0]['datetime'] = self.format_datetime(data['datetime'])
+            phone_number = data.get('phone_no', '')
+            if len(phone_number) > 0:
+                request_data['phone_number'] = '+91'+phone_number
 
-        if 'doctor_name' in data:
-            request_data['doctor'][0]['doctor_name'] = data['doctor_name']
-        if 'doctor_phone_no' in data:
-            request_data['doctor'][0]['doctor_phone_no'] = '+91'+data['doctor_phone_no']
-        if 'city' in data:
-            request_data['doctor'][0]['city'] = data['city']
-        if 'hospital_name' in data:
-            request_data['doctor'][0]['hospital_name'] = data['hospital_name']
-        if 'ailment' in data:
-            request_data['doctor'][0]['Ailment'] = data['ailment']
+            address = data.get('address', '')
+            if len(address) > 0:
+                request_data['address'] = address
 
-        if 'caregiver_name' in data:
-            request_data['caregiver'][0]['caregiver_name'] = data['caregiver_name']
-        if 'phone_no' in data:
-            request_data['caregiver'][0]['phone_no'] = '+91'+data['phone_no']
-        if 'email' in data:
-            request_data['caregiver'][0]['email'] = data['email']
-        if 'relation' in data:
-            request_data['caregiver'][0]['relation'] = data['relation']
+            city = data.get('city', '')
+            if len(city) > 0:
+                request_data['city'] = city
 
-        if len(request_data['medicine'][0].keys()) == 0:
-            request_data.pop('medicine')
-        if len(request_data['doctor'][0].keys()) == 0:
-            request_data.pop('doctor')
-        if len(request_data['caregiver'][0].keys()) == 0:
-            request_data.pop('caregiver')
+            country = data.get('country', '')
+            if len(country) > 0:
+                request_data['country'] = country
 
-        return request_data
+            pin_code = data.get('pin_code', '')
+            if len(pin_code) > 0:
+                request_data['pin_code'] = int(pin_code)
+            return request_data
+        except Exception as e:
+            return request_data
 
     def format_datetime(self, string_date):
         splitted_date = string_date.split(' ')
@@ -137,9 +87,6 @@ class Prescription(generics.GenericAPIView):
         else:
             s = s.replace("AM", " ")
             t = s.split(":")
-            # if len(t[0])==1:
-            #     t[0] = '0'+ t[0]
-            # s=':'.join(t)
             if t[0] == '12':
                 t[0] = '00'
                 s = (":").join(t)
