@@ -33,3 +33,10 @@ LEVEL_ENGAGEMENT = (
 )
 
 
+def get_email_verified_data(user):
+    from .models import EmailVerification
+    data = None
+    email_verify = EmailVerification.objects.filter(user=user)
+    if email_verify:
+        data = email_verify[0]
+    return data

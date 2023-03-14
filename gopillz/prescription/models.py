@@ -50,11 +50,17 @@ class PrescriptionFiles(models.Model):
 
 class Prescription(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    upload_prescription = models.ManyToManyField(PrescriptionFiles, blank=True, null=True)
+    upload_prescription = models.ManyToManyField(PrescriptionFiles, blank=True)
     medicine = models.ForeignKey(Medicine, blank=True, null=True, on_delete=models.CASCADE)
     doctor = models.ForeignKey(Doctor, blank=True, null=True, on_delete=models.CASCADE)
     caregiver = models.ForeignKey(Caregiver, blank=True, null=True, on_delete=models.CASCADE)
-    subscriber = models.ManyToManyField(Subscriber, blank=True, null=True)
+    subscriber = models.ManyToManyField(Subscriber, blank=True)
 
 
-
+class EmailVerification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    email = models.EmailField(max_length=254)
+    verified = models.BooleanField(default=False)
+    otp = models.CharField(max_length=100, null=True, blank=False)
+    rand_verification_string = models.CharField(max_length=250, null=True, blank=False)
+    message_mail_sent = models.BooleanField(default=False)

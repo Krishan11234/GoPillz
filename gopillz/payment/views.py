@@ -75,7 +75,14 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             payment_method = request.data.get('payment_method')
             plan_type = ''
             amount = ''
-            plan_id = request.data.get('id')
+            plan_id = request.data.get('id', '')
+            if plan_id == '':
+                error_message = 'Please Select Plan'
+                messages.error(request, error_message)
+                return JsonResponse({
+                    'error': error_message
+                })
+
             plan = Plan.objects.filter(id=plan_id)
             if plan:
                 plan_data = plan.get()
@@ -185,7 +192,11 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             })
         except Exception as e:
             print(e)
-            pass
+            error_message = 'Something Went Wrong !!!'
+            messages.error(request, error_message)
+            return JsonResponse({
+                'error': error_message
+            })
 
 
 class CheckoutSuccess(generics.GenericAPIView):

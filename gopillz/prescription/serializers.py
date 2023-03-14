@@ -1,6 +1,7 @@
 from rest_framework import serializers, fields
 from .models import *
 from .helper import NUMBER_DAYS
+from django.contrib.auth.hashers import make_password
 
 
 class SubscriberSerializer(serializers.ModelSerializer):
@@ -32,9 +33,25 @@ class CaregiverSerializer(serializers.ModelSerializer):
 
 class SubscribeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Subscriber
-        fields = ('subscriber_name', 'phone_number', 'address', 'city','country','pin_code')
+        model = User
+        fields = ('username', 'email', 'password')
 
     def save_record(self, validated_data, user):
-        validated_data['added_by'] = user
-        Subscriber.objects.create(**validated_data)
+        info = {'status': '', 'message': ''}
+        validated_data['is_staff'] = True
+        validated_data['is_active'] = True
+        validated_data['is_superuser'] = False
+        validated_data['password'] = make_password(validated_data['password'])
+
+        verified_email = EmailVerification.objects.filter(email=validated_data['email'])
+        if verified_email:
+            info['status'] = 'danger'
+            info['message'] = 'Email address already present'
+            return info
+
+        EmailVerification.objects.create(user=user, email=validated_data['email'])
+        user = User.objects.create(**validated_data)
+        info['status'] = 'info'
+        info['admin_details'] = validated_data
+        info['message'] = 'Admin User Added Successfully'
+        return info

@@ -184,7 +184,7 @@
           window.location.assign("/payment?val=monthly")
        }
        else{
-        window.location.assign("/payment?val=yearly")
+             window.location.assign("/payment?val=yearly")
        }
      }
       function selectArea(data,plan,type,price,plan_id){
@@ -250,8 +250,9 @@
              $('.loader').css('display','none')
               if ('error' in session){
               console.log(session.error)
-                window.location.reload()
-              $('#messages').load();
+                history.scrollRestoration = 'manual';
+                $(window).scrollTop(0);
+$('#messages').load();
               }
               else{
               return stripe.redirectToCheckout({ sessionId: session.id });

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'app',
+    'dashboard',
     'payment',
     'prescription',
     # 'phonenumber_field'
@@ -161,6 +162,11 @@ STRIPE_PUBLISHABLE_KEY_LIVE = os.getenv('STRIPE_PUBLISHABLE_KEY_LIVE')
 STRIPE_PUBLISHABLE_KEY_TEST = os.getenv('STRIPE_PUBLISHABLE_KEY_TEST')
 AUTH_USER_MODEL = 'auth.User'
 HOST_DOMAIN = os.getenv('HOST_DOMAIN')
+
+FROM_EMAIL = os.getenv('FROM_EMAIL')
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
+USER_DASHBOARD = os.getenv('USER_DASHBOARD')
+
 import mimetypes
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
