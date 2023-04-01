@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from .models import *
 # Register your models here.
-from .forms import PaymentLinkForm
+# from .forms import PaymentLinkForm
 
 
 class UserAdminArea(admin.AdminSite):
