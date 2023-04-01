@@ -53,7 +53,7 @@
             <input type="hidden" id="planId" value="{{content.id}}">
             <div class="loader" style="display:None"></div>
           <div class="chooseplan" >
-            <span style="color:#1E2751;font-weight:bold">Current Plan</span><a href="renew-subscription?upgrade=True" style="font-weight:500;float:right;color:#2242D5">Upgrade Plan</a>
+            <span style="color:#1E2751;font-weight:bold">Current Plan</span><a href="pay-now?upgrade=True" style="font-weight:500;float:right;color:#2242D5">Upgrade Plan</a>
           </div>
           <div class="chooseplan" style="border: 2px solid #2242D5 ; width:100%; margin-bottom:10%;cursor:pointer">
           <div style="margin-left: 2%; margin-top: 2%;font-weight:bold">
@@ -114,10 +114,10 @@
        console.log(planDuration)
        if (planDuration=='yearly'){
           console.log('here')
-          window.location.assign("/renew-subscription?upgrade=True&val=monthly")
+          window.location.assign("/pay-now?upgrade=True&val=monthly")
        }
        else{
-          window.location.assign("/renew-subscription?upgrade=True&val=yearly")
+          window.location.assign("/pay-now?upgrade=True&val=yearly")
         }
      }
 

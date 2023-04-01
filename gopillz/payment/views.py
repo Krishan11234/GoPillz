@@ -9,8 +9,10 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.contrib import messages
 from django.shortcuts import redirect
+from app.utils import Utils
 import datetime
 import json
+from .helper import PLAN_CHOICES
 
 plan_format = {
     'couple': 'Couple',
@@ -32,7 +34,7 @@ class PaymentView(generics.GenericAPIView):
             return redirect('/signup')
         try:
             subscription_data = Payment.objects.get(user_id=request.user.id)
-            return redirect('/renew-subscription')
+            return redirect('/pay-now')
         except Exception as e:
             pass
         failed_message = request.query_params.get('message', '')
@@ -115,7 +117,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
             amount = int(amount)*100
             if renew_subscription == True:
                 success_url_ = DOMAIN_URL + 'renew-success'
-                cancel_url_ = DOMAIN_URL + 'renew-subscription'
+                cancel_url_ = DOMAIN_URL + 'pay-now'
                 checkout_session = stripe.checkout.Session.create(
                     payment_method_types=['card'],
                     line_items=[
@@ -147,7 +149,7 @@ class CreateCheckoutSessionView(generics.GenericAPIView):
                     },
                     mode='payment',
                     success_url=DOMAIN_URL + 'renew-success',
-                    cancel_url=DOMAIN_URL + 'renew-subscription',
+                    cancel_url=DOMAIN_URL + 'pay-now',
                 )
                 return JsonResponse({
                     'id': checkout_session.id
@@ -243,7 +245,7 @@ class WebHooks(generics.GenericAPIView):
 
         if event['type'] == 'checkout.session.completed':
             now = datetime.datetime.now()
-            current_date = now.strftime("%Y-%m-%d")
+            current_date = now.strftime("%Y-%m-%d %H:%M:%S")
 
             session = event['data']['object']
             metadata = session.get('metadata')
@@ -252,13 +254,15 @@ class WebHooks(generics.GenericAPIView):
             if not plan:
                 return HttpResponse(status=400)
             plan = plan.get()
-            payment_method = PaymentMethod.objects.get(method_name='Stripe')
+            payment_method = PaymentMethod.objects.filter(method_name='Stripe')
+            if not payment_method:
+                return HttpResponse(status=400)
             expires_at = session['expires_at']
             date = datetime.datetime.fromtimestamp(expires_at)
-            str_expires_at = date.strftime("%Y-%m-%d")
+            str_expires_at = date.strftime("%Y-%m-%d %H:%M:%S")
 
             payment_data = {
-                'payment_method_id': payment_method.id,
+                'payment_method_id': payment_method[0].id,
                 'user_id': metadata.get('user_id', ''),
                 'plan_id': plan.id,
                 'expired': False,
@@ -266,10 +270,17 @@ class WebHooks(generics.GenericAPIView):
                 'created': current_date,
                 'payment_status': session.get('status', 'Incomplete'),
             }
-            print(payment_data)
+
             payment_serializer = PaymentSerializer(data=payment_data)
             if payment_serializer.is_valid():
                 payment_serializer.create(validated_data=payment_data)
-            print(payment_serializer)
+            print('plan successfully assigned to the user')
+            if 'customer_details' in session:
+                customer_details = session['customer_details']
+                if 'email' in customer_details:
+                    email_id = customer_details['email']
+                    util_obj = Utils(email_id)
+                    context = '<p>Congratulations you have successfully activated your gopillz {} {} plan</p>'.format(plan.plan_type, plan.duration)
+                    util_obj.send_email_using_sendgrid('Payment Success', context)
 
         return HttpResponse(status=200)

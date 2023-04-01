@@ -1,16 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
-DURATION_CHOICES = (
-    ("yearly", "yearly"),
-    ("monthly", "monthly"),
-)
-
-PLAN_CHOICES = (
-    ("couple", "Couple"),
-    ("single", "Single"),
-    ("family_friends", "Family & Friends"),
-)
+from .helper import PLAN_CHOICES, DURATION_CHOICES
 
 
 class Plan(models.Model):

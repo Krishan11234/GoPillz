@@ -14,10 +14,16 @@ class PrescriptionAdmin(admin.ModelAdmin):
     model = Medicine
 
 
+class EmailVerificationAdmin(admin.ModelAdmin):
+    fieldsets = ()
+    list_display = ('user', 'email', 'verified')
+    model = Medicine
+
+
 admin.site.register(Subscriber)
 admin.site.register(Medicine, MedicineAdmin)
 admin.site.register(Doctor)
 admin.site.register(Caregiver)
 admin.site.register(Prescription, PrescriptionAdmin)
 admin.site.register(PrescriptionFiles)
-admin.site.register(EmailVerification)
+admin.site.register(EmailVerification, EmailVerificationAdmin)

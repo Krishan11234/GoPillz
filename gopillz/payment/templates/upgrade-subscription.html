@@ -37,7 +37,7 @@
       </div>
       <div class="col-md-6 mt-2">
         <div class="backoption" style="margin:18px 0">
-          <a href="/renew-subscription"
+          <a href="/pay-now"
             ><img src="/static/assets/images/arrow-left.svg"
           /></a>
         </div>
@@ -183,10 +183,10 @@
        console.log(planDuration)
        if (planDuration=='yearly'){
           console.log('here')
-          window.location.assign("/renew-subscription?upgrade=True&val=monthly")
+          window.location.assign("/pay-now?upgrade=True&val=monthly")
        }
        else{
-          window.location.assign("/renew-subscription?upgrade=True&val=yearly")
+          window.location.assign("/pay-now?upgrade=True&val=yearly")
         }
      }
       function selectArea(data,plan,type,price,plan_id){

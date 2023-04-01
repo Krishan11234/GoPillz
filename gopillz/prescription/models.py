@@ -64,3 +64,12 @@ class EmailVerification(models.Model):
     otp = models.CharField(max_length=100, null=True, blank=False)
     rand_verification_string = models.CharField(max_length=250, null=True, blank=False)
     message_mail_sent = models.BooleanField(default=False)
+
+
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
+
+@receiver(pre_save,sender=Prescription)
+def test(sender, instance, **kwargs):
+    print('------------')

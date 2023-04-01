@@ -3,9 +3,10 @@ from django.core.validators import RegexValidator
 from django.contrib.auth.models import User
 import uuid
 from . import ailment_types
+
 # Create your models here.
 phone_regex = RegexValidator(
-        regex=r'^\+91\d{12}$', message="Phone number must be entered in the format: '+919999999999'. 10 digits allowed after +91."
+        regex=r'^\+91\d{10}$', message="Phone number must be entered in the format: '+919999999999'. 10 digits allowed after +91."
     )
 
 consent_storage_validator = RegexValidator(

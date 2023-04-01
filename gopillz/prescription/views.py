@@ -10,7 +10,7 @@ from .helper import get_email_verified_data
 from django.shortcuts import redirect, render
 from app.utils import Utils
 from django.conf import settings
-
+from payment.models import Payment
 
 class Prescription(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
@@ -83,13 +83,23 @@ class Prescription(generics.GenericAPIView):
 
 
 class AdminLoginView(generics.GenericAPIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
     renderer_classes = [TemplateHTMLRenderer]
     template_name = "prescription.html"
     verify_email_template = "verification_mail.html"
     admin_login_template = "admin_login.html"
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            error_message = 'Please Sign Up Service not available'
+            messages.info(request, error_message)
+            return redirect('/signup')
+        else:
+            payment_data = Payment.objects.filter(user=request.user)
+            if not payment_data:
+                error_message = 'No Payment has been made please select plans'
+                messages.info(request, error_message)
+                return redirect('/payment')
         content = {}
         # info_message = 'Payment Processing Completed'
         varified_email = get_email_verified_data(request.user)

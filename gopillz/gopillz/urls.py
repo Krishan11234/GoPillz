@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('app.urls')),
     path('', include('payment.urls')),
     path('', include('prescription.urls')),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]

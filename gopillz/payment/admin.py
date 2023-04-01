@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from .helper import PLAN_CHOICES
 
 
 class PlanAdmin(admin.ModelAdmin):
@@ -18,8 +19,19 @@ class PaymentMethodAdmin(admin.ModelAdmin):
 
 class PaymentAdmin(admin.ModelAdmin):
     fieldsets = ()
-    list_display = ('user', 'plan', 'payment_status', 'expired', 'renew', 'created')
+    list_display = ('user', 'plan_type', 'payment_method_name', 'payment_status', 'expired', 'renew', 'created')
     model = PaymentMethod
+
+    def plan_type(self, obj):
+        plan_type = obj.plan.plan_type
+        for plan in PLAN_CHOICES:
+            if plan[0] == plan_type:
+                return plan[1]
+        return plan_type
+
+    def payment_method_name(self, obj):
+        method_name = obj.payment_method.method_name
+        return method_name
 
 
 admin.site.register(Plan, PlanAdmin)

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'dashboard',
     'payment',
     'prescription',
+    'djstripe',
     # 'phonenumber_field'
 ]
 

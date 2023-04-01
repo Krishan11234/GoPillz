@@ -70,6 +70,6 @@ class Proceed(generics.GenericAPIView):
     def get(self, request):
         info_message = 'Cannot Proceed From here without Upgrading plan'
         messages.info(request, info_message)
-        return redirect('/renew-subscription')
+        return redirect('/pay-now')
 
 
