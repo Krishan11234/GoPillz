@@ -2,7 +2,7 @@ from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import Plan, PaymentMethod, Payment
+from .models import Plan, PaymentMethod, Payment, SubscriberCount
 from .serializers import PlanSerializer, PaymentSerializer
 import stripe
 from django.conf import settings
@@ -18,6 +18,13 @@ plan_format = {
     'couple': 'Couple',
     'single': 'Single',
     'family_friends': 'Family&Friends',
+}
+
+
+default_subscriber_added = {
+    'couple': 2,
+    'single': 1,
+    'family_friends': 4,
 }
 
 
@@ -254,6 +261,8 @@ class WebHooks(generics.GenericAPIView):
             if not plan:
                 return HttpResponse(status=400)
             plan = plan.get()
+            total_subscriber_count = default_subscriber_added[plan.plan_type]
+            SubscriberCount.objects.create(user_id=metadata.get('user_id', ''), total_subscriber_count=total_subscriber_count)
             payment_method = PaymentMethod.objects.filter(method_name='Stripe')
             if not payment_method:
                 return HttpResponse(status=400)

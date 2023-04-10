@@ -2,6 +2,7 @@ from rest_framework import serializers, fields
 from django.contrib.auth.models import User
 from .models import Profile, ContactUs
 from django.conf import settings
+from .utils import get_string
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -36,19 +37,22 @@ class UserProfileSerializer(serializers.ModelSerializer):
         else:
             user_data['email'] = validated_data.pop('email')
             user_data['username'] = validated_data.pop('username')
-        password = settings.DEFAULT_USER_PASSWORD
 
         if user_data:
+            password = get_string(8, 4)
             user = UserSerializer.create(UserSerializer(), validated_data=user_data)
             user.set_password(password)
             user.save()
         try:
-            user_profile = Profile.objects.get(user_id=user.id)
+            user_profile = Profile.objects.get(phone_user=user.email)
         except Exception as e:
             user_profile = None
 
         if user_profile is None:
-            user_profile, created = Profile.objects.update_or_create(user=user, otp=validated_data['otp'], expired=False)
+            user_profile, created = Profile.objects.update_or_create(user=user, otp=validated_data['otp'], expired=False,
+                                                                     phone_user=user_data['username'], password=password,
+                                                                     user_name=user_data['username'],
+                                                                     )
         else:
             user_profile.otp = validated_data['otp']
             user_profile.expired = False

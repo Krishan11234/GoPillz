@@ -23,3 +23,11 @@ class Payment(models.Model):
     payment_method = models.ForeignKey(PaymentMethod, on_delete=models.CASCADE)
     created = models.DateTimeField(blank=True, null=True)
     exp_date = models.DateTimeField(blank=True, null=True)
+
+
+class SubscriberCount(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    total_subscriber_count = models.IntegerField(blank=True, default=0)
+    used_subscriber_count = models.IntegerField(blank=True, default=0)
+
+

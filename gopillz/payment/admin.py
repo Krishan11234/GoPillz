@@ -37,3 +37,4 @@ class PaymentAdmin(admin.ModelAdmin):
 admin.site.register(Plan, PlanAdmin)
 admin.site.register(PaymentMethod, PaymentMethodAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(SubscriberCount)

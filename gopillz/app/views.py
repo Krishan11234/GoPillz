@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.contrib.auth import logout
 from .models import Profile
 from rest_framework.permissions import AllowAny
-
+from django.contrib.auth.models import User
 
 """
 api view for the landing page
@@ -153,14 +153,13 @@ class VerifyOtp(generics.GenericAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             try:
-                user = User.objects.filter(username=request.data['phone_no']+'@gopillz.com')
-                if user:
-                    user_data = user[0]
-                    profile_data = Profile.objects.get(user_id=user_data.id)
+                user_profile_data = Profile.objects.filter(phone_user=request.data['phone_no']+'@gopillz.com')
+                if user_profile_data:
+                    profile_data = user_profile_data[0]
                     if request.data['otp'] == str(profile_data.otp) and not profile_data.expired:
                         profile_data.expiry = True
                         profile_data.save()
-                        user_auth = authenticate(username=user_data.username, password=settings.DEFAULT_USER_PASSWORD)
+                        user_auth = authenticate(username=profile_data.user_name, password=profile_data.password)
                         login(request, user_auth)
 
                         return redirect('/payment')

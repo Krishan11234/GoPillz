@@ -1,10 +1,13 @@
 from django.contrib import admin
 from prescription.models import Subscriber
+from payment.models import SubscriberCount
 from django.core.exceptions import ValidationError
+from django.shortcuts import render
 from django.contrib import messages
 from .models import *
 # Register your models here.
 # from .forms import PaymentLinkForm
+from django.utils.html import format_html
 
 
 class UserAdminArea(admin.AdminSite):
@@ -12,9 +15,11 @@ class UserAdminArea(admin.AdminSite):
 
 
 class UserAdminPermission(admin.ModelAdmin):
+
     list_display = ('subscriber_name', 'phone_number', 'address', 'city', 'country', 'pin_code')
     model = Subscriber
 
+    # readonly_fields = ["payment_url"]
 
     fieldsets = (
         (
@@ -29,7 +34,15 @@ class UserAdminPermission(admin.ModelAdmin):
              ),
             }
         ),
+        (
+            'Custom Payment', {
+                'fields': (),
+            },
+        ),
     )
+
+    # actions = ['update_status']
+    change_form_template = 'admin/payment_link.html'
 
     def has_module_permission(self, request):
         return True
@@ -52,16 +65,16 @@ class UserAdminPermission(admin.ModelAdmin):
         return filtered_query
 
     def save_model(self, request, obj, form, change):
-        # if request.POST.get('action') == 'add_selected':
-        #     pass
-        #
-        # if getattr(obj, 'author', None) is None:
-        #     obj.added_by = request.user
-        # obj.save()
-        storage = messages.get_messages(request)
-        storage.used = True
-        # messages.add_message(request, messages.WARNING, 'Failed')
-        # print('------------------')
+        subscriber_count_details = SubscriberCount.objects.filter(user=request.user)
+        if subscriber_count_details:
+            subscriber_count_details = subscriber_count_details.get()
+            if subscriber_count_details.used_subscriber_count < subscriber_count_details.total_subscriber_count:
+                obj.added_by = request.user
+                obj.save()
+                subscriber_count_details.used_subscriber_count = subscriber_count_details.used_subscriber_count +1
+                subscriber_count_details.save()
+            else:
+                messages.add_message(request, messages.WARNING, 'Failed Cannot add more Subscriber please follow below custom payment link')
 
 
 # @admin.register(Subscriber)
@@ -176,7 +189,7 @@ class DoctorAdminPermission(admin.ModelAdmin):
                     ('doctor_email',),
                     ('speciality',),
                 ),
-            }
+            },
         ),
     )
 

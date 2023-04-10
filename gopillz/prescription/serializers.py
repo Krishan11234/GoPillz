@@ -2,6 +2,7 @@ from rest_framework import serializers, fields
 from .models import *
 from .helper import NUMBER_DAYS
 from django.contrib.auth.hashers import make_password
+from app.models import Profile
 
 
 class SubscriberSerializer(serializers.ModelSerializer):
@@ -38,9 +39,10 @@ class SubscribeSerializer(serializers.ModelSerializer):
 
     def save_record(self, validated_data, user):
         info = {'status': '', 'message': ''}
-        validated_data['is_staff'] = True
-        validated_data['is_active'] = True
-        validated_data['is_superuser'] = False
+        # validated_data['is_staff'] = True
+        # validated_data['is_active'] = True
+        # validated_data['is_superuser'] = False
+        plain_password = validated_data['password']
         validated_data['password'] = make_password(validated_data['password'])
 
         verified_email = EmailVerification.objects.filter(email=validated_data['email'])
@@ -49,8 +51,26 @@ class SubscribeSerializer(serializers.ModelSerializer):
             info['message'] = 'Email address already present'
             return info
 
+        profile_data = Profile.objects.filter(phone_user=user.username)
+        if not profile_data:
+            info['status'] = 'danger'
+            info['message'] = 'Something went Wrong'
+            return info
+
         EmailVerification.objects.create(user=user, email=validated_data['email'])
-        user = User.objects.create(**validated_data)
+        user.username = validated_data['username']
+        user.password = validated_data['password']
+        user.is_staff = True
+        user.save()
+
+        profile_data = profile_data[0]
+        profile_data.user = user
+        profile_data.user_name = validated_data['username']
+        profile_data.password = plain_password
+        profile_data.save()
+
+        # user = User.objects.create(**validated_data)
+        info['username'] = validated_data['username']
         info['status'] = 'info'
         info['admin_details'] = validated_data
         info['message'] = 'Admin User Added Successfully'

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 from .helper import MEDICINE_TYPE, NUMBER_DAYS, SCHEDULE_TIME, LEVEL_ENGAGEMENT
 from multiselectfield import MultiSelectField
+from django.db.models.signals import pre_save
 
 
 class Subscriber(models.Model):
@@ -13,6 +14,12 @@ class Subscriber(models.Model):
     country = models.CharField(max_length=100, null=True, blank=False)
     pin_code = models.IntegerField(null=True, blank=False)
     added_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    payment_url = models.URLField(max_length=200, default='http://127.0.0.1:8000/custom-payment/')
+
+    def full_url(self):
+        url = 'http://127.0.0.1:8000/custom-payment/'
+        from django.utils.html import format_html
+        return format_html("<a href='%s'>%s</a>" % (url, url))
 
 
 class Medicine(models.Model):

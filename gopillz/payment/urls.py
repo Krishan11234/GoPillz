@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import PaymentView, CreateCheckoutSessionView, CheckoutSuccess, RenewSuccess, WebHooks
 from .index_views import RenewSubscription, Proceed
+from .CustomPayment import CustomPaymentView
 
 urlpatterns = [
     path('payment/', PaymentView.as_view()),
@@ -10,4 +11,5 @@ urlpatterns = [
     path('renew-success', RenewSuccess.as_view(), name='renew-success'),
     path('stripe-webhooks', WebHooks.as_view(), name='stripe-webhooks'),
     path('proceed', Proceed.as_view(), name='proceed'),
+    path('custom-payment/', CustomPaymentView.as_view()),
 ]

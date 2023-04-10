@@ -208,16 +208,36 @@ $('.loader').css('display','block')
           $('.loader').css('display','none')
             console.log(data)
             if (data.status=='info'){
-                window.location.href= 'verify_email';
-             }
+                var fileFormData = new FormData();
+                fileFormData.append('user_name',data.username);
+                $.ajax({
+                      type: 'POST',
+                      url:'/custom-login',
+                      headers:{
+                      'contentType': 'application
+                      /json',
+                      },
+                      contentType: false,
+                      processData: false,
+                      data:fileFormData,
+                      success: function(data){
+                       console.log('Success Login')
+                       $("#message-body").remove();
+                        $('#django-message').append('<div class="container" id="message-body"><div class="alert alert-dismissible fade show" role="alert"><a></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>');
+                        mainDiv = document.getElementById('message-body'),
+                        childDiv = mainDiv.getElementsByTagName('div')[0]
+                        childDiv.classList.add('alert-'+data.status);
+                        childDiv.getElementsByTagName('a')[0].text = data.message
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        window.location.href= 'verify_email';
 
-            $("#message-body").remove();
-            $('#django-message').append('<div class="container" id="message-body"><div class="alert alert-dismissible fade show" role="alert"><a></a><button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div></div>');
-            mainDiv = document.getElementById('message-body'),
-            childDiv = mainDiv.getElementsByTagName('div')[0]
-            childDiv.classList.add('alert-'+data.status);
-            childDiv.getElementsByTagName('a')[0].text = data.message
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                      },
+                    });
+             }
+          else{
+
+          window.location.href= 'signup';
+          }
           },
           error: function(data){
           $('.loader').css('display','none')
@@ -231,3 +251,4 @@ $('.loader').css('display','block')
           },
       });
 }
+

@@ -12,6 +12,7 @@ from app.utils import Utils
 from django.conf import settings
 from payment.models import Payment
 
+
 class Prescription(generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = [TemplateHTMLRenderer]
