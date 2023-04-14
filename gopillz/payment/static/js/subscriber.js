@@ -131,6 +131,7 @@ $('.loader').css('display','block')
 }
 
 
+
 function send_mail(email){
 $('.loader').css('display','block')
     var fileFormData = new FormData();

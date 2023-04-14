@@ -256,6 +256,16 @@ class WebHooks(generics.GenericAPIView):
 
             session = event['data']['object']
             metadata = session.get('metadata')
+            if metadata.get('custom_subscriber_Adding', None):
+                subscriber_no = metadata.get('subscriber_no')
+                user_id = metadata.get('user_id')
+                subscriber_count = SubscriberCount.objects.filter(user=user_id)
+                if subscriber_count:
+                    subscriber_count = subscriber_count[0]
+                    subscriber_count.total_subscriber_count = subscriber_count.total_subscriber_count+int(subscriber_no)
+                    subscriber_count.save()
+
+                return HttpResponse(status=200)
 
             plan = Plan.objects.filter(id=metadata.get('plan_id', ''))
             if not plan:
