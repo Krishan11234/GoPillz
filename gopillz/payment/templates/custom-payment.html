@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <style>
+
+
+            .planinfo{
+
+        padding: 3% 3%;
+      }
+    </style>
+   {% include 'messages.html' %}
+<div class="renew-subscription-container container">
+  <div class="row justify-content-between">
+      <div class="col-md-5 mt-2"style="background-color: #CDD6FF;">
+        <div class="row">
+          <div class="crossoption" style="padding: 0 20px;margin-top: 5%;">
+            <a href="/home"><img src="/static/assets/images/x.svg" align="right"/></a>
+          </div>
+        </div>
+
+        <div class="row">
+          <img
+            src="/static/assets/images/payment_angel.svg"
+            class="center-image" />
+        </div>
+      </div>
+      <div class="col-md-6 mt-2" >
+        <div class="backoption" style="margin:18px 0">
+          <a href="/home"
+            ><img src="/static/assets/images/arrow-left.svg"
+          /></a>
+        </div>
+<!--        <div class="chooseplan">-->
+<!--          <span style="color:#1E275
+1;font-weight:bold">Choose Plan</span>-->
+<!--          <a style="font-weight:500;float:right;color:#2242D5" href='#' onclick="changePlan('{{content.active_plan}}')">Change Plan</a>-->
+<!--            <input type="hidden" id="planId">-->
+<!--        </div>-->
+
+        <div class="loader" style="display:None"></div>
+<!--        {% for plan in content.plans %}-->
+<!--        {% if content.active_plan ==  plan.duration%}-->
+<!--        <button id='{{content.active_plan}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_name}}','{{plan.price}}','{{plan.id}}')" style="text-align:left;border: 2px solid #2242D5 ; width:100%; margin-bottom:2%;background-color:#FBFBFB;">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%;font-weight:bold">{{ plan.plan_name }}</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%;font-weight:500">-->
+<!--            <span style="color: #2242d5">&#x20b9;{{ plan.price }}/</span-->
+<!--            ><span style="color: #949494">{{ plan.duration }}</span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        {% else %}-->
+<!--        <button id='{{plan.duration}}_{{plan.plan_type}}' onclick="selectArea(this,'{{content.active_plan}}','{{plan.plan_name}}','{{plan.price}}','{{plan.id}}')" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 2%; text-align: left; display:none;background-color:#FBFBFB;">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">{{ plan.plan_name }}</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;{{ plan.price }}/</span-->
+<!--            ><span style="color: #949494">{{ plan.duration }}</span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        {% endif %}-->
+<!--        {% endfor %}-->
+<!--        <button id='plan_couple' onclick="selectArea(this)" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left; ">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">Couple</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;10560/</span-->
+<!--            ><span style="color: #949494">yearly</span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        <button id='plan_single' onclick="selectArea(this)" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left;">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">Single</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;5760/</span-->
+<!--            ><span style="color: #949494">yearly</span>-->
+<!--          </div>-->
+<!--        </button>-->
+<!--        <button id='plan_family' onclick="selectArea(this)" style="border: 2px solid lightgrey; width: 100%;margin-bottom: 20px; text-align: left;">-->
+<!--          <div style="margin-left: 2%; margin-top: 2%">Family & Friends</div>-->
+<!--          <div style="margin-left: 2%; margin-bottom: 2%">-->
+<!--            <span style="color: #2242d5">&#x20b9;21120/</span-->
+<!--            ><span style="color: #949494">yearly</span>-->
+<!--          </div>-->
+<!--        </button>-->
+          <div
+            class="paymenttitle"
+            style="color: #1E2751; border-bottom: 1px solid lightgrey; padding-bottom:3%; margin-bottom:2%;font-weight:bold">
+            Payment Method
+          </div>
+          <div>
+<!--            class="paymentoption"-->
+<!--            style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;-->
+<!--              margin-bottom: 2%;-->
+<!--              grid-template-columns: 90% 10%;"-->
+
+<!--          >-->
+              <label for="quantity">Enter Subscriber No</label>
+              <input type="number" class="form-control" id="quantity" name="quantity" min="1" onchange="getAmount()">
+          </div>
+          <div
+          >
+              <br>
+              <label id = "amount"> Amount: ₹0</label>
+              <br>
+              <input type="checkbox" id="caregiver" name="caregiver" >
+  <label for="caregiver"> Caregiver</label><br>
+<!--          <div-->
+<!--            class="paymentoption"-->
+<!--           style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;-->
+<!--              margin-bottom: 2%;-->
+<!--              grid-template-columns: 90% 10%;"-->
+<!--          >-->
+<!--           <div> <img src="/static/assets/images/stripe.svg"  style="margin-right: 2%;font-weight:500" />Stripe</div>-->
+<!--            <input-->
+<!--                    id="stripe"-->
+<!--              type="radio"-->
+<!--              name="payment"-->
+<!--             style="width:100%;height:1.5rem"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="paymentoption"-->
+<!--           style="color: #1E2751; border: 1px solid lightgrey; padding:5% 5%;display: grid;-->
+<!--              margin-bottom: 2%;-->
+<!--              grid-template-columns: 90% 10%;"-->
+<!--          >-->
+<!--            <div> <img src="/static/assets/images/upi.svg" style="margin-right: 2%;font-weight:500" />UPI</div>-->
+<!--            <input-->
+<!--                    id="upi"-->
+<!--              type="radio"-->
+<!--              name="payment"-->
+<!--             style="width:100%;height:1.5rem"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div-->
+<!--            class="discountoption"-->
+<!--            style="color: #2242d5; margin-bottom: 10%"-->
+<!--          >-->
+<!--            Have a discount code?-->
+<!--          </div>-->
+          {% csrf_token %}
+          <button
+                  onclick="createSessionCheckout()"
+                  id="checkout-button"
+            type="button"
+            class="block"
+            style="
+              color: white;
+              background-color: #2242d5;
+              width: 100%;
+              height: 50px;
+              border: none;
+            "
+          >
+            Proceed To Pay
+          </button>
+        </div>
+      </div>
+</div>
+
+
+    <script src="https://js.stripe.com/v3/"></script>
+<script>
+function getAmount(){
+var quantity = document.getElementById('quantity').value
+document.getElementById('amount').innerHTML = 'Amount: ₹'+quantity*369;
+}
+
+function createSessionCheckout(){
+$('.loader').css('display','block')
+    var fileFormData = new FormData();
+    var messageData = new Object();
+    messageData.status = "danger";
+    var checked = $('#caregiver').is(":checked")
+
+
+    fileFormData.append('subscriber_no', document.getElementById('quantity').value);
+    fileFormData.append('caregiver', checked);
+    console.log(checked)
+    console.log(document.getElementById('quantity').value)
+
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    $.ajax({
+          type: 'POST',
+          url:'/create_custom_checkout_session',
+          headers:{
+          'X-CSRFToken': csrftoken,
+          'contentType': 'application/json',
+          },
+          contentType: false, //this is requireded please see answers above
+          processData: false,
+          data:fileFormData,
+          success: function(data){
+          $('.loader').css('display','none')
+          window.location.href = data.checkout_url
+          },
+          error: function(data){
+          $('.loader').css('display','none')
+          },
+      });
+}
+
+</script>
+</div>
+{% endblock content %}
