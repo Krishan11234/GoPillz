@@ -11,6 +11,7 @@ from django.shortcuts import redirect, render
 from app.utils import Utils
 from django.conf import settings
 from payment.models import Payment
+from django.contrib.auth import logout
 
 
 class Prescription(generics.GenericAPIView):
@@ -24,7 +25,8 @@ class Prescription(generics.GenericAPIView):
         subscriber_serializer = self.serializer_class(data=request_data)
         try:
             if subscriber_serializer.is_valid(raise_exception=True):
-                saved_status = subscriber_serializer.save_record(validated_data=subscriber_serializer.validated_data, user=request.user)
+                user_detail = request.user
+                saved_status = subscriber_serializer.save_record(validated_data=subscriber_serializer.validated_data, user=user_detail, request=request)
                 return JsonResponse(saved_status)
 
         except Exception as e:

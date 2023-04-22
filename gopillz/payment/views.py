@@ -55,6 +55,7 @@ class PaymentView(generics.GenericAPIView):
         plan_serializer = PlanSerializer(plans, many=True)
         content = {'plans': []}
         try:
+
             for plan in plan_serializer.data:
                 temp_plan_row = {}
                 temp_plan_row['id'] = plan['id']
